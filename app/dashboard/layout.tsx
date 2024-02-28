@@ -1,3 +1,5 @@
+import GuestNav from "@/components/GuestNav"
+import Logo from "@/components/assets/Logo"
 import React from "react"
 
 interface Props {
@@ -6,6 +8,7 @@ interface Props {
 
 export default function layout(props:Props){
     return <div>
+        <GuestNav/>
         {props.children}
     </div>
 }

@@ -1,4 +1,5 @@
 import ConfirmEmailForm from "@/components/forms/ConfirmEmailForm";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -25,12 +26,13 @@ export default function ConfirmEmailPage() {
           <ConfirmEmailForm/>
         </CardContent>
 
-        <CardFooter>
-          <Link href={"/#"} className="text-center">
-            Reenviar el código nuevamente
-          </Link>
-        </CardFooter>
       </Card>
+        <div className="flex flex-col items-center justify-center mt-3">
+          <div className="text-sm">¿No recibiste el código?</div>
+          <Button size="sm" variant="link">
+            Reenviar
+          </Button>
+        </div>
     </>
   );
 }

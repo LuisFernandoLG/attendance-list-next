@@ -1,4 +1,4 @@
-import LoginForm from "@/components/forms/LoginForm";
+import SignUpForm from "@/components/forms/SignUpForm";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function LoginPage() {
@@ -10,7 +10,7 @@ export default function LoginPage() {
         <CardDescription>Inicia creando una cuenta.</CardDescription>
       </CardHeader>
         <CardContent>
-          <LoginForm className="space-y-5" />
+          <SignUpForm className="space-y-5" />
         </CardContent>
       </Card>
     </>

@@ -11,11 +11,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useLoginForm } from "@/hooks/useLoginForm";
+import { useSignUpForm } from "@/hooks/useSignUpForm";
 import { PasswordInput } from "../ui/password-input";
 
-export default function LoginForm({className}:{className?:string}) {
-  const { form, handleSubmit } = useLoginForm();
+export default function SignUpForm({className}:{className?:string}) {
+  const { form, handleSubmit, loading } = useSignUpForm();
 
   return (
     <Form {...form}>
@@ -69,7 +69,7 @@ export default function LoginForm({className}:{className?:string}) {
           }}
         ></FormField>
 
-        <Button className="w-full">
+        <Button loading={loading} className="w-full">
         Registrarse <PaperPlaneIcon className="ml-2 h-4 w-4" />
         </Button>
       </form>

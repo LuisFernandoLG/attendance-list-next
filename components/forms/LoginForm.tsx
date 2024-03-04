@@ -1,0 +1,106 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import { authApi } from "@/services/api/authApi";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
+import { login } from "@/redux/authSlice";
+import { toast } from "sonner";
+import { useFetchStatus } from "@/hooks/useFetchStatus";
+import { debounce } from "@/helpers/debounce";
+import { useRouter } from "next/navigation";
+
+const loginFormSchema = z
+  .object({
+    email: z.string().email(),
+    password: z.string().min(1),
+  })
+  .required();
+
+type LoginFormType = z.infer<typeof loginFormSchema>;
+
+const initialForm: LoginFormType = {
+  email: "",
+  password: "",
+};
+
+export default function LoginForm() {
+  const form = useForm<LoginFormType>({
+    resolver: zodResolver(loginFormSchema),
+    defaultValues: initialForm,
+  });
+  const dispatch = useDispatch<AppDispatch>()
+  const fetchStatus = useFetchStatus()
+  const route = useRouter()
+
+  const handleSubmit = async (values:LoginFormType)=>{
+    try{
+      fetchStatus.startLoading()
+      const res = await authApi().login(values)
+      dispatch(login(res))
+      toast.success(`Welcome again${res.user.name}`)
+
+      debounce(()=>{
+        route.push("/dashboard")
+      }, 3000)
+
+    }catch(error){
+      if(error instanceof Error) return toast.error(error.message)
+      toast.error("Unknown Error")
+    }finally{
+      fetchStatus.stopLoading()
+    }
+  }
+
+  return (
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(handleSubmit)}>
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => {
+            return (
+              <FormItem>
+                <FormLabel>Correo</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            );
+          }}
+        />
+
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => {
+            return (
+              <FormItem>
+                <FormLabel>Contraseña</FormLabel>
+                <FormControl>
+                  <Input {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            );
+          }}
+        />
+
+        <Button loading={fetchStatus.loading  } className="mt-5 w-full">
+            Iniciar sesión
+        </Button>
+      </form>
+    </Form>
+  );
+}

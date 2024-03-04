@@ -6,6 +6,10 @@ import { authApi } from "@/services/api/authApi";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useFetchStatus } from "@/hooks/useFetchStatus";
+import { debounce } from "@/helpers/debounce";
+import { useDispatch, useSelector } from "react-redux";
+import { confirmEmail } from "@/redux/authSlice";
+import { AppDispatch, RootState } from "@/redux/store";
 
 const OTPForm = z
   .object({
@@ -22,6 +26,8 @@ const initialForm = {
 
 export default function useVerifyEmailForm() {
   const router = useRouter();
+  const dispatch = useDispatch<AppDispatch>()
+  const {user} = useSelector((state:RootState)=>state.authUser)
   const fetchStatus = useFetchStatus();
   const [otpValue, setOtpValue] = useState<OTPFormType>();
   const {
@@ -44,10 +50,13 @@ export default function useVerifyEmailForm() {
     fetchStatus.startLoading();
 
     authApi()
-      .verifyEmail({ code: values.code, email: "grave281@gmail.com" })
+      .verifyEmail({ code: values.code, email: user.email })
       .then(() => {
+        dispatch(confirmEmail());
         toast.success("Email verified");
-        router.push("/dashboard");
+        debounce(()=>{
+          router.push("/dashboard");
+        }, 3000);
       })
       .catch((error: Error) => {
         toast.error(error.message);
@@ -56,6 +65,8 @@ export default function useVerifyEmailForm() {
         fetchStatus.stopLoading();
       });
   };
+
+
 
   return {
     onSubmit,

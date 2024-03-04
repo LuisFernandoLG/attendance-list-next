@@ -73,6 +73,8 @@ export default function SignUpForm({className}:{className?:string}) {
         Registrarse <PaperPlaneIcon className="ml-2 h-4 w-4" />
         </Button>
       </form>
+
+      {/* {JSON.stringify(loading, null, 2)} */}
     </Form>
   );
 }

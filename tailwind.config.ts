@@ -67,19 +67,21 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        'caret-blink': {
-          '0%,70%,100%': { opacity: '1' },
-          '20%,50%': { opacity: '0' },
+        'fade-left-aux': {
+          'from': { opacity: '0', transform: 'translateX(2rem)' },
+          'to': { opacity: '1', transform: 'translateX(0rem)' },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         'caret-blink': 'caret-blink 1.2s ease-out infinite',
+        "fade-left-aux": "fade-left-aux 1s both"
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+
+  plugins: [require("tailwindcss-animated")],
 } satisfies Config
 
 export default config

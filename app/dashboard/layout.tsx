@@ -11,7 +11,9 @@ interface Props {
 function layout(props:Props){
     return <div>
         <AppNav/>
+        <div className="p-5">
         {props.children}
+        </div>
     </div>
 }
 

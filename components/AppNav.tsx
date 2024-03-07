@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import { logOut } from "@/redux/authSlice";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function AppNav() {
   const dispatch = useDispatch<AppDispatch>()
@@ -23,7 +24,9 @@ export default function AppNav() {
 
   return (
     <header className="flex justify-between p-4 bg-white">
+      <Link href="/dashboard">
       <Logo className="w-28" />
+      </Link>
       <nav>
         <ul className="flex gap-2">
           <li>

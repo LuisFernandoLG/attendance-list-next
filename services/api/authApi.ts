@@ -1,10 +1,10 @@
+import { handleError } from "@/helpers/handleAxiosErrors";
 import {
   LoginResponse,
   RegisterProps,
   RegisterResponse,
 } from "@/models/authApiTypes";
-import { User } from "@/models/userTypes";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 const apiUrl = process.env.NEXT_PUBLIC_MY_ATTENDANCE_API;
 
 axios.defaults.baseURL = `${apiUrl}/auth`;
@@ -71,43 +71,4 @@ export const authApi = () => {
   };
 };
 
-const handleError = (error: any): string => {
-  console.log(error)
-  if (axios.isAxiosError(error)) return handleAxiosError(error);
-  return "Unknown Error";
-};
 
-type ResponseDataError = {
-  message: string;
-  errors: [];
-};
-
-const handleAxiosError = (error: AxiosError<ResponseDataError>): string => {
-  if (error.response) {
-    // The request was made and the server responded with a status code
-    // that falls out of the range of 2xx
-
-    if (
-      error.response.data.message === "The email does not belong to any user"
-    )
-      return "Email provided is not registered";
-    if (error.response.data.message === "Invalid password")
-      return "Incorrect password";
-    if (error.response.data.message === "Validation error")
-      return "Validation Error";
-    if (error.response.data.message === "Email has been already taken")
-      return "Email has been already taken";
-  }
-  
-  if(error.message === 'Request failed with status code 404') return "Endpoint not found, or check for new errors"
-  if (error.code === 'ERR_NETWORK') {
-    return "There was an error with the conection";
-  } else if (error.code === 'ECONNABORTED') {
-    return "Time out";
-  } else if (error.request) {
-    return "Cant' connect to server";
-  } 
-  
-
-  return "Axios: Unknown error.";
-};

@@ -124,7 +124,7 @@ export const DatesForm = () => {
             </div>
           </CardContent>
           <CardFooter>
-            <Button  className="ml-auto" type="submit">Finalizar</Button>
+            <Button  className="ml-auto" type="submit">Siguiente</Button>
           </CardFooter>
         </Card>
       </form>

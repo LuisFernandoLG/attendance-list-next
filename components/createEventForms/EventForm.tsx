@@ -28,6 +28,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { EventTypeHelpSection } from "../EventTypeHelpSection";
 
 const formSchema = z
   .object({
@@ -94,9 +95,9 @@ export const EventForm = () => {
             <Button  className="ml-auto" type="submit">Siguiente</Button>
           </CardFooter>
         </Card>
-
-       
+      <EventTypeHelpSection/>
       </form>
+
     </Form>
   );
 };

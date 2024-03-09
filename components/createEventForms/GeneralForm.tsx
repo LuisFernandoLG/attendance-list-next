@@ -49,7 +49,7 @@ export const GeneralForm = () => {
           <CardHeader>
             <CardTitle>Información general</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="space-y-5">
             <FormField
               control={form.control}
               name="name"

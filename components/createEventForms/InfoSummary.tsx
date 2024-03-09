@@ -11,6 +11,7 @@ import {
   CardTitle,
 } from "../ui/card";
 import { Separator } from "../ui/separator";
+import { Badge } from "../ui/badge";
 
 export const InfoSummary = () => {
   const { mainForm, changeSection } = useCreateEventStepForm();
@@ -54,7 +55,11 @@ export const InfoSummary = () => {
         <Separator className="mt-5" />
 
         <h4 className="text-base font-bold">Fechas seleccionadas</h4>
-        <p className="text-xs">{mainForm.DATES_FORM.dates.join(", ")}</p>
+        <div>
+          {mainForm.DATES_FORM.dates.map((item, i)=>{
+            return <Badge variant="secondary" key={`${i}-date`}>{item}</Badge>
+          })}
+        </div>
         <Button
           size="sm"
           variant="secondary"

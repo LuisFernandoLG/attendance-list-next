@@ -81,7 +81,7 @@ export const EventForm = () => {
                       <SelectItem value="CONTROLLED">
                       <QRIcon className="inline size-5 mr-2"/> Asistencia controlada
                       </SelectItem>
-                      <SelectItem value="m@google.com">
+                      <SelectItem value="UNCONTROLLED">
                       <FormIcon className="inline size-5 mr-2"/> Asistencia NO controlada
                       </SelectItem>
                     </SelectContent>

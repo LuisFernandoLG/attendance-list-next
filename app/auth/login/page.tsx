@@ -17,7 +17,7 @@ export default function LoginPage(){
 
     return <>
     <GuestNav />
-    <Card className="max-w-[500px] mx-auto mt-5">
+    <Card className="max-w-[500px] mx-auto mt-5 shadow">
         <CardHeader>
             <CardTitle>Inicio de sesión</CardTitle>
         </CardHeader>

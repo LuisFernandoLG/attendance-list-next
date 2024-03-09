@@ -62,7 +62,7 @@ export const DatesForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="max-w-[500px] mx-auto"
+        className="max-w-[500px] mx-auto shadow"
       >
         <Card>
           <CardHeader>

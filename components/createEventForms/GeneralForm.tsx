@@ -44,7 +44,7 @@ export const GeneralForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="max-w-[500px] mx-auto">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="max-w-[500px] mx-auto shadow">
         <Card>
           <CardHeader>
             <CardTitle>Información general</CardTitle>

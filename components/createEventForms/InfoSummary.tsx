@@ -17,7 +17,7 @@ export const InfoSummary = () => {
   const { mainForm, changeSection } = useCreateEventStepForm();
 
   return (
-    <Card className="max-w-[500px] mx-auto">
+    <Card className="max-w-[500px] mx-auto shadows">
       <CardHeader>
         <CardTitle>Resumen</CardTitle>
         <CardDescription>

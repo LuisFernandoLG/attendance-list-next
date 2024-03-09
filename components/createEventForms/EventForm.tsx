@@ -55,7 +55,7 @@ export const EventForm = () => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="max-w-[500px] mx-auto"
+        className="max-w-[500px] mx-auto shadows"
       >
         <Card>
           <CardHeader>

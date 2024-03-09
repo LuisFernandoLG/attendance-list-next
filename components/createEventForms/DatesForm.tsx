@@ -27,6 +27,9 @@ import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { compareAsc, format } from 'date-fns';
+import { formatDateForHuman } from '@/helpers/formatDateForHuman';
+
 
 const formSchema = z
   .object({
@@ -50,9 +53,8 @@ export const DatesForm = () => {
 
   const onSubmit = (values: Form) => {
     changeSection(sectionNamesObject.summary);
-    const datesString = values.dates.map((date) => date.toDateString());
     addDatesFormData({
-      dates: datesString,
+      dates: values.dates,
       ok: true,
     });
 
@@ -118,9 +120,12 @@ export const DatesForm = () => {
             />
 
             <div className="flex gap-2 flex-wrap my-2">
-                {fields.map((date, i) => (
-                    <Badge variant="secondary" key={i}>{date.toLocaleDateString()}</Badge>
-                ))}
+                {fields.sort(compareAsc).map((item, i) => 
+                    <Badge variant="secondary" key={i} className="text-sm">{
+                      formatDateForHuman(item)
+                    }</Badge>
+                )
+                }
             </div>
           </CardContent>
           <CardFooter>

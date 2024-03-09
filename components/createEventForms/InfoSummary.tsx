@@ -12,9 +12,18 @@ import {
 } from "../ui/card";
 import { Separator } from "../ui/separator";
 import { Badge } from "../ui/badge";
+import { compareAsc } from "date-fns";
+import { formatDateForHuman } from "@/helpers/formatDateForHuman";
+import { useRegisterEvent } from "@/hooks/useRegisterEvent";
+
 
 export const InfoSummary = () => {
   const { mainForm, changeSection } = useCreateEventStepForm();
+  const { handleCreateEvent, loading} = useRegisterEvent()
+
+
+
+
 
   return (
     <Card className="max-w-[500px] mx-auto shadows">
@@ -56,8 +65,8 @@ export const InfoSummary = () => {
 
         <h4 className="text-base font-bold">Fechas seleccionadas</h4>
         <div>
-          {mainForm.DATES_FORM.dates.map((item, i)=>{
-            return <Badge variant="secondary" key={`${i}-date`}>{item}</Badge>
+          {mainForm.DATES_FORM.dates.sort(compareAsc).map((item, i)=>{
+            return <Badge variant="secondary" key={`${i}-date`}>{formatDateForHuman(item)}</Badge>
           })}
         </div>
         <Button
@@ -72,7 +81,7 @@ export const InfoSummary = () => {
       </CardContent>
 
       <CardFooter>
-        <Button className="ml-auto">Crear evento</Button>
+        <Button className="ml-auto" loading={loading} onClick={()=>handleCreateEvent(mainForm)}>Crear evento</Button>
       </CardFooter>
     </Card>
   );

@@ -1,15 +1,11 @@
+import { axios } from "@/contants/axiosConfig";
 import { handleError } from "@/helpers/handleAxiosErrors";
 import {
   LoginResponse,
   RegisterProps,
   RegisterResponse,
 } from "@/models/authApiTypes";
-import axios from "axios";
-const apiUrl = process.env.NEXT_PUBLIC_MY_ATTENDANCE_API;
 
-axios.defaults.baseURL = `${apiUrl}/auth`;
-axios.defaults.headers.common["Content-Type"] = "application/json";
-axios.defaults.headers.common["Accept"] = "application/json";
 
 export const authApi = () => {
   const login = async (props: {
@@ -17,7 +13,7 @@ export const authApi = () => {
     password: string;
   }): Promise<LoginResponse> => {
     try {
-      const response = await axios.post("/login", props);
+      const response = await axios.post("/auth/login", props);
       const data = response.data as LoginResponse;
       return data
     } catch (error) {
@@ -30,7 +26,7 @@ export const authApi = () => {
     props: RegisterProps
   ): Promise<RegisterResponse> => {
     try {
-      const response = await axios.post("/register", props);
+      const response = await axios.post("/auth/register", props);
       const data = response.data as RegisterResponse;
       return data;
     } catch (error) {

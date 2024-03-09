@@ -18,7 +18,7 @@ export type EventForm = {
 }
 
 export type DatesForm = {
-    dates: string[];
+    dates: Date[];
     ok: boolean;
 }
 

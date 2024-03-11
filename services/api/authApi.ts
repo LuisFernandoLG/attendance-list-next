@@ -38,7 +38,7 @@ export const authApi = () => {
 
   const resendVerificationEmailCode = async (email:string)=>{
     try{
-      const res = await axios.post("resend-email", {email})
+      const res = await axios.post("/auth/resend-email", {email})
       return true
     }catch(error){
       console.log(error)
@@ -49,7 +49,7 @@ export const authApi = () => {
 
   const verifyEmail = async (props:{email:string, code:string}): Promise<boolean> =>{
     try {
-      const response = await axios.post("/verify-email", props)
+      const response = await axios.post("/auth/verify-email", props)
       const data = response.data
       return true
     } catch (error) {

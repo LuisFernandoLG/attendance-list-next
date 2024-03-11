@@ -5,6 +5,12 @@ export const EVENT_TYPES = {
   UNCONTROLLED: "UNCONTROLLED",
 };
 
+export const getType = (value: string) => {
+  if (value === EVENT_TYPES.CONTROLLED) return "Escanear QR";
+  if (value === EVENT_TYPES.UNCONTROLLED) return "Formulario";
+  return "Desconocido";
+};
+
 export const initialMainForm: MainForm = {
   GENERAL_FORM: {
     name: "",

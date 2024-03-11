@@ -15,6 +15,8 @@ export const authApi = () => {
     try {
       const response = await axios.post("/auth/login", props);
       const data = response.data as LoginResponse;
+      axios.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
+      
       return data
     } catch (error) {
       const errorMsg = new Error(handleError(error))
@@ -28,6 +30,8 @@ export const authApi = () => {
     try {
       const response = await axios.post("/auth/register", props);
       const data = response.data as RegisterResponse;
+      axios.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
+          
       return data;
     } catch (error) {
       console.log(error)

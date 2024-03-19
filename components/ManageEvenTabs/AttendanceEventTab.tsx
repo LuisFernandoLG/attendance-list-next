@@ -6,24 +6,33 @@ import {
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Avatar, AvatarFallback } from "../ui/avatar";
+import { useFetchStatus } from "@/hooks/useFetchStatus";
+import { AttendanceTableSkeleton } from "../skeletons/AttendanceTableSkeleton";
 
 export function AttendanceEventTab() {
   const [members, setMembers] = useState<MemberWithAttendance[]>([]);
   const params = useParams<{ id: string }>();
+  const fetchStatus = useFetchStatus(true)
 
   const fetchMember = async () => {
     try {
+      fetchStatus.startLoading()
       const response = await eventMember().getAttendance(params.id);
       console.log(response.data);
       setMembers(response.data);
     } catch (e) {
       console.log(e);
+    }finally{
+      fetchStatus.stopLoading()
     }
   };
 
   useEffect(() => {
     fetchMember();
   }, []);
+
+
+  if(fetchStatus.loading) return <AttendanceTableSkeleton/>
 
   return (
     <article

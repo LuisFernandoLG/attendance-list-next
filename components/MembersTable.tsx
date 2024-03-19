@@ -29,6 +29,7 @@ import {
 import { Loader } from "./Loader";
 import { useMembersTable } from "@/hooks/useMembersTable";
 import { MembersTableSkeleton } from "./skeletons/MembersTableSkeleton";
+import { EmptyUsersIllustration } from "./illustrations/emptyIllustrations/EmptyUsersIllustration";
 
 
 type Props = {
@@ -55,7 +56,7 @@ export const MembersTable = ({
 
   return (
     <div className="space-y-5">
-      <div className="relative overflow-x-auto bg-slate-200 p-5 min-h-[70vh] rounded-sm">
+      <div className="relative overflow-x-auto  min-h-[70vh] rounded-sm">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 rounded-sm">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -74,6 +75,16 @@ export const MembersTable = ({
             </tr>
           </thead>
           <tbody>
+          {
+        data.length === 0 && (
+          <tr className="text-center text-gray-500 dark:text-gray-400">
+            <td colSpan={4} className="p-5">
+              <EmptyUsersIllustration className="w-40 h-40 mx-auto" />
+              No hay miembros registrados
+            </td>
+          </tr>
+        )
+      }
             {data.map((item, index) => (
               <tr
                 key={index}
@@ -136,6 +147,7 @@ export const MembersTable = ({
           </tbody>
         </table>
       </div>
+     
       <PaginationComponent className="bg-slate-200 w-fit p-2 rounded-md">
         <PaginationContent>
           {prevPage !== pagination.current_page && (

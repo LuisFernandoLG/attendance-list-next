@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import ReduxProvider from "@/components/ReduxProvider";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,8 +21,16 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className}  min-h-dvh`}>
       <ReduxProvider>
+      <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+
       <Toaster position="top-center" />
       {children}
+          </ThemeProvider>
       </ReduxProvider>
       </body>
     </html>

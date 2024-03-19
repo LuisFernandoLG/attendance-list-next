@@ -11,6 +11,7 @@ import { AppDispatch, RootState } from "@/redux/store";
 import { logOut } from "@/redux/authSlice";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { ThemeToggle } from "./ThemeToggle";
 
 export default function AppNav() {
   const dispatch = useDispatch<AppDispatch>()
@@ -23,12 +24,15 @@ export default function AppNav() {
   }
 
   return (
-    <header className="flex justify-between sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 container h-14 max-w-screen-2xl items-center">
+    <header className="flex p-10 justify-between sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 container h-14 max-w-screen-2xl items-center">
       <Link href="/dashboard">
       <Logo className="w-28" />
+      <h1>
+        </h1>
       </Link>
       <nav>
         <ul className="flex gap-2">
+          <ThemeToggle/>
           <li>
             <DropdownMenu>
               <DropdownMenuTrigger>

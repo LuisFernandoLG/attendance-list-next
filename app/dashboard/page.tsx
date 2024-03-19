@@ -2,19 +2,26 @@
 
 import { DashboardEventList } from "@/components/DashboardEventList";
 import { buttonVariants } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 
 function Page() {
   return (
     <section>
-      <h1 className="text-2xl font-bold mb-5">Mis pases de lista</h1>
-      <Link
-        href="/dashboard/new-event"
-        className={buttonVariants({ variant: "default" })}
-      >
-        Crear evento
-      </Link>
-      <DashboardEventList />
+      <Card className="p-2 shadow-md">
+        <CardHeader>
+          <CardTitle>Mis pases de lista</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Link
+            href="/dashboard/new-event"
+            className={buttonVariants({ variant: "default" })}
+          >
+            Crear evento
+          </Link>
+          <DashboardEventList />
+        </CardContent>
+      </Card>
     </section>
   );
 }

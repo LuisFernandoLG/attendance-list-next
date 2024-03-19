@@ -15,17 +15,17 @@ export const DashboardEventItem = ({ id, image_url, name, type }: Props) => {
   const link = `dashboard/events/${id}`
 
   return (
-    <Link href={link} className="shadow border p-2 text-ellipsis overflow-hidden flex gap-2 rounded-md bg-white cursor-pointer hover:-translate-y-1 hover:shadow-xl transition-all">
+    <Link href={link} className="shadow p-2 border text-ellipsis overflow-hidden flex gap-2 rounded-md bg-muted cursor-pointer hover:-translate-y-1 hover:shadow-xl transition-all">
       <img
         src={image_url}
         alt={name}
-        className="w-28 h-28 object-cover rounded-md pointer-events-none"
-      />
-      <div>
+        className="size-16 object-cover rounded-md pointer-events-none"
+      /> 
+      <div className="p-2">
         <h3 className="text-xl font-bold text-clip overflow-hidden text-nowrap">
           {name}
         </h3>
-        <Badge variant="secondary">{type_found}</Badge>
+        <Badge variant="outline">{type_found}</Badge>
       </div>
     </Link>
   );

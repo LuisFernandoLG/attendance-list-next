@@ -3,6 +3,7 @@ import { EventItemFromResponse, eventApi } from "@/services/api/eventApi";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { DashboardEventItem } from "./DashboardEventItem";
+import { DashboardEventListSkeleton } from "./skeletons/DashboardEventListSkeleton";
 
 export const DashboardEventList = () => {
   const { loading, startLoading, stopLoading } = useFetchStatus();
@@ -27,9 +28,12 @@ export const DashboardEventList = () => {
     handleLoadEvents();
   }, []);
 
+      
+  if(loading) return <DashboardEventListSkeleton />
+
   return (
     <div
-      className="grid mt-5 g"
+      className="grid mt-5"
       style={{
         gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))",
         gap: "1rem",

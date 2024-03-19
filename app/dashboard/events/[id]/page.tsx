@@ -1,4 +1,6 @@
 "use client";
+import { AttendanceEventTab } from "@/components/ManageEvenTabs/AttendanceEventTab";
+import { DatesEventTab } from "@/components/ManageEvenTabs/DatesEventTab";
 import { GeneralEventTab } from "@/components/ManageEvenTabs/GeneralEventTab";
 import { MemberEventTab } from "@/components/ManageEvenTabs/MembersEventTab";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -6,6 +8,8 @@ import { useEventPage } from "@/hooks/useEventPage";
 
 export default function Page({ params }: { params: { id: string } }) {
   const { event, loading } = useEventPage(params.id);
+
+  console.log({event})
 
   return (
     <>
@@ -21,11 +25,15 @@ export default function Page({ params }: { params: { id: string } }) {
         <TabsContent value="general">
           <GeneralEventTab event={event} />
         </TabsContent>
-        <TabsContent value="dates">Dates</TabsContent>
+        <TabsContent value="dates">
+          <DatesEventTab event={event}/>
+        </TabsContent>
         <TabsContent value="members">
           <MemberEventTab />
         </TabsContent>
-        <TabsContent value="attendance">Attendance</TabsContent>
+        <TabsContent value="attendance">
+          <AttendanceEventTab/>
+        </TabsContent>
       </Tabs>
     </>
   );

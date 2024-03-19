@@ -90,10 +90,21 @@ export const eventApi = ()=>{
         }
     }
 
+    const update = async (id:string, props: EventItemFromResponse) => {
+        try {
+            const response = await axios.put(`/events/${id}`, props);
+            return response.data;
+        } catch (e) {
+            const error = new Error(handleError(e))
+            throw error
+        }
+    }
+
 
     return {
         create,
         getAll,
-        get
+        get,
+        update
     }
 }

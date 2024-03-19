@@ -19,7 +19,7 @@ export const MemberEventTab = () => {
   return (
     <>
       <h2 className="text-xl font-bold">Administra a tus participantes</h2>
-      <h3 className="mt-2 mb-5">Agrega o elimina a tus participantes</h3>
+      <h3 className="mb-5">Agrega o elimina a tus participantes</h3>
 
       <section className=" mb-5">
         <AddNewMember addMember={addMember} />

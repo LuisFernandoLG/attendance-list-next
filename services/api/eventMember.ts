@@ -141,9 +141,52 @@ export const eventMember = () => {
     }
   }
 
+  const getAttendance = async (eventId: string)  => {
+    try {
+      const response = await axios.get(`/events/${eventId}/attendance`);
+      const data = response.data as GetAttendanceResponse;
+      return data.pagination
+    } catch (e) {
+      const error = new Error(handleError(e))
+      throw error
+    }
+  }
+
   return {
     create,
     getFromEvent,
-    deleteFromEvent
+    deleteFromEvent,
+    getAttendance
   };
 };
+
+
+export interface GetAttendanceResponse {
+  message:    string;
+  pagination: GetAttendancePagination;
+}
+
+export interface GetAttendancePagination {
+  current_page:   number;
+  data:           MemberWithAttendance[];
+  first_page_url: string;
+  from:           number;
+  last_page:      number;
+  last_page_url:  string;
+  links:          Link[];
+  next_page_url:  null;
+  path:           string;
+  per_page:       number;
+  prev_page_url:  null;
+  to:             number;
+  total:          number;
+}
+
+export interface MemberWithAttendance {
+  id:         number;
+  member_id:  number;
+  event_id:   number;
+  created_at: Date;
+  updated_at: Date;
+  member:     Item;
+}

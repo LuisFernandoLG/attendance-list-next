@@ -8,7 +8,6 @@ import React, { useEffect } from "react"
 export default function WithAuth(Component: any){    
     return function WithAuth(props: any){
         const {auth} = useSelector((state:RootState)=>state.authUser)
-        const router = useRouter()
 
         useEffect(()=>{
             if(!auth) redirect("/auth/login")

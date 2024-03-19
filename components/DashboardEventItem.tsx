@@ -1,18 +1,21 @@
 /* eslint-disable @next/next/no-img-element */
 import { getType } from "@/contants/createEventStepForm";
 import { Badge } from "./ui/badge";
+import Link from "next/link";
 
 type Props = {
+  id: number;
   image_url: string;
   name: string;
   type: string;
 };
 
-export const DashboardEventItem = ({ image_url, name, type }: Props) => {
+export const DashboardEventItem = ({ id, image_url, name, type }: Props) => {
   const type_found = getType(type);
+  const link = `dashboard/events/${id}`
 
   return (
-    <div className="shadow border p-2 text-ellipsis overflow-hidden flex gap-2 rounded-md bg-white cursor-pointer hover:-translate-y-1 hover:shadow-xl transition-all">
+    <Link href={link} className="shadow border p-2 text-ellipsis overflow-hidden flex gap-2 rounded-md bg-white cursor-pointer hover:-translate-y-1 hover:shadow-xl transition-all">
       <img
         src={image_url}
         alt={name}
@@ -24,6 +27,6 @@ export const DashboardEventItem = ({ image_url, name, type }: Props) => {
         </h3>
         <Badge variant="secondary">{type_found}</Badge>
       </div>
-    </div>
+    </Link>
   );
 };

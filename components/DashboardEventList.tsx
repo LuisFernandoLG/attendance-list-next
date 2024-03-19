@@ -37,6 +37,7 @@ export const DashboardEventList = () => {
     >
       {events.map((item) => (
         <DashboardEventItem
+          id={item.id}
           type={item.type}
           name={item.name}
           image_url={item.image_url}

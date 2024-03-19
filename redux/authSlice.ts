@@ -1,4 +1,5 @@
 import { getCurrentDateTime } from "@/helpers/getCurrentDateTime";
+import { isClientSide } from "@/helpers/isClientSide";
 import { LoginResponse, RegisterProps, RegisterResponse } from "@/models/authApiTypes";
 import { User } from "@/models/userTypes";
 import { authApi } from "@/services/api/authApi";
@@ -16,12 +17,39 @@ const initialState: AuthSlice = {
     name: "",
     email: "",
     timezone: "",
+    email_verified_at: ""
+
   },
   auth: false
 };  
 
-const localStorageStateValue = localStorage.getItem("user")
-const localStoragerState = localStorageStateValue ? {user:JSON.parse(localStorageStateValue) as User, auth:true} : initialState
+const initialUser = {
+  id: 0,
+  name: "",
+  email: "",
+  timezone: "",
+  email_verified_at: ""
+}
+
+
+const getUserStateFromLocalStorage = () => {
+  if(!isClientSide()) return initialUser
+
+  if(localStorage.getItem("user") === null){
+    return initialUser
+  }
+
+  const user = JSON.parse(localStorage.getItem("user") as string) as User
+  return user
+}
+
+const getToken = (): boolean => {
+  if(!isClientSide()) return false
+
+  return localStorage.getItem("token") === null ? false : true
+}
+
+const localStoragerState = {user: getUserStateFromLocalStorage(), auth: getToken()}
 
 
 const authSlice = createSlice({

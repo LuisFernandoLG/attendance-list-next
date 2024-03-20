@@ -87,7 +87,7 @@ export const AddEventMember = (props: Props) => {
                 </FormItem>
               )}
             />
-            <Button type="submit" loading={loading}><PlusCircledIcon className="w-5 h-5 mr-2" />Añadir</Button>
+            <Button type="submit" className="w-full" loading={loading}><PlusCircledIcon className="w-5 h-5 mr-2" />Añadir</Button>
           </form>
       </Form>
   );

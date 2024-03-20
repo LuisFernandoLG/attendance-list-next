@@ -37,9 +37,18 @@ export interface ButtonProps
   loading?: boolean;
 }
 
+
+const Content = ({isLoading, children}: {isLoading:boolean, children:React.ReactNode})=>{
+if(isLoading) return  <Loader2 className={cn('h-4 w-4 animate-spin', children && 'mr-2')} />
+
+return <>{children}</>
+}
+
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, loading, children, ...props }, ref) => {
     const Comp = asChild ? Slot : 'button';
+
+    const isLoadingLocal = loading || false;
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
@@ -48,8 +57,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         <>
-          {loading && <Loader2 className={cn('h-4 w-4 animate-spin', children && 'mr-2')} />}
-          {children}
+          <Content isLoading={isLoadingLocal}>{children}</Content>
         </>
       </Comp>
     );

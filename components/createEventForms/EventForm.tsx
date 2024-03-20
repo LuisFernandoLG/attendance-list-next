@@ -29,6 +29,7 @@ import {
   SelectValue,
 } from "../ui/select";
 import { EventTypeHelpSection } from "../EventTypeHelpSection";
+import { ArrowRightIcon } from "@radix-ui/react-icons";
 
 const formSchema = z
   .object({
@@ -92,7 +93,9 @@ export const EventForm = () => {
             />
           </CardContent>
           <CardFooter>
-            <Button  className="ml-auto" type="submit">Siguiente</Button>
+            <Button  className="ml-auto" type="submit">Siguiente
+            <ArrowRightIcon className="w-5 h-5 ml-2" />
+            </Button>
           </CardFooter>
         </Card>
       <EventTypeHelpSection/>

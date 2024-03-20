@@ -60,7 +60,8 @@ export const useAddEventMemberForm = ({addMember}:Props)=>{
         url_attendance: res.url_attendance
       })
       form.reset()
-      toast.success(res.url_attendance)
+      const successMsg = `El miembro ${res.member.name} ha sido agregado`
+      toast.success(successMsg)
     }catch(e){
       if(e instanceof Error) toast.error(e.message)
     }

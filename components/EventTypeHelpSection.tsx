@@ -8,7 +8,7 @@ import {
 export const EventTypeHelpSection = () => {
 
     return <>
-     <Accordion type="single" collapsible>
+     <Accordion type="single" collapsible className="mt-5">
           <AccordionItem value="item-1">
             <AccordionTrigger>¿Qué es la asistencia controlada?</AccordionTrigger>
             <AccordionContent>

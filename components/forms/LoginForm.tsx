@@ -19,6 +19,7 @@ import { toast } from "sonner";
 import { useFetchStatus } from "@/hooks/useFetchStatus";
 import { debounce } from "@/helpers/debounce";
 import { useRouter } from "next/navigation";
+import { EnterIcon } from "@radix-ui/react-icons";
 
 const loginFormSchema = z
   .object({
@@ -99,6 +100,7 @@ export default function LoginForm() {
 
         <Button loading={fetchStatus.loading  } className="mt-5 w-full">
             Iniciar sesión
+            <EnterIcon  className="w-5 h-5 ml-2"/>
         </Button>
       </form>
     </Form>

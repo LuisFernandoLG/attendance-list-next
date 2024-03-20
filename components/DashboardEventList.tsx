@@ -4,9 +4,10 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { DashboardEventItem } from "./DashboardEventItem";
 import { DashboardEventListSkeleton } from "./skeletons/DashboardEventListSkeleton";
+import {  EmptyBoxIllustration } from "./illustrations/emptyIllustrations/EmptyBoxIllustration";
 
 export const DashboardEventList = () => {
-  const { loading, startLoading, stopLoading } = useFetchStatus();
+  const { loading, startLoading, stopLoading } = useFetchStatus(true);
   const [events, setEvents] = useState<EventItemFromResponse[]>([]);
 
   const handleLoadEvents = async () => {
@@ -32,10 +33,11 @@ export const DashboardEventList = () => {
   if(loading) return <DashboardEventListSkeleton />
 
   return (
+    <>
     <div
       className="grid mt-5"
       style={{
-        gridTemplateColumns: "repeat(auto-fill, minmax(350px, 1fr))",
+        gridTemplateColumns: "repeat(auto-fill, minmax(310px, 1fr))",
         gap: "1rem",
       }}
     >
@@ -49,5 +51,12 @@ export const DashboardEventList = () => {
         />
       ))}
     </div>
+    {
+      events.length === 0 && <div className="flex mx-auto justify-center w-full flex-col items-center">
+       <EmptyBoxIllustration className="w-auto h-56"/>
+        <p>No tienes eventos aún</p>
+      </div>
+    }
+      </>
   );
 };

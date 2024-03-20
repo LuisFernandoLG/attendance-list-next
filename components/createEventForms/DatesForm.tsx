@@ -20,7 +20,7 @@ import { sectionNamesObject } from "@/contants/createEventStepForm";
 import { useCreateEventStepForm } from "@/hooks/useCreateEventStepForm";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CalendarIcon } from "@radix-ui/react-icons";
+import { ArrowRightIcon, CalendarIcon } from "@radix-ui/react-icons";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Badge } from "../ui/badge";
@@ -129,7 +129,9 @@ export const DatesForm = () => {
             </div>
           </CardContent>
           <CardFooter>
-            <Button  className="ml-auto" type="submit">Siguiente</Button>
+            <Button  className="ml-auto" type="submit">Siguiente
+            <ArrowRightIcon className="w-5 h-5 ml-2" />
+            </Button>
           </CardFooter>
         </Card>
       </form>

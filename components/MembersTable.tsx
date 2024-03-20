@@ -79,7 +79,7 @@ export const MembersTable = ({
         data.length === 0 && (
           <tr className="text-center text-gray-500 dark:text-gray-400">
             <td colSpan={4} className="p-5">
-              <EmptyUsersIllustration className="w-40 h-40 mx-auto" />
+              <EmptyUsersIllustration className="w-1/6 h-auto mx-auto" />
               No hay miembros registrados
             </td>
           </tr>
@@ -128,9 +128,7 @@ export const MembersTable = ({
                           Estás seguro de eliminar a &quot;{item.name}&quot;?
                         </AlertDialogTitle>
                         <AlertDialogDescription>
-                          This action cannot be undone. This will permanently
-                          delete your account and remove your data from our
-                          servers.
+                          Esta acción no puede deshacerse. Esto eliminará a tu miembro permanentemente.
                         </AlertDialogDescription>
                       </AlertDialogHeader>
                       <AlertDialogFooter>

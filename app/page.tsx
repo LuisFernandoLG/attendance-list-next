@@ -1,8 +1,5 @@
 "use client"
 import GuestNav from "@/components/GuestNav";
-import { Button } from "@/components/ui/button";
-import { RootState } from "@/redux/store";
-import { useDispatch, useSelector } from "react-redux";
 
 export default function Home() {
 

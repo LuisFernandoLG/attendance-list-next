@@ -20,6 +20,8 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
+import { Icon } from "@radix-ui/react-select";
+import { ArrowRightIcon } from "@radix-ui/react-icons";
 
 const formSchema = z.object({
   name: z.string().min(1).max(255),
@@ -79,7 +81,9 @@ export const GeneralForm = () => {
             />
           </CardContent>
           <CardFooter>
-            <Button className="ml-auto" type="submit">Siguiente</Button>
+            <Button className="ml-auto" type="submit">Siguiente 
+            <ArrowRightIcon className="w-5 h-5 ml-2" />
+            </Button>
           </CardFooter>
         </Card>
       </form>

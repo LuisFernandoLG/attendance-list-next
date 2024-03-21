@@ -18,8 +18,9 @@ import { login } from "@/redux/authSlice";
 import { toast } from "sonner";
 import { useFetchStatus } from "@/hooks/useFetchStatus";
 import { debounce } from "@/helpers/debounce";
-import { useRouter } from "next/navigation";
 import { EnterIcon } from "@radix-ui/react-icons";
+import {useTranslations} from "next-intl"
+import { useRouter } from "../navigation";
 
 const loginFormSchema = z
   .object({
@@ -43,6 +44,7 @@ export default function LoginForm() {
   const dispatch = useDispatch<AppDispatch>()
   const fetchStatus = useFetchStatus()
   const route = useRouter()
+  const t = useTranslations("Login")
 
   const handleSubmit = async (values:LoginFormType)=>{
     try{
@@ -72,7 +74,7 @@ export default function LoginForm() {
           render={({ field }) => {
             return (
               <FormItem>
-                <FormLabel>Correo</FormLabel>
+                <FormLabel>{t("email")}</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -88,7 +90,7 @@ export default function LoginForm() {
           render={({ field }) => {
             return (
               <FormItem>
-                <FormLabel>Contraseña</FormLabel>
+                <FormLabel>{t("password")}</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -99,7 +101,7 @@ export default function LoginForm() {
         />
 
         <Button loading={fetchStatus.loading  } className="mt-5 w-full">
-            Iniciar sesión
+            {t("submit")}
             <EnterIcon  className="w-5 h-5 ml-2"/>
         </Button>
       </form>

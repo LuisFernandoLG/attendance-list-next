@@ -1,0 +1,139 @@
+{
+  "Index": {
+    "title": "Hola mundo"
+  },
+  "GuestNav": {
+    "login": "Iniciar sesión",
+    "signUp": "Registrarse",
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Sistema",
+    "logout": "Cerrar sesión"
+  },
+  "Login": {
+    "title": "Iniciar sesión",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "submit": "Iniciar sesión"
+  },
+  "SignUp": {
+    "title": "Registrarse",
+    "subtitle": "Inicia creando una cuenta.",
+    "name": "Nombre",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "submit": "Registrarse"
+  },
+  "Dashboard": {
+    "title": "Mis pases de lista",
+    "createEvent": "Crear evento"
+  },
+  "NewEvent": {
+    "title": "Cuéntanos un poco del evento 📅",
+    "generalForm": {
+      "title": "Información general",
+      "inputName": {
+        "label": "Nombre",
+        "placeholder": "Conferencia..."
+      },
+      "inputDescription": {
+        "label": "Descripción",
+        "placeholder": "acerca de..."
+      },
+      "submit": "Siguiente"
+    },
+    "eventTypeForm": {
+      "title": "Selecciona el tipo de evento",
+      "inputType": {
+        "label": "Asistencia",
+        "options": {
+          "controlledAttendance": "Asistencia controlada",
+          "uncontrolledAttendance": "Asistencia libre"
+        }
+      },
+      "submit": "Siguiente",
+      "questions": {
+        "controlledAttendance": {
+          "title": "¿Qué es la asistencia controlada?",
+          "answer": "Los participantes deben escanear un código QR para registrar su asistencia."
+        },
+        "freeAttendance": {
+          "title": "¿Qué es la asistencia libre?",
+          "answer": "Los participantes pueden registrar su asistencia a través de un formulario."
+        }
+      }
+    },
+    "eventDateForm": {
+      "title": "Selecciona las fechas del evento",
+      "inputDates": {
+        "label": "Fechas",
+        "placeholder": "Selecciona algunas fechas"
+      },
+      "dates": "fechas",
+      "selectedDates": "Fechas seleccionadas:",
+      "submit": "Siguiente"
+    },
+    "summary": {
+      "title": "Resumen",
+      "description": "Revisa que la información sea correcta antes de crear el evento.",
+      "nameField": "Nombre",
+      "descriptionField": "Descripción",
+      "eventTypeField": "Tipo de asistencia",
+      "datesField": "Fechas seleccionadas",
+      "editButton": "Editar",
+      "submitButton": "Crear evento"
+    }
+  },
+  "Event": {
+    "tabs": {
+      "members": {
+        "tabName": "Participantes",
+        "title": "Administra a tus participantes",
+        "description": "Agrega o elimina participantes de tu evento.",
+        "addMember": "Agregar participante",
+        "addMemberForm": {
+          "title": "Agrega un nuevo participante",
+          "submit": "Agregar",
+          "inputs": {
+            "name": {
+              "label": "Nombre",
+              "placeholder": ""
+            },
+            "email": {
+              "label": "Correo electrónico",
+              "placeholder": ""
+            },
+            "sendEmailCheckBox": "Enviar correo electrónico",
+            "details": {
+              "label": "Detalles",
+              "placeholder": "Detalles adicionales"
+            }
+          }
+        },
+        "table": {
+          "header": {
+            "id": "Identificador",
+            "name": "Nombr",
+            "email": "Correo electrónico",
+            "actions": "Acciones"
+          },
+          "actions": {
+            "edit": "Editar",
+            "delete": "Eliminar"
+          },
+          "empty": "No hay miembros aún"
+        }
+      },
+      "attendance": {
+        "tabName": "Asistencia",
+        "table": {
+          "header": {},
+          "emptyMessage": "No hay asistencias aún"
+        }
+      },
+      "settings": {
+        "tabName": "Configuración"
+      }
+    }
+  }
+}

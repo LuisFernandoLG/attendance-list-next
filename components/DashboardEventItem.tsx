@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import { getType } from "@/contants/createEventStepForm";
 import { Badge } from "./ui/badge";
-import Link from "next/link";
 import { LocationIllustration } from "./illustrations/LocationIllustration";
+import { Link } from "./navigation";
 
 type Props = {
   id: number;

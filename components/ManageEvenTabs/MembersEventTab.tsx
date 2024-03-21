@@ -4,6 +4,7 @@ import { AddNewMember } from "../AddNewMember";
 import { MembersTable } from "../MembersTable";
 import { QRCodeCardForm } from "../forms/QRCodeCardForm";
 import { useMemberTab } from "@/hooks/useMemberTab";
+import { useTranslations } from "next-intl";
 
 export const MemberEventTab = () => {
   const {
@@ -15,11 +16,12 @@ export const MemberEventTab = () => {
     selectedMember,
     addMember
   } = useMemberTab();
+  const t = useTranslations("Event")
 
   return (
     <>
-      <h2 className="text-xl font-bold mt-5">Administra a tus participantes</h2>
-      <h3 className="mb-5">Agrega o elimina a tus participantes</h3>
+      <h2 className="text-xl font-bold mt-5">{t("tabs.members.title")}</h2>
+      <h3 className="mb-5">{t("tabs.members.description")}</h3>
 
       <section className=" mb-5">
         <AddNewMember addMember={addMember} />

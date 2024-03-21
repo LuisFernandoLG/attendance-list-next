@@ -30,6 +30,7 @@ import { Loader } from "./Loader";
 import { useMembersTable } from "@/hooks/useMembersTable";
 import { MembersTableSkeleton } from "./skeletons/MembersTableSkeleton";
 import { EmptyUsersIllustration } from "./illustrations/emptyIllustrations/EmptyUsersIllustration";
+import { useTranslations } from "next-intl";
 
 
 type Props = {
@@ -51,6 +52,7 @@ export const MembersTable = ({
 }: Props) => {
 
   const { nextPage, numberLinks, openDrawer, prevPage} = useMembersTable({pagination})
+  const t = useTranslations("Event")
 
   if (loading) return <MembersTableSkeleton/>
 
@@ -61,16 +63,16 @@ export const MembersTable = ({
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
-                Código
+                {t("tabs.members.table.header.id")}
               </th>
               <th scope="col" className="px-6 py-3">
-                Nombre
+                {t("tabs.members.table.header.name")}
               </th>
               <th scope="col" className="px-6 py-3">
-                Correo
+                {t("tabs.members.table.header.email")}
               </th>
               <th scope="col" className="px-6 py-3">
-                Acciones
+                {t("tabs.members.table.header.actions")}
               </th>
             </tr>
           </thead>
@@ -80,7 +82,7 @@ export const MembersTable = ({
           <tr className="text-center text-gray-500 dark:text-gray-400">
             <td colSpan={4} className="p-5">
               <EmptyUsersIllustration className="w-1/6 h-auto mx-auto" />
-              No hay miembros registrados
+              {t("tabs.members.table.empty")}
             </td>
           </tr>
         )

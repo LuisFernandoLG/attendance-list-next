@@ -13,6 +13,7 @@ import { Checkbox } from "../ui/checkbox";
 import { useAddEventMemberForm } from "@/hooks/useAddEventMemberForm";
 import { MemberItemFromPagination } from "@/services/api/eventMember";
 import { PlusCircledIcon } from "@radix-ui/react-icons";
+import { useTranslations } from "next-intl";
 
 type Props = {
   addMember: (item: MemberItemFromPagination) => void;
@@ -20,6 +21,7 @@ type Props = {
 
 export const AddEventMember = (props: Props) => {
   const {form, loading, onSubmit} = useAddEventMemberForm({addMember:props.addMember})
+  const t = useTranslations("Event")
   
   return (
       <Form {...form}>
@@ -30,7 +32,7 @@ export const AddEventMember = (props: Props) => {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>{t("tabs.members.addMemberForm.inputs.name.label")}</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -44,7 +46,7 @@ export const AddEventMember = (props: Props) => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>{t("tabs.members.addMemberForm.inputs.email.label")}</FormLabel>
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
@@ -64,7 +66,9 @@ export const AddEventMember = (props: Props) => {
                       onCheckedChange={field.onChange}
                     />
                   </FormControl>
-                      <FormLabel className="ml-2 text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Enviar código QR al correo</FormLabel>
+                      <FormLabel className="ml-2 text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                      {t("tabs.members.addMemberForm.inputs.sendEmailCheckBox")}
+                      </FormLabel>
                   <FormMessage />
                 </FormItem>
               )}
@@ -75,10 +79,10 @@ export const AddEventMember = (props: Props) => {
               name="details"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Detalles</FormLabel>
+                  <FormLabel>{t("tabs.members.addMemberForm.inputs.details.label")}</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Notas sobre el miembro"
+                      placeholder={t("tabs.members.addMemberForm.inputs.details.placeholder")}
                       className="resize-none"
                       {...field}
                     />
@@ -87,7 +91,7 @@ export const AddEventMember = (props: Props) => {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full" loading={loading}><PlusCircledIcon className="w-5 h-5 mr-2" />Añadir</Button>
+            <Button type="submit" className="w-full" loading={loading}><PlusCircledIcon className="w-5 h-5 mr-2" />{t("tabs.members.addMemberForm.submit")}</Button>
           </form>
       </Form>
   );

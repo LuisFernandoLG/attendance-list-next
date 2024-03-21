@@ -4,7 +4,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../ui/card
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
-import { CalendarIcon } from "@radix-ui/react-icons";
+import { CalendarIcon, CheckCircledIcon, CheckIcon } from "@radix-ui/react-icons";
 import { Calendar } from "../ui/calendar";
 import { es } from "date-fns/locale";
 import { Badge } from "../ui/badge";
@@ -15,6 +15,7 @@ import { compareAsc, formatISO9075 } from "date-fns";
 import { formatDateForHuman } from "@/helpers/formatDateForHuman";
 import { useEffect } from "react";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 type Props = {
   event: GetEventItemResponse;
@@ -33,6 +34,7 @@ type Form = z.infer<typeof formSchema>;
 export function DatesEventTab({ event }: Props) {
 
   const datesProps = event.dates.map((date) => date.date)
+  const t = useTranslations("Event")
 
   const form = useForm<Form>({
     resolver: zodResolver(formSchema),
@@ -68,7 +70,7 @@ export function DatesEventTab({ event }: Props) {
 
   return (
     <div>
-      <h2 className="text-xl font-bold">Administra las fechas de tu evento</h2>
+      <h2 className="text-xl font-bold">{t("tabs.settings.title")}</h2>
       <h3 className="">{event.name}</h3>
       <p className="mb-5">{event.description}</p>
 
@@ -80,7 +82,7 @@ export function DatesEventTab({ event }: Props) {
       >
         <Card>
           <CardHeader>
-            <CardTitle>Fechas del evento</CardTitle>
+            <CardTitle>{t("tabs.settings.datesForm.title")}</CardTitle>
           </CardHeader>
           <CardContent>
             <FormField
@@ -88,7 +90,7 @@ export function DatesEventTab({ event }: Props) {
               name="dates"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
-                  <FormLabel>Selecciona las fechas del evento</FormLabel>
+                  <FormLabel>{t("tabs.settings.datesForm.inputs.dates.label")}</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>
@@ -100,9 +102,9 @@ export function DatesEventTab({ event }: Props) {
                             )}
                         >
                             {field.value.length > 0 ? (
-                                <span>
-                                    {field.value.length} fechas seleccionadas
-                                </span>
+                                <Badge>
+                                    {field.value.length}
+                                </Badge>
                             ) : (
                                 <span>Seleccionar</span>
                             )}
@@ -124,7 +126,7 @@ export function DatesEventTab({ event }: Props) {
                     </PopoverContent>
                   </Popover>
                   <FormDescription>
-                    Fechas seleccionadas:
+                  {t("tabs.settings.datesForm.inputs.selectedDatesLabel")}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -141,7 +143,9 @@ export function DatesEventTab({ event }: Props) {
             </div>
           </CardContent>
           <CardFooter>
-            <Button  className="ml-auto" type="submit">Siguiente</Button>
+            <Button  className="ml-auto" type="submit">
+             <CheckIcon/>  {t("tabs.settings.datesForm.submit")}
+            </Button>
           </CardFooter>
         </Card>
       </form>

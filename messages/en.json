@@ -1,0 +1,161 @@
+{
+  "Index": {
+    "title": "Hello world!"
+  },
+  "GuestNav": {
+    "login": "Login",
+    "signUp": "Sign Up",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "logout": "Logout"
+  },
+  "Login": {
+    "title": "Login",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Login"
+  },
+  "SignUp": {
+    "title": "Sign Up",
+    "subtitle": "Create a new account",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Sign Up"
+  },
+  "Dashboard": {
+    "title": "My attendance lists",
+    "createEvent": "Create event"
+  },
+  "NewEvent": {
+    "title": "Tell us about your event 📅",
+    "generalForm": {
+      "title": "General information",
+      "inputName": {
+        "label": "Name",
+        "placeholder": "Meeting..."
+      },
+      "inputDescription": {
+        "label": "Description",
+        "placeholder": "About..."
+      },
+      "submit": "Next"
+    },
+    "eventTypeForm": {
+      "title": "Event type",
+      "inputType": {
+        "label": "Attendance",
+        "options": {
+          "controlledAttendance": "Controlled attendance",
+          "uncontrolledAttendance": "Uncontrolled attendance"
+        }
+      },
+      "submit": "Next",
+      "questions": {
+        "controlledAttendance": {
+          "title": "Controlled attendance",
+          "answer": "Participants must scan a QR code to register their attendance."
+        },
+        "uncontrolledAttendance": {
+          "title": "Uncontrolled attendance",
+          "answer": "Participants can register their attendance by filling out a form."
+        }
+      }
+    },
+    "eventDateForm": {
+      "title": "Event dates",
+      "inputDates": {
+        "label": "Dates",
+        "placeholder": "Select some dates"
+      },
+      "dates": "dates",
+      "selectedDates": "Selected dates:",
+      "submit": "Next"
+    },
+    "summary": {
+      "title": "Summary",
+      "description": "Check that everything is correct",
+      "nameField": "Name",
+      "descriptionField": "Description",
+      "eventTypeField": "Attendance type",
+      "datesField": "Dates",
+      "editButton": "Edit",
+      "submitButton": "Create event"
+    }
+  },
+
+  "Event": {
+    "tabs": {
+      "members": {
+        "tabName": "Members",
+        "title": "Manage your members",
+        "description": "Add, remove or edit members of your event.",
+        "addMember": "Add member",
+        "addMemberForm": {
+          "title": "Add member",
+          "submit": "Agregar",
+          "inputs": {
+            "name": {
+              "label": "Name",
+              "placeholder": ""
+            },
+            "email": {
+              "label": "Email",
+              "placeholder": ""
+            },
+            "sendEmailCheckBox": "Send invitation to email",
+            "details": {
+              "label": "Details",
+              "placeholder": "Phone, address, etc."
+            }
+          }
+        }
+        ,
+          "table": {
+            "header": {
+              "id": "ID",
+              "name": "Name",
+              "email": "Email",
+              "actions": "Actions"
+            },
+            "actions": {
+              "edit": "Edit",
+              "delete": "Delete"
+            },
+            "empty": "No members yet"
+          }
+      }
+      ,
+        "attendance": {
+          "tabName": "Attendance",
+          "table": {
+            "header": {
+              "id": "ID",
+              "name": "Name",
+              "email": "Email",
+              "date": "Date",
+              "time": "Time"
+            },
+            "emptyMessage": "No attendance yet"
+          }
+        },
+        "settings": {
+          "tabName": "Settings",
+          "title": "Settings",
+          "datesForm":{
+            "title": "Dates",
+            "inputs":{
+              "dates":{
+                "label": "Dates",
+                "placeholder": "Select some dates"
+              },
+              "selectedDatesLabel": "Selected dates:"
+              },
+              "submit": "Save"
+            }
+          
+        }
+    }
+  }
+}

@@ -3,13 +3,13 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { authApi } from "@/services/api/authApi";
-import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useFetchStatus } from "@/hooks/useFetchStatus";
 import { debounce } from "@/helpers/debounce";
 import { useDispatch, useSelector } from "react-redux";
 import { confirmEmail } from "@/redux/authSlice";
 import { AppDispatch, RootState } from "@/redux/store";
+import { useRouter } from "@/components/navigation";
 
 const OTPForm = z
   .object({

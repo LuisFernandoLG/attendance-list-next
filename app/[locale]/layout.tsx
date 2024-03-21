@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import ReduxProvider from "@/components/ReduxProvider";
 import { ThemeProvider } from "@/components/theme-provider";
+import {NextIntlClientProvider, useMessages} from 'next-intl';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,13 +15,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+  params: {locale}
+}: {
   children: React.ReactNode;
-}>) {
+  params: {locale: string};
+}) {
+  const messages = useMessages();
+  
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body className={`${inter.className}  min-h-dvh`}>
+      <NextIntlClientProvider messages={messages}>
       <ReduxProvider>
+
       <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -32,6 +39,7 @@ export default function RootLayout({
       {children}
           </ThemeProvider>
       </ReduxProvider>
+            </NextIntlClientProvider>
       </body>
     </html>
   );

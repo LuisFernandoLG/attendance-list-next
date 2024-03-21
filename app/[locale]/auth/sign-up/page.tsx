@@ -3,17 +3,18 @@ import GuestNav from "@/components/GuestNav";
 import SignUpForm from "@/components/forms/SignUpForm";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { RootState } from "@/redux/store";
-import { redirect, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useRouter } from "@/components/navigation";
+import { useRedirect } from "@/hooks/useRedirect";
 
 export default function SignUpPage() {
   const { auth } = useSelector((state: RootState) => state.authUser)
-  const router = useRouter()
+  const _redirect = useRedirect()
   console.log("Sign-up page rendered")
 
   useEffect(()=>{
-    if(auth) redirect("/dashboard")
+    if(auth) _redirect("/dashboard")
   },[])
 
   return (

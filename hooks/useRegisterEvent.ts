@@ -4,7 +4,7 @@ import { formatISO9075 } from "date-fns";
 import { toast } from "sonner";
 import { useFetchStatus } from "./useFetchStatus";
 import { debounce } from "@/helpers/debounce";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/components/navigation";
 
 export const useRegisterEvent = () => {
   const { loading, startLoading, stopLoading } = useFetchStatus();

@@ -30,6 +30,7 @@ import {
 } from "../ui/select";
 import { EventTypeHelpSection } from "../EventTypeHelpSection";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
+import { useTranslations } from "next-intl";
 
 const formSchema = z
   .object({
@@ -41,6 +42,7 @@ type Form = z.infer<typeof formSchema>;
 
 export const EventForm = () => {
   const { changeSection, addEventFormData, mainForm } = useCreateEventStepForm()
+  const t = useTranslations("NewEvent");
   const form = useForm<Form>({
     resolver: zodResolver(formSchema),
     defaultValues: mainForm.EVENT_FORM,
@@ -60,7 +62,7 @@ export const EventForm = () => {
       >
         <Card>
           <CardHeader>
-            <CardTitle>Selecciona el tipo de evento</CardTitle>
+            <CardTitle>{t("eventTypeForm.title")}</CardTitle>
           </CardHeader>
           <CardContent>
             <FormField
@@ -68,7 +70,7 @@ export const EventForm = () => {
               name="type"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Asistencia</FormLabel>
+                  <FormLabel>{t("eventTypeForm.inputType.label")}</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -80,10 +82,12 @@ export const EventForm = () => {
                     </FormControl>
                     <SelectContent>
                       <SelectItem value="CONTROLLED">
-                      <QRIcon className="inline size-5 mr-2"/> Asistencia controlada
+                      <QRIcon className="inline size-5 mr-2"/> {
+                        t("eventTypeForm.inputType.options.controlledAttendance")}
                       </SelectItem>
                       <SelectItem value="UNCONTROLLED">
-                      <FormIcon className="inline size-5 mr-2"/> Asistencia NO controlada
+                      <FormIcon className="inline size-5 mr-2"/> 
+                      {t("eventTypeForm.inputType.options.uncontrolledAttendance")}
                       </SelectItem>
                     </SelectContent>
                   </Select>
@@ -93,7 +97,9 @@ export const EventForm = () => {
             />
           </CardContent>
           <CardFooter>
-            <Button  className="ml-auto" type="submit">Siguiente
+            <Button  className="ml-auto" type="submit">{
+              t("eventTypeForm.submit")
+            }
             <ArrowRightIcon className="w-5 h-5 ml-2" />
             </Button>
           </CardFooter>

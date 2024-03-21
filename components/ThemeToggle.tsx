@@ -11,9 +11,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { useTranslations } from "next-intl"
 
 export function ThemeToggle() {
   const { setTheme } = useTheme()
+  const t = useTranslations("GuestNav")
 
   return (
     <DropdownMenu>
@@ -26,13 +28,13 @@ export function ThemeToggle() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start">
         <DropdownMenuItem onClick={() => setTheme("light")}>
-          Claro <SunIcon className="w-4 h-4 ml-2" />
+          {t("light")} <SunIcon className="w-4 h-4 ml-2" />
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Oscuro <MoonIcon className="w-4 h-4 ml-2" />
+          {t("dark")} <MoonIcon className="w-4 h-4 ml-2" />
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("system")}>
-          Sistema <HomeIcon className="w-4 h-4 ml-2" />
+          {t("system")} <HomeIcon className="w-4 h-4 ml-2" />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

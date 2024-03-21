@@ -1,15 +1,13 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
-import { authApi } from "@/services/api/authApi";
 import { toast } from "sonner";
 import { useFetchStatus } from "./useFetchStatus";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/redux/store";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
 import { registerUser } from "@/redux/authSlice";
-import { useEffect } from "react";
 import { debounce } from "@/helpers/debounce";
+import { useRouter } from "@/components/navigation";
 
 const formSchema = z
   .object({

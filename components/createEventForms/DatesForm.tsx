@@ -29,6 +29,7 @@ import { Calendar } from "../ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { compareAsc, format } from 'date-fns';
 import { formatDateForHuman } from '@/helpers/formatDateForHuman';
+import { useTranslations } from 'next-intl';
 
 
 const formSchema = z
@@ -41,6 +42,7 @@ type Form = z.infer<typeof formSchema>;
 
 export const DatesForm = () => {
   const { changeSection, addDatesFormData, mainForm } = useCreateEventStepForm();
+  const t = useTranslations("NewEvent");
   const form = useForm<Form>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -68,7 +70,7 @@ export const DatesForm = () => {
       >
         <Card>
           <CardHeader>
-            <CardTitle>Fechas del evento</CardTitle>
+            <CardTitle>{t("eventDateForm.title")}</CardTitle>
           </CardHeader>
           <CardContent>
             <FormField
@@ -76,7 +78,7 @@ export const DatesForm = () => {
               name="dates"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
-                  <FormLabel>Selecciona las fechas del evento</FormLabel>
+                  <FormLabel>{t("eventDateForm.inputDates.label")}</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>
@@ -88,11 +90,11 @@ export const DatesForm = () => {
                             )}
                         >
                             {field.value.length > 0 ? (
-                                <span>
-                                    {field.value.length} fechas seleccionadas
-                                </span>
+                                <Badge>
+                                    {field.value.length} 
+                                </Badge>
                             ) : (
-                                <span>Seleccionar</span>
+                                <span>{t("eventDateForm.inputDates.placeholder")}</span>
                             )}
                             <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                         </Button>
@@ -112,7 +114,7 @@ export const DatesForm = () => {
                     </PopoverContent>
                   </Popover>
                   <FormDescription>
-                    Fechas seleccionadas:
+                    {t("eventDateForm.selectedDates")}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -129,7 +131,9 @@ export const DatesForm = () => {
             </div>
           </CardContent>
           <CardFooter>
-            <Button  className="ml-auto" type="submit">Siguiente
+            <Button  className="ml-auto" type="submit">{
+              t("eventDateForm.submit")
+            }
             <ArrowRightIcon className="w-5 h-5 ml-2" />
             </Button>
           </CardFooter>

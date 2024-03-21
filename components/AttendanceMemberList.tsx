@@ -2,6 +2,7 @@ import { MemberWithAttendance } from "@/services/api/eventMember";
 import { AttendanceTableSkeleton } from "./skeletons/AttendanceTableSkeleton";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import { EmptyUsersIllustration } from "./illustrations/emptyIllustrations/EmptyUsersIllustration";
+import { useTranslations } from "next-intl";
 
 export function AttendanceMemberList({
   loading,
@@ -10,6 +11,9 @@ export function AttendanceMemberList({
   loading: boolean;
   members: MemberWithAttendance[];
 }) {
+
+  const t = useTranslations("Event")
+
   if (loading) return <AttendanceTableSkeleton />;
 
   return (
@@ -53,7 +57,9 @@ export function AttendanceMemberList({
         !members.length && (
           <div className="text-center text-gray-400">
             <EmptyUsersIllustration className="w-1/6 h-auto mx-auto" />
-            <p>No hay registros de asistencia aún</p>
+            <p>{
+            t("tabs.members.table.empty")}
+            </p>
           </div>
         )
       }

@@ -2,15 +2,16 @@
 
 import { RootState } from "@/redux/store"
 import { useSelector } from "react-redux"
-import { redirect, useRouter } from "next/navigation"
 import React, { useEffect } from "react"
+import { useRedirect } from "@/hooks/useRedirect"
 
 export default function WithAuth(Component: any){    
     return function WithAuth(props: any){
         const {auth} = useSelector((state:RootState)=>state.authUser)
+        const _redirect = useRedirect()
 
         useEffect(()=>{
-            if(!auth) redirect("/auth/login")
+            if(!auth) _redirect("/auth/login")
         },[])
         
         return <Component {...props}/>        

@@ -10,19 +10,20 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useAuthUser } from "@/hooks/useAuthUser";
-import { redirect } from "next/navigation";
+import { useRedirect } from "@/hooks/useRedirect";
 import { useEffect } from "react";
 
 
 
 export default function ConfirmEmailPage() {
   const { user, auth } = useAuthUser()
+  const _redirect = useRedirect()
   console.log("Confirm-email page rendered")
 
   
   useEffect(()=>{
-    if(!auth) redirect("/auth/login")
-    if(auth && user.email_verified_at) redirect("/dashboard")
+    if(!auth) _redirect("/auth/login")
+    if(auth && user.email_verified_at) _redirect("/dashboard")
   },[])
 
   

@@ -20,8 +20,8 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
-import { Icon } from "@radix-ui/react-select";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
+import { useTranslations } from "next-intl";
 
 const formSchema = z.object({
   name: z.string().min(1).max(255),
@@ -32,6 +32,7 @@ type Form = z.infer<typeof formSchema>;
 
 export const GeneralForm = () => {
   const { mainForm, changeSection, addGeneralFormData } = useCreateEventStepForm()
+  const t = useTranslations("NewEvent")
 
   const form = useForm<Form>({
     resolver: zodResolver(formSchema),
@@ -49,7 +50,7 @@ export const GeneralForm = () => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="max-w-[500px] mx-auto shadow">
         <Card>
           <CardHeader>
-            <CardTitle>Información general</CardTitle>
+            <CardTitle>{t("generalForm.title")}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-5">
             <FormField
@@ -57,9 +58,9 @@ export const GeneralForm = () => {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Nombre</FormLabel>
+                  <FormLabel>{t("generalForm.inputName.label")}</FormLabel>
                   <FormControl>
-                    <Input placeholder="Conferencia..." {...field} />
+                    <Input placeholder={t("generalForm.inputName.placeholder")} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -71,9 +72,9 @@ export const GeneralForm = () => {
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Descripción</FormLabel>
+                  <FormLabel>{t("generalForm.inputDescription.label")}</FormLabel>
                   <FormControl>
-                    <Input placeholder="Primera reunión de..." {...field} />
+                    <Input placeholder={t("generalForm.inputDescription.placeholder")} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -81,7 +82,7 @@ export const GeneralForm = () => {
             />
           </CardContent>
           <CardFooter>
-            <Button className="ml-auto" type="submit">Siguiente 
+            <Button className="ml-auto" type="submit"> {t("generalForm.submit")} 
             <ArrowRightIcon className="w-5 h-5 ml-2" />
             </Button>
           </CardFooter>

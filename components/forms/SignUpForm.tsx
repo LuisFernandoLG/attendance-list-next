@@ -13,9 +13,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { useSignUpForm } from "@/hooks/useSignUpForm";
 import { PasswordInput } from "../ui/password-input";
+import { useTranslations } from "next-intl";
 
 export default function SignUpForm({className}:{className?:string}) {
   const { form, handleSubmit, loading } = useSignUpForm();
+  const t = useTranslations("SignUp");
 
   return (
     <Form {...form}>
@@ -26,7 +28,7 @@ export default function SignUpForm({className}:{className?:string}) {
           render={({ field }) => {
             return (
               <FormItem>
-                <FormLabel>Nombre</FormLabel>
+                <FormLabel>{t("name")}</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -42,7 +44,7 @@ export default function SignUpForm({className}:{className?:string}) {
           render={({ field }) => {
             return (
               <FormItem>
-                <FormLabel>Correo</FormLabel>
+                <FormLabel>{t("email")}</FormLabel>
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
@@ -57,7 +59,7 @@ export default function SignUpForm({className}:{className?:string}) {
           render={({ field }) => {
             return (
               <FormItem>
-                <FormLabel>Contraseña</FormLabel>
+                <FormLabel>{t("password")}</FormLabel>
                 <FormControl>
                   <PasswordInput
                     {...field}
@@ -70,7 +72,7 @@ export default function SignUpForm({className}:{className?:string}) {
         ></FormField>
 
         <Button loading={loading} className="w-full">
-        Registrarse <PaperPlaneIcon className="ml-2 h-4 w-4" />
+        {t("submit")} <PaperPlaneIcon className="ml-2 h-4 w-4" />
         </Button>
       </form>
 

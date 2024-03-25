@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import { logOut } from "@/redux/authSlice";
 import { ThemeToggle } from "./ThemeToggle";
-import { ExitIcon } from "@radix-ui/react-icons";
+import { ExitIcon, MixerHorizontalIcon } from "@radix-ui/react-icons";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { Link, useRouter } from "./navigation";
 
@@ -20,6 +20,10 @@ export default function AppNav() {
   const handleLogOut = ()=>{
     dispatch(logOut())
     router.push("/auth/login")
+  }
+
+  const handleProfile = ()=>{
+    router.push("/dashboard/profile")
   }
 
   return (
@@ -40,9 +44,13 @@ export default function AppNav() {
               <DropdownMenuContent>
               <DropdownMenuLabel>Cuenta</DropdownMenuLabel>
         <DropdownMenuSeparator />
+        <DropdownMenuItem onClick={handleProfile}>
+         <MixerHorizontalIcon className="w-5 h-5 mr-2"/>
+          Perfil
+        </DropdownMenuItem>
         <DropdownMenuItem onClick={handleLogOut}>
+         <ExitIcon className="w-5 h-5 mr-2"/>
           Cerrar sesión
-         <ExitIcon className="w-5 h-5 ml-2"/>
         </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

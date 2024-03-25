@@ -157,5 +157,38 @@
           
         }
     }
+  },
+  "Profile":{
+    
+      "title": "Profile",
+      "description": "Manage your account and preferences",
+    "language":{
+      "switchTitle": "Languages"
+    }
+  },
+
+  "common": {
+    "cancel": "Cancelar",
+    "next": "Siguiente",
+    "back": "Atrás",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "close": "Cerrar",
+    "yes": "Sí",
+    "no": "No",
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "warning": "Advertencia",
+    "info": "Información",
+    "confirm": "Confirmar",
+    "deleteConfirmation": "¿Estás seguro de que deseas eliminar este elemento?",
+    "deleteConfirmationDescription": "Esta acción no se puede deshacer.",
+    "deleteConfirmationYes": "Sí, eliminar",
+    "deleteConfirmationNo": "No, cancelar",
+    "deleteSuccess": "Elemento eliminado",
+    "deleteError": "No se pudo eliminar el elemento",
+    "deleteErrorDescription": "Ocurrió un error al intentar eliminar el elemento. Por favor, inténtalo de nuevo."
   }
 }

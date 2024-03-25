@@ -45,6 +45,14 @@ export const pathnames: Pathnames<typeof locales> = {
     es: '/dashboard/new-event'
   },
 
+  
+  '/dashboard/profile': {
+    en: '/dashboard/profile',
+    es: '/dashboard/profile'
+  },
+
+
+
   // // Dynamic params are supported via square brackets
   // '/news/[articleSlug]-[articleId]': {
   //   en: '/news/[articleSlug]-[articleId]',

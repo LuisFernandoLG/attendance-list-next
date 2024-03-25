@@ -147,6 +147,7 @@
 
 
   "common": {
+    "goHome": "Ir a inicio",
     "cancel": "Cancelar",
     "next": "Siguiente",
     "back": "Atrás",
@@ -156,6 +157,7 @@
     "close": "Cerrar",
     "yes": "Sí",
     "no": "No",
+    "sourceNotFound": "No se encontró el recurso",
     "loading": "Cargando...",
     "error": "Error",
     "success": "Éxito",

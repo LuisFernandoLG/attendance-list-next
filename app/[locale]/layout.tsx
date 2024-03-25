@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/sonner";
 import ReduxProvider from "@/components/ReduxProvider";
 import { ThemeProvider } from "@/components/theme-provider";
 import {NextIntlClientProvider, useMessages} from 'next-intl';
+import QueryProvider from "@/components/QueryProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,23 +22,25 @@ export default function RootLayout({
   params: {locale: string};
 }) {
   const messages = useMessages();
-  
+
   return (
     <html lang={locale}>
       <body className={`${inter.className}  min-h-dvh`}>
       <NextIntlClientProvider messages={messages}>
       <ReduxProvider>
+<QueryProvider>
 
       <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
-          >
+            >
 
       <Toaster position="top-center" />
       {children}
           </ThemeProvider>
+            </QueryProvider>
       </ReduxProvider>
             </NextIntlClientProvider>
       </body>

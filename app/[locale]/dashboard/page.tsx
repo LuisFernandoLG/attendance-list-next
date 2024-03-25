@@ -24,7 +24,7 @@ function Page() {
             <PlusCircledIcon className="w-5 h-5 mr-2" />
             {t("createEvent")}
           </Link>
-          <DashboardEventList />
+          <DashboardEventList className="mt-5"/>
         </CardContent>
       </Card>
     </section>

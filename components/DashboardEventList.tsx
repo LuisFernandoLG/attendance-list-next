@@ -1,47 +1,42 @@
-import { useFetchStatus } from "@/hooks/useFetchStatus";
-import { EventItemFromResponse, eventApi } from "@/services/api/eventApi";
-import { useEffect, useState } from "react";
+"use client";
+
+import {  eventApi } from "@/services/api/eventApi";
 import { toast } from "sonner";
 import { DashboardEventItem } from "./DashboardEventItem";
 import { DashboardEventListSkeleton } from "./skeletons/DashboardEventListSkeleton";
 import {  EmptyBoxIllustration } from "./illustrations/emptyIllustrations/EmptyBoxIllustration";
+import { useQuery } from "react-query";
+import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 
-export const DashboardEventList = () => {
-  const { loading, startLoading, stopLoading } = useFetchStatus(true);
-  const [events, setEvents] = useState<EventItemFromResponse[]>([]);
-
-  const handleLoadEvents = async () => {
-    startLoading();
-    try {
-      const response = await eventApi().getAll();
-      console.log({ response });
-      setEvents(response.items);
-    } catch (e) {
-      if (e instanceof Error) {
-        toast.error(e.message);
+export const DashboardEventList = ({className}:{className?:string}) => {
+  const queryClient = useQuery(["events"], eventApi().getAll, {
+    onError: (error) => {
+      if (error instanceof Error) {
+        toast.error(error.message)
       }
-    } finally {
-      stopLoading();
     }
-  };
-
-  useEffect(() => {
-    handleLoadEvents();
-  }, []);
-
+  })
       
-  if(loading) return <DashboardEventListSkeleton />
+  if(queryClient.isLoading) return <DashboardEventListSkeleton />
+  if(queryClient.isError) {
+ 
+  return <div className="flex justify-center items-center gap-2 ">
+    <ExclamationTriangleIcon />  There was an error 
+  </div>
+  }
+
+  const isEmpty = queryClient.data?.items.length === 0
 
   return (
-    <>
+    <div className={className}>
     <div
-      className="grid mt-5"
+      className="grid"
       style={{
         gridTemplateColumns: "repeat(auto-fill, minmax(310px, 1fr))",
         gap: "1rem",
       }}
     >
-      {events.map((item) => (
+      {queryClient.data?.items.map((item) => (
         <DashboardEventItem
           id={item.id}
           type={item.type}
@@ -52,11 +47,11 @@ export const DashboardEventList = () => {
       ))}
     </div>
     {
-      events.length === 0 && <div className="flex mx-auto justify-center w-full flex-col items-center">
+      isEmpty && <div className="flex mx-auto justify-center w-full flex-col items-center">
        <EmptyBoxIllustration className="w-auto h-56"/>
         <p>No tienes eventos aún</p>
       </div>
     }
-      </>
+      </div>
   );
 };

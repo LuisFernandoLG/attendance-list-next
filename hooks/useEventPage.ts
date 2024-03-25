@@ -2,6 +2,7 @@ import { GetEventItemResponse, eventApi } from "@/services/api/eventApi";
 import { useEffect, useState } from "react";
 import { useFetchStatus } from "./useFetchStatus";
 import { toast } from "sonner";
+import { useQuery } from "react-query";
 
 const defaultEvent: GetEventItemResponse = {
   id: 0,
@@ -17,27 +18,21 @@ const defaultEvent: GetEventItemResponse = {
 };
 
 export const useEventPage = (eventId:string)=>{
-  const [event, setEvent] = useState<GetEventItemResponse>(defaultEvent);
-  const { loading, startLoading, stopLoading } = useFetchStatus();
-
-  const fetchEvent = async () => {
-    try {
-      startLoading();
-      const item = await eventApi().get(eventId);
-      setEvent(item);
-    } catch (e) {
-      if (e instanceof Error) toast.error(e.message);
-    } finally {
-      stopLoading();
+  const query = useQuery({
+    queryKey: ["event", eventId],
+    queryFn: ()=> eventApi().get(eventId),
+    onError: (error) => {
+      if (error instanceof Error) {
+        toast.error(error.message)
+      }
     }
-  };
+  })  
 
-  useEffect(() => {
-    fetchEvent();
-  }, []);
 
   return {
-    event,
-    loading,
+    event: query.data || defaultEvent,
+    loading: query.isLoading,
+    error: query.error,
+    isError: query.isError
   }
 }

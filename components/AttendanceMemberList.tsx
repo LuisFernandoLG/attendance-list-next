@@ -22,6 +22,7 @@ export function AttendanceMemberList({
   
 
   return (
+    <>
     <article
       className="grid gap-5"
       style={{ gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr)" }}
@@ -64,16 +65,17 @@ export function AttendanceMemberList({
         );
       })}
 
+    </article>
       {
         !members.length && (
           <div className="text-center text-gray-400">
             <EmptyUsersIllustration className="w-1/6 h-auto mx-auto" />
             <p>{
-            t("tabs.members.table.empty")}
+              t("tabs.members.table.empty")}
             </p>
           </div>
         )
       }
-    </article>
+              </>
   );
 }

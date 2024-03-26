@@ -2,7 +2,11 @@ import { MemberWithAttendance } from "@/services/api/eventMember";
 import { AttendanceTableSkeleton } from "./skeletons/AttendanceTableSkeleton";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import { EmptyUsersIllustration } from "./illustrations/emptyIllustrations/EmptyUsersIllustration";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { Badge } from "./ui/badge";
+import { format } from "date-fns";
+import { es, enUS } from 'date-fns/locale';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
 
 export function AttendanceMemberList({
   members,
@@ -11,43 +15,43 @@ export function AttendanceMemberList({
 }) {
 
   const t = useTranslations("Event")
+  const locale = useLocale()
+  const calendarLocale = locale === "es" ? es : enUS;
+
 
   
 
   return (
     <article
       className="grid gap-5"
-      style={{ gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr)" }}
+      style={{ gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr)" }}
     >
       {members.map((item) => {
         const twoLettersFromWord = item.member.name[0] + item.member.name[1];
+        const time = format(new Date(item.member.created_at), "MM/dd/yyyy HH:mm", {
+          locale:calendarLocale
+        })
 
         return (
-          <div
+          <Card
             key={item.id}
-            className="border p-5 rounded-md flex gap-2 
-          [&:nth-child(1)]:bg-green-600
-          [&:nth-child(2)]:bg-pink-600
-          [&:nth-child(3)]:bg-purple-600
-          [&:nth-child(4)]:bg-rose-600
-          [&:nth-child(5)]:bg-fuchsia-600
-          [&:nth-child(6)]:bg-sky-600
-          text-white
-
-          "
+            className="w-full"
           >
-            <div>
-              <Avatar>
-                <AvatarFallback className="text-black">
+            <CardHeader className="flex flex-col justify-center items-center">
+            <Avatar >
+                <AvatarFallback className="text-current mx-auto">
                   {twoLettersFromWord}
                 </AvatarFallback>
               </Avatar>
-            </div>
-            <div>
-              <h1>{item.member.name}</h1>
-              <h2>{item.member.email}</h2>
-            </div>
-          </div>
+              <CardDescription>{item.member.name}</CardDescription>
+            </CardHeader>
+            <CardContent className="flex flex-col gap-1 justify-center items-center">
+              <Badge variant="secondary">{item.member.email}</Badge>
+              <Badge variant="outline">
+              {time}
+              </Badge>
+            </CardContent>
+          </Card>
         );
       })}
 

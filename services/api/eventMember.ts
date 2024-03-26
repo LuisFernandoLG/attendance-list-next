@@ -186,7 +186,7 @@ export interface MemberWithAttendance {
   id:         number;
   member_id:  number;
   event_id:   number;
-  created_at: Date;
-  updated_at: Date;
+  created_at: string[];
+  updated_at: string[];
   member:     Item;
 }

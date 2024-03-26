@@ -1,5 +1,5 @@
 import { MemberWithAttendance } from "@/services/api/eventMember";
-import { AttendanceTableSkeleton } from "./skeletons/AttendanceTableSkeleton";
+import { generateColorRGB } from "@marko19907/string-to-color";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import { EmptyUsersIllustration } from "./illustrations/emptyIllustrations/EmptyUsersIllustration";
 import { useLocale, useTranslations } from "next-intl";
@@ -31,14 +31,23 @@ export function AttendanceMemberList({
         const time = format(new Date(item.member.created_at), "MM/dd/yyyy HH:mm", {
           locale:calendarLocale
         })
+        const color = generateColorRGB(item.member.name);
 
         return (
           <Card
             key={item.id}
-            className="w-full"
+            className="w-full relative overflow-hidden shadow-md"
           >
+            <div className="size-10 w-full round" style={{ 
+              position: "absolute",
+              top:0,
+              left:0,
+              backgroundColor: color,
+             }}>
+            
+            </div>
             <CardHeader className="flex flex-col justify-center items-center">
-            <Avatar >
+            <Avatar>
                 <AvatarFallback className="text-current mx-auto">
                   {twoLettersFromWord}
                 </AvatarFallback>

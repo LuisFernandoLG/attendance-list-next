@@ -43,7 +43,7 @@ export const useAddEventMemberForm = ({addMember}:Props)=>{
         name: values.name, 
         email: values.email, 
         details: values.details,
-        verifyByEmail: values.notifyByEmail
+        verifyByEmail: false,
       })
 
       console.log({res})

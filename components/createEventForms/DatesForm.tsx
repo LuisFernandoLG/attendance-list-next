@@ -1,4 +1,4 @@
-import { es } from 'date-fns/locale';
+import { es, enUS } from 'date-fns/locale';
 import {
   Card,
   CardContent,
@@ -29,7 +29,7 @@ import { Calendar } from "../ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { compareAsc, format } from 'date-fns';
 import { formatDateForHuman } from '@/helpers/formatDateForHuman';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 
 const formSchema = z
@@ -43,6 +43,7 @@ type Form = z.infer<typeof formSchema>;
 export const DatesForm = () => {
   const { changeSection, addDatesFormData, mainForm } = useCreateEventStepForm();
   const t = useTranslations("NewEvent");
+  const locale = useLocale()
   const form = useForm<Form>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -51,6 +52,7 @@ export const DatesForm = () => {
   });
 
   const fields = form.watch("dates")
+  const calendarLocale = locale === "es" ? es : enUS;
 
 
   const onSubmit = (values: Form) => {
@@ -105,7 +107,7 @@ export const DatesForm = () => {
                         mode="multiple"
                         selected={field.value}
                         onSelect={field.onChange}
-                        locale={es}
+                        locale={calendarLocale}
                         disabled={(date) =>
                           date < new Date(new Date().setHours(0, 0, 0, 0))
                         }
@@ -124,7 +126,7 @@ export const DatesForm = () => {
             <div className="flex gap-2 flex-wrap my-2">
                 {fields.sort(compareAsc).map((item, i) => 
                     <Badge variant="secondary" key={i} className="text-sm">{
-                      formatDateForHuman(item)
+                      formatDateForHuman(item, calendarLocale)
                     }</Badge>
                 )
                 }

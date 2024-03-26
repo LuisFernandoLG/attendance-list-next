@@ -12,10 +12,12 @@ import { ThemeToggle } from "./ThemeToggle";
 import { ExitIcon, MixerHorizontalIcon } from "@radix-ui/react-icons";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { Link, useRouter } from "./navigation";
+import { useTranslations } from "next-intl";
 
 export default function AppNav() {
   const dispatch = useDispatch<AppDispatch>()
   const router = useRouter()
+  const t = useTranslations("profileMenu")
 
   const handleLogOut = ()=>{
     dispatch(logOut())
@@ -42,15 +44,15 @@ export default function AppNav() {
                 </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-              <DropdownMenuLabel>Cuenta</DropdownMenuLabel>
+              <DropdownMenuLabel>{t("accountTitle")}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleProfile}>
          <MixerHorizontalIcon className="w-5 h-5 mr-2"/>
-          Perfil
+         {t("profile")}
         </DropdownMenuItem>
         <DropdownMenuItem onClick={handleLogOut}>
          <ExitIcon className="w-5 h-5 mr-2"/>
-          Cerrar sesión
+         {t("logout")}
         </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

@@ -6,7 +6,7 @@ import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { CalendarIcon, CheckCircledIcon, CheckIcon } from "@radix-ui/react-icons";
 import { Calendar } from "../ui/calendar";
-import { es } from "date-fns/locale";
+import { es, enUS } from "date-fns/locale";
 import { Badge } from "../ui/badge";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
@@ -15,7 +15,7 @@ import { compareAsc, formatISO9075 } from "date-fns";
 import { formatDateForHuman } from "@/helpers/formatDateForHuman";
 import { useEffect } from "react";
 import { toast } from "sonner";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Input } from "../ui/input";
 import { useMutation, useQuery } from "react-query";
 
@@ -39,6 +39,8 @@ export function DatesEventTab({ event }: Props) {
 
   const datesProps = event.dates.map((date) => date.date)
   const t = useTranslations("Event")
+  const locale = useLocale()
+  const calendarLocale = locale === "es" ? es : enUS;
   const mutation = useMutation({
     mutationFn: (props:updateEventProps) =>{
       const eventId = event.id.toString()
@@ -157,7 +159,7 @@ export function DatesEventTab({ event }: Props) {
                         mode="multiple"
                         selected={field.value}
                         onSelect={field.onChange}
-                        locale={es}
+                        locale={calendarLocale}
                         disabled={(date) =>
                           date < new Date(new Date().setHours(0, 0, 0, 0))
                         }
@@ -176,7 +178,7 @@ export function DatesEventTab({ event }: Props) {
             <div className="flex gap-2 flex-wrap my-2">
                 {fields.sort(compareAsc).map((item, i) => 
                     <Badge variant="secondary" key={i} className="text-sm">{
-                      formatDateForHuman(item)
+                      formatDateForHuman(item, calendarLocale)
                     }</Badge>
                 )
                 }

@@ -7,8 +7,11 @@ import { DashboardEventListSkeleton } from "./skeletons/DashboardEventListSkelet
 import {  EmptyBoxIllustration } from "./illustrations/emptyIllustrations/EmptyBoxIllustration";
 import { useQuery } from "react-query";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
+import { useTranslations } from "next-intl";
 
 export const DashboardEventList = ({className}:{className?:string}) => {
+  const t = useTranslations("Dashboard")
+  const commonT = useTranslations("common")
   const queryClient = useQuery(["events"], eventApi().getAll, {
     onError: (error) => {
       if (error instanceof Error) {
@@ -16,12 +19,13 @@ export const DashboardEventList = ({className}:{className?:string}) => {
       }
     }
   })
+  
       
   if(queryClient.isLoading) return <DashboardEventListSkeleton />
   if(queryClient.isError) {
  
   return <div className="flex justify-center items-center gap-2 ">
-    <ExclamationTriangleIcon />  There was an error 
+    <ExclamationTriangleIcon />  <span>{commonT("thereWasAnError")}</span>
   </div>
   }
 
@@ -49,7 +53,7 @@ export const DashboardEventList = ({className}:{className?:string}) => {
     {
       isEmpty && <div className="flex mx-auto justify-center w-full flex-col items-center">
        <EmptyBoxIllustration className="w-auto h-56"/>
-        <p>No tienes eventos aún</p>
+        <p>{t("noEvents")}</p>
       </div>
     }
       </div>

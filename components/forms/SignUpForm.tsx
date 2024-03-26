@@ -46,7 +46,7 @@ export default function SignUpForm({className}:{className?:string}) {
               <FormItem>
                 <FormLabel>{t("email")}</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input   {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

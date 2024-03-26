@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { useAuthUser } from "@/hooks/useAuthUser";
 import { useRedirect } from "@/hooks/useRedirect";
+import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 
 
@@ -18,7 +19,7 @@ import { useEffect } from "react";
 export default function ConfirmEmailPage() {
   const { user, auth } = useAuthUser()
   const _redirect = useRedirect()
-  console.log("Confirm-email page rendered")
+  const t = useTranslations("ConfirmEmail")
 
   
   useEffect(()=>{
@@ -32,9 +33,9 @@ export default function ConfirmEmailPage() {
     <AppNav/>
       <Card className="max-w-[550px] mx-auto mt-5">
         <CardHeader>
-          <CardTitle className="text-center">Verifica tu cuenta</CardTitle>
+          <CardTitle className="text-center">{t("title")}</CardTitle>
           <CardDescription className="text-center">
-            Ingresa el código enviado a {user.email}
+          {t("description")} {user.email}
           </CardDescription>
         </CardHeader>
         
@@ -44,7 +45,7 @@ export default function ConfirmEmailPage() {
 
       </Card>
         <div className="flex flex-col items-center justify-center mt-3">
-          <div className="text-sm">¿No recibiste el código?</div>
+          <div className="text-sm">{t("didntReceive")}</div>
           <ResendEmailCodeButton/>
         </div>
     </>

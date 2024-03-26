@@ -77,7 +77,7 @@ export function QRCodeCardForm() {
                     defaultValue="squar"
                   >
                     <ToggleGroupItem value="squar" aria-label="Toggle bold">
-                      <SquareIcon className="h-4 w-4" /> Cuadrado
+                      <SquareIcon className="h-4 w-4 mr-2" /> Cuadrado
                     </ToggleGroupItem>
                   </ToggleGroup>
                 </div>

@@ -24,9 +24,18 @@
     "password": "Contraseña",
     "submit": "Registrarse"
   },
+  
+  "ConfirmEmail":{
+    "title": "verifica tu correo electrónico",
+    "description": "Hemos enviado un código de verificación a: ",
+    "verify": "Verificar ",
+    "didntReceive": "¿No recibiste el correo electrónico?",
+    "resend": "Reenviar"
+  },
   "Dashboard": {
     "title": "Mis pases de lista",
-    "createEvent": "Crear evento"
+    "createEvent": "Crear evento",
+    "noEvents": "No tienes eventos aún"
   },
   "NewEvent": {
     "title": "Cuéntanos un poco del evento 📅",
@@ -126,6 +135,8 @@
       },
       "attendance": {
         "tabName": "Asistencia",
+        "title": "Pase de lista",
+        "description": "Lista de miembros registrados",
         "table": {
           "header": {},
           "emptyMessage": "No hay asistencias aún"
@@ -165,12 +176,18 @@
   },
 
 
+  "profileMenu":{
+    "accountTitle": "Cuenta",
+    "profile": "Perfil",
+    "logout": "Cerrar sesión"
+  },
 
   "common": {
     "goHome": "Ir a inicio",
     "cancel": "Cancelar",
     "next": "Siguiente",
     "back": "Atrás",
+    "tryAgain": "Intentar de nuevo",
     "save": "Guardar",
     "delete": "Eliminar",
     "edit": "Editar",
@@ -184,6 +201,7 @@
     "warning": "Advertencia",
     "info": "Información",
     "confirm": "Confirmar",
+    "therWasAnError": "Ocurrió un error",
     "deleteConfirmation": "¿Estás seguro de que deseas eliminar este elemento?",
     "deleteConfirmationDescription": "Esta acción no se puede deshacer.",
     "deleteConfirmationYes": "Sí, eliminar",

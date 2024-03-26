@@ -85,10 +85,10 @@ export const EventForm = () => {
                       <QRIcon className="inline size-5 mr-2"/> {
                         t("eventTypeForm.inputType.options.controlledAttendance")}
                       </SelectItem>
-                      <SelectItem value="UNCONTROLLED">
+                      {/* <SelectItem value="UNCONTROLLED">
                       <FormIcon className="inline size-5 mr-2"/> 
                       {t("eventTypeForm.inputType.options.uncontrolledAttendance")}
-                      </SelectItem>
+                      </SelectItem> */}
                     </SelectContent>
                   </Select>
                   <FormMessage />

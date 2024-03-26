@@ -1,9 +1,11 @@
 import { useResendVerificationEmailCode } from "@/hooks/useResendVerificationEmailCode";
 import { Button } from "./ui/button";
+import { useTranslations } from "next-intl";
 
 export function ResendEmailCodeButton() {
   const { loading, sendVEmailVerificationCode } =
     useResendVerificationEmailCode();
+  const t = useTranslations("ConfirmEmail");
 
   return (
     <Button
@@ -12,7 +14,7 @@ export function ResendEmailCodeButton() {
       size="sm"
       variant="link"
     >
-      Reenviar
+      {t("resend")}
     </Button>
   );
 }

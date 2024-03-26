@@ -24,9 +24,17 @@
     "password": "Password",
     "submit": "Sign Up"
   },
+  "ConfirmEmail":{
+    "title": "Verify your email",
+    "description": "We have sent you a verification code to: ",
+    "verify": "Verify ",
+    "didntReceive": "Didn't receive the email?",
+    "resend": "Resend"
+  },
   "Dashboard": {
     "title": "My attendance lists",
-    "createEvent": "Create event"
+    "createEvent": "Create event",
+    "noEvents": "You don't have any events yet"
   },
   "NewEvent": {
     "title": "Tell us about your event 📅",
@@ -129,6 +137,9 @@
       ,
         "attendance": {
           "tabName": "Attendance",
+          
+        "title": "Attendance List",
+        "description": "Check the attendance of your event.",
           "table": {
             "header": {
               "id": "ID",
@@ -175,11 +186,18 @@
     }
   },
 
+
+  "profileMenu":{
+    "accountTitle": "Account",
+    "profile": "Profile",
+    "logout": "Logout"
+  },
   "common": {
     "goHome": "Go home",
     "cancel": "Cancell",
     "next": "Next",
     "back": "Back",
+    "tryAgain": "Try again",
     "save": "Save",
     "delete": "Delete",
     "edit": "Edit",
@@ -193,6 +211,7 @@
     "warning": "Warning",
     "info": "Info",
     "confirm": "Confirm",
+    "therWasAnError": "There was an error",
     "deleteConfirmation": "Are you sure you want to delete this item?",
     "deleteConfirmationDescription": "This action cannot be undone.",
     "deleteConfirmationYes": "Yes, delete it",

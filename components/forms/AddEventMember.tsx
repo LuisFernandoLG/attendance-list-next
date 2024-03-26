@@ -55,7 +55,7 @@ export const AddEventMember = (props: Props) => {
               )}
             />
 
-            <FormField
+            {/* <FormField
               control={form.control}
               name="notifyByEmail"
               render={({ field }) => (
@@ -72,7 +72,7 @@ export const AddEventMember = (props: Props) => {
                   <FormMessage />
                 </FormItem>
               )}
-            />
+            /> */}
 
             <FormField
               control={form.control}

@@ -39,7 +39,7 @@ export interface ButtonProps
 
 
 const Content = ({isLoading, children}: {isLoading:boolean, children:React.ReactNode})=>{
-if(isLoading) return  <Loader2 className={cn('h-4 w-4 animate-spin', children && 'mr-2')} />
+if(isLoading) return  <Loader2 className={cn('h-4 w-4 animate-spin')} />
 
 return <>{children}</>
 }

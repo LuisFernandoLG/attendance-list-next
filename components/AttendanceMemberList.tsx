@@ -16,7 +16,7 @@ export function AttendanceMemberList({
 
   return (
     <article
-      className="p-5 grid"
+      className="grid gap-5"
       style={{ gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr)" }}
     >
       {members.map((item) => {
@@ -25,7 +25,7 @@ export function AttendanceMemberList({
         return (
           <div
             key={item.id}
-            className="border p-5 m-2 rounded-md flex gap-2 
+            className="border p-5 rounded-md flex gap-2 
           [&:nth-child(1)]:bg-green-600
           [&:nth-child(2)]:bg-pink-600
           [&:nth-child(3)]:bg-purple-600

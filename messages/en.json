@@ -144,8 +144,16 @@
           "tabName": "Settings",
           "title": "Settings",
           "datesForm":{
-            "title": "Dates",
+            "title": "Event settings",
             "inputs":{
+              
+            "name":{
+              "label": "Name",
+              "placeholder": ""
+            },
+            "description":{
+              "label": "Description"
+            },
               "dates":{
                 "label": "Dates",
                 "placeholder": "Select some dates"

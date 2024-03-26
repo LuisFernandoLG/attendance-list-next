@@ -5,16 +5,14 @@ import { EmptyUsersIllustration } from "./illustrations/emptyIllustrations/Empty
 import { useTranslations } from "next-intl";
 
 export function AttendanceMemberList({
-  loading,
   members,
 }: {
-  loading: boolean;
   members: MemberWithAttendance[];
 }) {
 
   const t = useTranslations("Event")
 
-  if (loading) return <AttendanceTableSkeleton />;
+  
 
   return (
     <article

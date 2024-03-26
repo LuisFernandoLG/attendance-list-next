@@ -1,4 +1,4 @@
-import { GetEventItemResponse, eventApi } from "@/services/api/eventApi";
+import { EventItemFromResponse, GetEventItemResponse, eventApi } from "@/services/api/eventApi";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../ui/card";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
@@ -16,6 +16,8 @@ import { formatDateForHuman } from "@/helpers/formatDateForHuman";
 import { useEffect } from "react";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
+import { Input } from "../ui/input";
+import { useMutation, useQuery } from "react-query";
 
 type Props = {
   event: GetEventItemResponse;
@@ -24,7 +26,9 @@ type Props = {
 
 const formSchema = z
   .object({
-    dates: z.array(z.date()).min(1, "Select at least a date")
+    dates: z.array(z.date()).min(1, "Select at least a date"),
+    name: z.string().min(1, { message: "Name is too short" }).max(255, { message: "Name is too long" }),
+    description: z.string().min(1, { message: "Description is too short" }).max(255, { message: "Description is too long" }),
   })
   .required();
 
@@ -35,14 +39,31 @@ export function DatesEventTab({ event }: Props) {
 
   const datesProps = event.dates.map((date) => date.date)
   const t = useTranslations("Event")
+  const mutation = useMutation({
+    mutationFn: (props:updateEventProps) =>{
+      const eventId = event.id.toString()
+      return eventApi().update(eventId, props)
+    },
+    onSuccess: () => {
+      toast.success("Event updated")
+    },
+    onError: (error:Error) => {
+      toast.error(error.message)
+    }
+  })
 
   const form = useForm<Form>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       dates: [],
+      name: event.name,
+      description: event.description,
     },
   });
 
+  type updateEventProps = EventItemFromResponse & {dates:string[]};
+
+  // Rest of the code remains the same
   useEffect(()=>{
     if(event){
       form.setValue("dates", datesProps.map((dateString) => new Date(dateString)))
@@ -53,27 +74,16 @@ export function DatesEventTab({ event }: Props) {
 
   const onSubmit = (values: Form) => {
     const formattedDates = values.dates.map((date) => formatISO9075(date))
-    updateEvent(formattedDates)
-  }
-
-  const updateEvent = async (_dates:string[])=>{
-    try{
-      const tempEvent = {...event, dates: _dates, attendance_type: null}
-      const res = await eventApi().update(event.id.toString(), tempEvent)
-      toast.success("Event updated")
-    }catch(e){
-      console.log(e)
-      if(e instanceof Error) toast.error(e.message)
-    }
+    mutation.mutate({
+      ...event,
+      ...values,
+      dates: formattedDates,
+    })
   }
 
 
   return (
     <div>
-      <h2 className="text-xl font-bold">{t("tabs.settings.title")}</h2>
-      <h3 className="">{event.name}</h3>
-      <p className="mb-5">{event.description}</p>
-
       <div>
       <Form {...form}>
       <form
@@ -85,6 +95,36 @@ export function DatesEventTab({ event }: Props) {
             <CardTitle>{t("tabs.settings.datesForm.title")}</CardTitle>
           </CardHeader>
           <CardContent>
+          <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem className="mb-4">
+              <FormLabel>{t("tabs.settings.datesForm.inputs.name.label")}</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        
+          <FormField
+          control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem className="mb-4">
+              <FormLabel>{t("tabs.settings.datesForm.inputs.description.label")}</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+            
             <FormField
               control={form.control}
               name="dates"
@@ -143,9 +183,8 @@ export function DatesEventTab({ event }: Props) {
             </div>
           </CardContent>
           <CardFooter>
-            <Button  className="ml-auto" type="submit">
-             <CheckIcon/>  {t("tabs.settings.datesForm.submit")}
-            </Button>
+            <Button  className="ml-auto w-fit" type="submit" loading={mutation.isLoading} disabled={mutation.isLoading}>
+             <CheckIcon/> {t("tabs.settings.datesForm.submit")}</Button>
           </CardFooter>
         </Card>
       </form>

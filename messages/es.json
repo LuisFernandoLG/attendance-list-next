@@ -132,7 +132,27 @@
         }
       },
       "settings": {
-        "tabName": "Configuración"
+        "tabName": "Configuración",
+        "title": "Configuración del evento",
+        "datesForm":{
+          "title": "Configuración del evento",
+          "inputs":{
+            "name":{
+              "label": "Nombre",
+              "placeholder": ""
+            },
+            "description":{
+              "label": "Descripción"
+            },
+            "dates":{
+              "label": "Fechas",
+              "placeholder": "Elige algunas fechas"
+            },
+            "selectedDatesLabel": "Fechas seleccionadas:"
+            },
+            "submit": "Guardar"
+          }
+        
       }
     }
   },

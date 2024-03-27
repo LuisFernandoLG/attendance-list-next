@@ -25,6 +25,7 @@ export const RegisterAsistance = () => {
       setSuccess(true);
     } catch (e) {
       console.error(e);
+      toast.error("Error al registrar asistencia");
     } finally {
       fetchStatus.stopLoading();
       toast.success("Asistencia registrada");

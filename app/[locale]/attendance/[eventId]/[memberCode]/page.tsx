@@ -48,14 +48,6 @@ export default async function Page(props: Props) {
     memberCode: props.params.memberCode,
   });
 
-  async function registerAttendance() {
-    'use server'
- 
-    const apiEndpoint = process.env.NEXT_PUBLIC_MY_ATTENDANCE_API;
-    const endpoint = `${apiEndpoint}/attendance/${props.params.eventId}/${props.params.memberCode}`;
-    const res =  await axios.post(endpoint, {}, {headers:{'Content-Type': 'application/json', Accept: 'application/json'}})
-    return res.data;
-  }
 
   return (
     <div

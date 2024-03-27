@@ -124,7 +124,9 @@ export function QRCodeCardForm() {
                 </div> */}
               </article>
 
-              <article ref={ref} className=" w-56 h-56 border flex flex-col p-4 max-w-[400px] bg-white">
+<div className="rounded-3xl border p-2" >
+
+              <article ref={ref} className=" w-56 h-56 flex flex-col p-4 max-w-[400px] bg-white">
                 <QRCode
                   size={800}
                   style={{ height: "auto", maxWidth: "100%", width: "100%" }}
@@ -132,10 +134,11 @@ export function QRCodeCardForm() {
                   viewBox={`0 0 800 800`}
                 />
                 <div>
-              { hasAttribute("name") && <h3 className="text-center text-xl font-bold mt-2">{member.custom_id}</h3>}
-              { hasAttribute("folio") && <h4 className="text-center text-base">{member.name}</h4> }
+              { hasAttribute("name") && <h3 className="text-center text-xl font-bold mt-2 text-black">{member.custom_id}</h3>}
+              { hasAttribute("folio") && <h4 className="text-center text-base text-black">{member.name}</h4> }
                 </div>
               </article>
+</div>
             </section>
           </CardContent>
 

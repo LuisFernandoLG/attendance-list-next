@@ -186,6 +186,21 @@
     }
   },
 
+  "Attendance":{
+    "found":{
+      "title": "Register your attendance",
+      "description": "Click the button to register your attendance.",
+      "explination": "Hi {name}, register your attendance by clicking the button below.",
+      "submit": "Register attendance",
+      "successMsg": "Attendance registered"
+    },
+    "notFound":{
+      "title": "Oops, there was a problem",  
+      "description": "We couldn't find the event or user you are trying.",
+      "explination": "If you think this is an error, please contact the event organizer."
+    }
+  },  
+
 
   "profileMenu":{
     "accountTitle": "Account",

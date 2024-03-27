@@ -175,6 +175,21 @@
     }
   },
 
+  "Attendance":{
+    "found":{
+      "title": "Registra tu asistencia",
+      "description": "Da click sobre el botón para registrar tu asistencia en el evento",
+      "explination": "Hola {name}, registra tu asistencia.",
+      "submit": "Registrar asistencia",
+      "successMsg": "Asistencia registrada"
+    },
+    "notFound":{
+      "title": "Oops, hubo un problema",  
+      "description": "No se encontró el evento o tu usuario. Por favor, verifica que el enlace sea correcto.",
+      "explination": "Si crees que esto es un error, por favor contacta al organizador del evento."
+    }
+  },  
+
 
   "profileMenu":{
     "accountTitle": "Cuenta",

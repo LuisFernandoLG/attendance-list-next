@@ -51,7 +51,7 @@ export default function LoginForm() {
       fetchStatus.startLoading()
       const res = await authApi().login(values)
       dispatch(login(res))
-      toast.success(`Welcome again${res.user.name}`)
+      toast.success(`Welcome again ${res.user.name}`)
 
       debounce(()=>{
         route.push("/dashboard")

@@ -1,11 +1,18 @@
-import { axios } from "@/contants/axiosConfig"
+import { apiUrl } from "@/contants/axiosConfig"
 import { handleError } from "@/helpers/handleAxiosErrors"
+import axios from "axios"
 
 export const attendanceApi = () => {
 
-  const register = ({eventId, memberCode}:{eventId: string, memberCode: string}) => {  
+  // called from app/[locale]/actions.ts , Server action
+  const register = async ({eventId, memberCode}:{eventId: string, memberCode: string}) => {  
     try{
-      const res = axios.post(`/attendance/${eventId}/${memberCode}`, {})
+      const res = await axios.post(`${apiUrl}/attendance/${eventId}/${memberCode}`, {}, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      })
       return res
     }
     catch(e){

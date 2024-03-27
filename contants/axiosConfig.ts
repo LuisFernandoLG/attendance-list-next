@@ -1,6 +1,6 @@
 import { isClientSide } from "@/helpers/isClientSide";
 import _axios from "axios";
-const apiUrl = process.env.NEXT_PUBLIC_MY_ATTENDANCE_API;
+export const apiUrl = process.env.NEXT_PUBLIC_MY_ATTENDANCE_API;
 
 _axios.defaults.baseURL = apiUrl
 _axios.defaults.headers.common["Content-Type"] = "application/json";

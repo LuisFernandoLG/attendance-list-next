@@ -17,6 +17,8 @@ import {
 import QRCode from "react-qr-code";
 import { ToggleGroup, ToggleGroupItem } from "../ui/toggle-group";
 import {
+  EyeOpenIcon,
+  GlobeIcon,
   SquareIcon,
 } from "@radix-ui/react-icons";
 
@@ -24,6 +26,8 @@ import {  toJpeg } from 'html-to-image';
 import { usePathname } from "../navigation";
 import { useLocale } from "next-intl";
 import { useParams } from "next/navigation";
+import { Badge } from "../ui/badge";
+import Link from "next/link";
 
 export function QRCodeCardForm() {
   const { isOpen, member, closeDrawer } = useContext(QRCodesWizzardContext);
@@ -37,7 +41,7 @@ export function QRCodeCardForm() {
     // Check if the code is running on the client side
     if (process) {
       // Access the current page URL using window.location
-      const tempUrl = `${window.location.host}/${locale}/attendance/${member.event_id}/${member.custom_id}`
+      const tempUrl = `${window.location.protocol}//${window.location.host}/${locale}/attendance/${member.event_id}/${member.custom_id}`
       setCurrentUrl(tempUrl);
     }
   }, [member, locale]);
@@ -118,6 +122,8 @@ export function QRCodeCardForm() {
                   </ToggleGroup>
                 </div>
 
+                
+
                 {/* <div>
                   <h3 className="text-2xl font-bold mb-2">Color</h3>
                   <ToggleGroup
@@ -140,7 +146,7 @@ export function QRCodeCardForm() {
                 </div> */}
               </article>
 
-<div className="rounded-3xl border p-2" >
+<div className="rounded-3xl border p-2 flex flex-col items-center justify-center">
 
               <article ref={ref} className=" w-56 h-56 flex flex-col p-4 max-w-[400px] bg-white">
                 <QRCode
@@ -154,6 +160,11 @@ export function QRCodeCardForm() {
               { hasAttribute("folio") && <h4 className="text-center text-base text-black">{member.name}</h4> }
                 </div>
               </article>
+
+{currentUrl}
+<Link href={currentUrl} target="_blank" className="mx-auto">
+  <Badge className="mt-4 cursor-pointer">Vista previa <GlobeIcon/>  </Badge>
+</Link>
 </div>
             </section>
           </CardContent>

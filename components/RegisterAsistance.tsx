@@ -23,12 +23,12 @@ export const RegisterAsistance = () => {
         memberCode: params.memberCode,
       });
       setSuccess(true);
+      toast.success("Asistencia registrada");
     } catch (e) {
       console.error(e);
       toast.error("Error al registrar asistencia");
     } finally {
       fetchStatus.stopLoading();
-      toast.success("Asistencia registrada");
     }
   };
 

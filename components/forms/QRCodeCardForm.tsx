@@ -4,7 +4,7 @@ import {
   DrawerContent,
 } from "@/components/ui/drawer";
 import { Button } from "../ui/button";
-import {  useContext, useRef, useState } from "react";
+import {  useContext, useEffect, useRef, useState } from "react";
 import { QRCodesWizzardContext } from "@/contexts/QRCodeWizzardContext";
 import {
   Card,
@@ -21,11 +21,26 @@ import {
 } from "@radix-ui/react-icons";
 
 import {  toJpeg } from 'html-to-image';
+import { usePathname } from "../navigation";
+import { useLocale } from "next-intl";
+import { useParams } from "next/navigation";
 
 export function QRCodeCardForm() {
   const { isOpen, member, closeDrawer } = useContext(QRCodesWizzardContext);
   const [attributes, setAttributes] = useState<string[]>(["name", "folio"]);
   const ref = useRef<HTMLDivElement>(null)
+  const locale = useLocale()
+
+  const [currentUrl, setCurrentUrl] = useState('');
+
+  useEffect(() => {
+    // Check if the code is running on the client side
+    if (process) {
+      // Access the current page URL using window.location
+      const tempUrl = `${window.location.host}/${locale}/attendance/${member.event_id}/${member.custom_id}`
+      setCurrentUrl(tempUrl);
+    }
+  }, [member, locale]);
 
   const hasAttribute = (attribute: string) => {
     return attributes.includes(attribute);
@@ -52,6 +67,7 @@ export function QRCodeCardForm() {
         console.log(err)
       })
   }
+
 
   return (
     <Drawer open={isOpen} dismissible={false}>
@@ -130,7 +146,7 @@ export function QRCodeCardForm() {
                 <QRCode
                   size={800}
                   style={{ height: "auto", maxWidth: "100%", width: "100%" }}
-                  value={member.url_attendance}
+                  value={currentUrl}
                   viewBox={`0 0 800 800`}
                 />
                 <div>

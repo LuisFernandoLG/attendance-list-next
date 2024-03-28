@@ -21,6 +21,7 @@ export default function GuestNav() {
     </Link>
 
       <nav className="flex gap-2">
+        <LanguageSwitcher/>
         <ThemeToggle/>
         <ul className="flex gap-2">
           

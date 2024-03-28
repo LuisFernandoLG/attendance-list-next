@@ -15,13 +15,17 @@ import { Badge } from "../ui/badge";
 import { compareAsc } from "date-fns";
 import { formatDateForHuman } from "@/helpers/formatDateForHuman";
 import { useRegisterEvent } from "@/hooks/useRegisterEvent";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { es, enUS } from 'date-fns/locale';
 
 
 export const InfoSummary = () => {
   const { mainForm, changeSection } = useCreateEventStepForm();
   const { handleCreateEvent, loading} = useRegisterEvent()
   const t = useTranslations("NewEvent")
+  const locale = useLocale()
+
+  const lan = locale === "es" ? es : enUS;
 
   return (
     <Card className="max-w-[500px] mx-auto shadows">
@@ -64,7 +68,7 @@ export const InfoSummary = () => {
         <h4 className="text-base font-bold">{t("summary.datesField")}</h4>
         <div>
           {mainForm.DATES_FORM.dates.sort(compareAsc).map((item, i)=>{
-            return <Badge variant="secondary" key={`${i}-date`}>{formatDateForHuman(item)}</Badge>
+            return <Badge variant="secondary" key={`${i}-date`}>{formatDateForHuman(item, lan)}</Badge>
           })}
         </div>
         <Button

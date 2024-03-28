@@ -1,10 +1,9 @@
 "use client"; // Error components must be Client Components
-
-import { NotFoundIllustration } from "@/components/illustrations/NotFoundIllustration";
 import { TiredCat } from "@/components/illustrations/TiredCat";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
 
@@ -16,6 +15,8 @@ export default function Error({
   reset: () => void;
 }) {
   const params = useParams<{ eventId: string; memberCode: string }>();
+  const t = useTranslations("Attendance")
+  const commonT = useTranslations("common")
 
   useEffect(() => {
     // Log the error to an error reporting service
@@ -27,8 +28,8 @@ export default function Error({
 
     <Card className="max-w-[400px] mx-5 sm:mx-auto  mt-5 shadow-md ">
       <CardHeader>
-        <CardTitle>Oops, hubo un problema</CardTitle>
-        <CardDescription>No encontramos tu registro.</CardDescription>
+        <CardTitle>{t("notFound.title")}</CardTitle>
+        <CardDescription>{t("notFound.description")}</CardDescription>
       </CardHeader>
       <CardContent>
 
@@ -36,14 +37,14 @@ export default function Error({
       <TiredCat className="w-full"/>
       {/* Possible reasons */}
       <p className="text-center text-gray-600 mt-4">
-        Puede que el enlace que seguiste sea incorrecto, o que el evento haya sido cancelado.
+        {t("notFound.explination")}
       </p>
 
     {/* code */}
     <Badge variant="destructive" className="mt-4">{params.memberCode}</Badge>
       
 
-      <Button onClick={reset} className="mt-4">Volver a intentar</Button>
+      <Button onClick={reset} className="mt-4">{commonT("tryAgain")}</Button>
 
     </div>
       </CardContent>

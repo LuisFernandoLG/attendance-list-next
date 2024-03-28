@@ -59,11 +59,11 @@ export default async function Page(props: Props) {
       style={{
         backgroundImage: bgImage,
         backgroundSize: "cover",
-        backgroundPosition: "center",
+        // backgroundPosition: "center",
       }}
-      className="min-h-screen flex justify-center items-center"
+      className="min-h-screen pt-5 "
     >
-      <Card className="max-w-[400px] mx-5 sm:mx-auto  mt-5 shadow-md ">
+      <Card className="max-w-[400px] mx-5 sm:mx-auto shadow-md ">
         <CardHeader>
           <CardTitle>{t("found.title")}</CardTitle>
           <CardTitle className="mt-1"><span className="underline text-primary">{info.user.name}</span></CardTitle>

@@ -23,7 +23,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <div style={{ backgroundImage:bgImage, backgroundSize: 'cover', backgroundPosition: 'center' }} className="min-h-screen flex justify-center items-center">
+    <div style={{ backgroundImage:bgImage, backgroundSize: 'cover', backgroundPosition: 'center' }} className="min-h-screen">
 
     <Card className="max-w-[400px] mx-5 sm:mx-auto  mt-5 shadow-md ">
       <CardHeader>

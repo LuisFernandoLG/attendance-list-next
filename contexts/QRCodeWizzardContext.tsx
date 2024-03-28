@@ -1,4 +1,4 @@
-
+"use client"
 import { MemberItemFromPagination } from '@/services/api/eventMember';
 import { createContext, useState } from 'react';
 

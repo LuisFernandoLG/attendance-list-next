@@ -1,14 +1,18 @@
-"use client";
-
 import { DashboardEventList } from "@/components/DashboardEventList";
 import { Link } from "@/components/navigation";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PlusCircledIcon } from "@radix-ui/react-icons";
-import { useTranslations } from "next-intl";
+import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
-function Page() {
-  const t = useTranslations("Dashboard")
+export const metadata: Metadata = {
+  "title": "Dashboard",
+  "description": "Dashboard page for the app."
+}
+
+async function Page() {
+  const t = await getTranslations("Dashboard")
 
   return (
     <section>

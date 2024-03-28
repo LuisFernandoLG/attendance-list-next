@@ -1,16 +1,20 @@
-"use client";
 import { CreateEventMultiStepForm } from "@/components/CreateEventMultiSetpForm";
-import CreateEventStepFormProvider from "@/contexts/CreateEventStepFormContext";
-import { useTranslations } from "next-intl";
+import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
-export default function Page() {
-  const t = useTranslations("NewEvent")
+export const metadata: Metadata = {
+  "title": "New Event",
+  "description": "Create a new event."
+}
+
+export default async function Page() {
+  const t = await getTranslations("NewEvent")
   return (
-    <CreateEventStepFormProvider>
+    <>
       <h1 className="text-center font-black text-4xl">
         {t("title")}
       </h1>
       <CreateEventMultiStepForm />
-    </CreateEventStepFormProvider>
-  );
+    </>
+   );
 }

@@ -1,9 +1,5 @@
-"use client";
-
-import QRCodesWizzardProvider from "@/contexts/QRCodeWizzardContext";
-
 function layout({ children }: { children: React.ReactNode }) {
-  return <QRCodesWizzardProvider>{children}</QRCodesWizzardProvider>;
+  return <>{children}</>;
 }
 
 export default layout;

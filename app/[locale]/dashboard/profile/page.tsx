@@ -1,16 +1,21 @@
-"use client"
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Link } from "@/components/navigation";
 import {  buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { ArrowLeftIcon } from "@radix-ui/react-icons";
-import { useTranslations } from "next-intl";
+import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
-export default function Page() {
+export const metadata: Metadata = {
+  "title": "Profile",
+  "description": "Update your profile."
+}
 
-  const t = useTranslations("Profile")
-  const commonT =  useTranslations("common")
+export default async function Page() {
+
+  const t = await getTranslations("Profile")
+  const commonT = await getTranslations("common")
 
   return <>
   <Link href="/dashboard" className={buttonVariants({variant:"secondary"})}>

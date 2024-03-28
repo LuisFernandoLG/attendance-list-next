@@ -1,3 +1,4 @@
+"use client"
 import { useResendVerificationEmailCode } from "@/hooks/useResendVerificationEmailCode";
 import { Button } from "./ui/button";
 import { useTranslations } from "next-intl";

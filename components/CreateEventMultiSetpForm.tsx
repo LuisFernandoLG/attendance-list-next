@@ -6,9 +6,11 @@ import { EventForm } from "./createEventForms/EventForm";
 import { DatesForm } from "./createEventForms/DatesForm";
 import { sectionNamesObject } from "@/contants/createEventStepForm";
 import { InfoSummary } from "./createEventForms/InfoSummary";
+import CreateEventStepFormProvider from "@/contexts/CreateEventStepFormContext";
 
 export const CreateEventMultiStepForm = () => {
   return (
+    <CreateEventStepFormProvider>
     <div>
         <StepFormNav className="flex justify-center gap-2 mt-4 mb-8" />
         <StepForm item={sectionNamesObject.GENERAL}>
@@ -27,5 +29,6 @@ export const CreateEventMultiStepForm = () => {
           <InfoSummary/>
         </StepForm>
     </div>
+    </CreateEventStepFormProvider>
   );
 };

@@ -1,3 +1,4 @@
+"use client"
 import { EventItemFromResponse, GetEventItemResponse, eventApi } from "@/services/api/eventApi";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../ui/card";

@@ -1,7 +1,7 @@
-"use client"
 import AppNav from "@/components/AppNav";
 import { ResendEmailCodeButton } from "@/components/ResendEmailCodeButton";
 import ConfirmEmailForm from "@/components/forms/ConfirmEmailForm";
+import { AuthAndEmailConfirmedToDashboard } from "@/components/redirects/AuthAndEmailConfirmedToDashboard";
 import {
   Card,
   CardContent,
@@ -9,34 +9,26 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useAuthUser } from "@/hooks/useAuthUser";
-import { useRedirect } from "@/hooks/useRedirect";
-import { useTranslations } from "next-intl";
-import { useEffect } from "react";
+import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
 
+export const metadata: Metadata = {
+  "title": "Confirm email",
+  "description": "Confirm your email address to continue."
+}
 
-export default function ConfirmEmailPage() {
-  const { user, auth } = useAuthUser()
-  const _redirect = useRedirect()
-  const t = useTranslations("ConfirmEmail")
-
-  
-  useEffect(()=>{
-    if(!auth) _redirect("/auth/login")
-    if(auth && user.email_verified_at) _redirect("/dashboard")
-  },[])
-
+export default async function ConfirmEmailPage() {
+  const t = await getTranslations("ConfirmEmail")
   
   return (
     <>
     <AppNav/>
+    <AuthAndEmailConfirmedToDashboard/>
       <Card className="max-w-[550px] mx-auto mt-5">
         <CardHeader>
           <CardTitle className="text-center">{t("title")}</CardTitle>
-          <CardDescription className="text-center">
-          {t("description")} {user.email}
-          </CardDescription>
+          
         </CardHeader>
         
         <CardContent className="flex justify-center">

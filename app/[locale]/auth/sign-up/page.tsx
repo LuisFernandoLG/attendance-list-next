@@ -1,27 +1,22 @@
-"use client"
 import GuestNav from "@/components/GuestNav";
 import SignUpForm from "@/components/forms/SignUpForm";
+import { AuthToDashboard } from "@/components/redirects/AuthToDashboard";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { RootState } from "@/redux/store";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useRouter } from "@/components/navigation";
-import { useRedirect } from "@/hooks/useRedirect";
-import { useTranslations } from "next-intl";
+import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
-export default function SignUpPage() {
-  const { auth } = useSelector((state: RootState) => state.authUser)
-  const _redirect = useRedirect()
-  const t = useTranslations("SignUp")
-  console.log("Sign-up page rendered")
+export const metadata: Metadata = {
+  "title": "Sign Up",
+  "description": "Create an account."
+}
 
-  useEffect(()=>{
-    if(auth) _redirect("/dashboard")
-  },[])
+export default async function SignUpPage() {
+  const t = await getTranslations("SignUp")
 
   return (
     <>
     <GuestNav />
+    <AuthToDashboard/>
       <Card className="max-w-[500px] mx-auto mt-5">
       <CardHeader>
         <CardTitle>{t("title")}</CardTitle>

@@ -8,8 +8,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import axios from "axios";
+import { Metadata } from "next";
 import {getTranslations} from 'next-intl/server';
 
+export const metadata: Metadata = {
+  "title": "Attendance",
+  "description": "Hi, here you can take your attendance."
+}
 
 type Props = {
   params: {

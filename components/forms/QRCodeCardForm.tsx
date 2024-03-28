@@ -161,7 +161,6 @@ export function QRCodeCardForm() {
                 </div>
               </article>
 
-{currentUrl}
 <Link href={currentUrl} target="_blank" className="mx-auto">
   <Badge className="mt-4 cursor-pointer">Vista previa <GlobeIcon/>  </Badge>
 </Link>

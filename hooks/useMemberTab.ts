@@ -7,6 +7,7 @@ import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useFetchStatus } from "./useFetchStatus";
 import { toast } from "sonner";
+import { useQuery } from "react-query";
 
 const initialPaginationResults: Pagination = {
   current_page: 1,
@@ -44,8 +45,22 @@ export const useMemberTab = () => {
   const [members, setMembers] = useState<MemberItemFromPagination[]>([]);
   const params = useParams<PageParams>();
   const query = useSearchParams();
-  const page = query.get("page") ? parseInt(query.get("page") as string) : 1;
-  const fetchTableItemsStatus = useFetchStatus(true);
+  const [page, setPage] = useState(1)
+
+  const {
+    isLoading,
+    isError,
+    error,
+    data,
+    isFetching,
+    isPreviousData,
+
+  } = useQuery({
+    queryKey: ['membersPagination', page],
+    queryFn: () => eventMember().getFromEvent(params.id, page),
+    keepPreviousData : true
+  })
+
   const fetchStatusDeleting = useFetchStatus();
   const [selectedMember, setSelectedMember] =
     useState<MemberItemFromPagination>(memberItemFromPagination);
@@ -76,30 +91,38 @@ export const useMemberTab = () => {
     setMembers([item, ...members]);
   }
 
-  const loadTableItems = async () => {
-    try {
-      fetchTableItemsStatus.startLoading();
-      const res = await eventMember().getFromEvent(params.id, page);
-      setMembers(res.data);
-      setPaginationResults(res);
-    } catch (e) {
-      if (e instanceof Error) toast.error(e.message);
-    } finally {
-      fetchTableItemsStatus.stopLoading();
-    }
-  };
+  const incrementPage = () => setPage(old=> old + 1)
+  const decrementPage = () => setPage(old=> old - 1)
+  const assignPage = (page: number) => setPage(page)
+
 
   useEffect(() => {
-    loadTableItems();
-  }, []);
+    if (data) {
+      setMembers(data.data)
+      setPaginationResults(data)
+    }
+  }
+  , [data])
+
 
   return {
-    members,
-    paginationResults,
-    fetchTableItemsStatus,
+    members: members,
+    paginationResults: paginationResults,
+    fetchTableItemsStatus:{
+      loading: isLoading,
+      error: isError,
+      data: data,
+      isFetching: isFetching,
+      isPreviousData: members ? true : false
+    },
     deleteMember,
     fetchStatusDeleting,
     selectedMember,
-    addMember
+    addMember,
+    incrementPage,
+    decrementPage,
+    page,
+    assignPage,
+    isPreviousData
   };
 };

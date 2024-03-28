@@ -14,26 +14,38 @@ export const MemberEventTab = () => {
     members,
     paginationResults,
     selectedMember,
-    addMember
+    addMember,
+    incrementPage,
+    decrementPage,
+    page,
+    assignPage,
+    isPreviousData
   } = useMemberTab();
   const t = useTranslations("Event")
 
   return (
     <>
-      <h2 className="text-xl font-bold mt-5">{t("tabs.members.title")}</h2>
-      <h3 className="mb-5">{t("tabs.members.description")}</h3>
+      <section className="flex mb-5 justify-between">
+        <div>
+      <h2 className="text-xl font-bold">{t("tabs.members.title")}</h2>
+      <h3 className="">{t("tabs.members.description")}</h3>
+        </div>
 
-      <section className=" mb-5">
         <AddNewMember addMember={addMember} />
       </section>
 
       <MembersTable
-        loading={fetchTableItemsStatus.loading}
+        loading={fetchTableItemsStatus.loading || fetchTableItemsStatus.isFetching && !fetchTableItemsStatus.data}
         data={members}
         pagination={paginationResults}
         deleteMember={deleteMember}
         isDeleting={fetchStatusDeleting.loading}
         selectedMember={selectedMember}
+        incrementPage={incrementPage}
+        decrementPage={decrementPage}
+        page={page}
+        assignPage={assignPage}
+        isPreviousData={isPreviousData}
       />
       <QRCodeCardForm />
     </>

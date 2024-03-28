@@ -31,6 +31,8 @@ import { useMembersTable } from "@/hooks/useMembersTable";
 import { MembersTableSkeleton } from "./skeletons/MembersTableSkeleton";
 import { EmptyUsersIllustration } from "./illustrations/emptyIllustrations/EmptyUsersIllustration";
 import { useTranslations } from "next-intl";
+import { Card } from "./ui/card";
+import { Badge } from "./ui/badge";
 
 
 type Props = {
@@ -40,6 +42,11 @@ type Props = {
   deleteMember: (item: MemberItemFromPagination) => void;
   isDeleting: boolean;
   selectedMember: MemberItemFromPagination | null;
+  decrementPage: () => void;
+  incrementPage: () => void;
+  page: number;
+  assignPage: (page: number) => void;
+  isPreviousData: boolean;
 }
 
 export const MembersTable = ({
@@ -49,16 +56,22 @@ export const MembersTable = ({
   deleteMember,
   isDeleting,
   selectedMember,
+  decrementPage,
+  incrementPage,
+  page,
+  assignPage,
+  isPreviousData,
+
 }: Props) => {
 
   const { nextPage, numberLinks, openDrawer, prevPage} = useMembersTable({pagination})
   const t = useTranslations("Event")
 
-  if (loading) return <MembersTableSkeleton/>
+  if (loading || isPreviousData) return <MembersTableSkeleton/>
 
   return (
     <div className="space-y-5">
-      <div className="relative overflow-x-auto  min-h-[70vh] rounded-sm">
+      <Card className="relative overflow-x-auto  min-h-[60vh] rounded-sm  max-h-[60vh] overflow-y-auto">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 rounded-sm">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -76,7 +89,7 @@ export const MembersTable = ({
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="">
           {
         data.length === 0 && (
           <tr className="text-center text-gray-500 dark:text-gray-400">
@@ -90,13 +103,15 @@ export const MembersTable = ({
             {data.map((item, index) => (
               <tr
                 key={index}
-                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                className="border-b dark:bg-gray-800 dark:border-gray-700"
               >
                 <th
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
+                  <Badge variant="secondary">
                   {item.custom_id}
+                  </Badge>
                 </th>
                 <td className="px-6 py-4">{item.name}</td>
                 <td className="px-6 py-4">{item.email}</td>
@@ -146,34 +161,31 @@ export const MembersTable = ({
             ))}
           </tbody>
         </table>
-      </div>
+      </Card>
+    <PaginationComponent className=" w-fit p-2 rounded-md">
+      <PaginationContent>
+        <Button variant="outline" disabled={!pagination.prev_page_url} onClick={decrementPage}>
+          <PaginationPrevious>Anterior</PaginationPrevious>
+        </Button>
+
+        {numberLinks.map((number, index) => (
+          <PaginationItem key={index}>
+            <PaginationLink
+              onClick={() => assignPage(number)}
+              isActive={number === pagination.current_page}
+            >
+              {number}
+            </PaginationLink>
+          </PaginationItem>
+        ))}
+
+          <Button variant="outline" disabled={!pagination.next_page_url}  onClick={incrementPage}>
+            <PaginationNext>Siguiente</PaginationNext>
+          </Button>
+         </PaginationContent>
+    </PaginationComponent>
      
-      <PaginationComponent className="bg-slate-200 w-fit p-2 rounded-md">
-        <PaginationContent>
-          {prevPage !== pagination.current_page && (
-            <PaginationPrevious href={`?page=${prevPage}`}>
-              Anterior
-            </PaginationPrevious>
-          )}
-
-          {numberLinks.map((number, index) => (
-            <PaginationItem key={index}>
-              <PaginationLink
-                href={`?page=${number}`}
-                isActive={number === pagination.current_page}
-              >
-                {number}
-              </PaginationLink>
-            </PaginationItem>
-          ))}
-
-          {nextPage !== pagination.current_page && (
-            <PaginationNext href={`?page=${nextPage}`}>
-              Siguiente
-            </PaginationNext>
-          )}
-        </PaginationContent>
-      </PaginationComponent>
-    </div>
+      
+</div>
   );
 };

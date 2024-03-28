@@ -53,7 +53,7 @@ export function AttendanceMemberList({
                   {twoLettersFromWord}
                 </AvatarFallback>
               </Avatar>
-              <CardDescription>{item.member.name}</CardDescription>
+              <CardDescription className="text-center">{item.member.name}</CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col gap-1 justify-center items-center">
               <Badge variant="secondary">{item.member.email}</Badge>

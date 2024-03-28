@@ -122,7 +122,7 @@
         "table": {
           "header": {
             "id": "Identificador",
-            "name": "Nombr",
+            "name": "Nombre",
             "email": "Correo electrónico",
             "actions": "Acciones"
           },

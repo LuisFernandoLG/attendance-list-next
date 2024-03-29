@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import GuestNav from "@/components/GuestNav";
 import { getTranslations } from 'next-intl/server';
+import { HeroBanner } from '@/components/landing-page/HeroBanner';
 
 export const metadata: Metadata = {
   "title": "Home",
@@ -13,14 +14,8 @@ export default async function Home() {
   return (
     <>
     <GuestNav/>
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <pre>
-        {t('title')}
-        </pre>
-       
-        
-      </div>
+    <main className="flex min-h-screen w-full">
+      <HeroBanner/>
     </main>
     </>
   );

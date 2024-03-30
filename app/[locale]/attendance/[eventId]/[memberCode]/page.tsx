@@ -56,11 +56,6 @@ export default async function Page(props: Props) {
 
   return (
     <div
-      style={{
-        backgroundImage: bgImage,
-        backgroundSize: "cover",
-        // backgroundPosition: "center",
-      }}
       className="min-h-screen pt-5 "
     >
       <Card className="max-w-[400px] mx-5 sm:mx-auto shadow-md ">
@@ -70,7 +65,7 @@ export default async function Page(props: Props) {
 
           <CardDescription>
             {t("found.description")}{" "}
-            <span className="font-bold text-black underline">
+            <span className="font-bold underline">
               {info.event.name}
             </span>
             .
@@ -80,9 +75,9 @@ export default async function Page(props: Props) {
           <div className="flex flex-col justify-center items-center">
             <ConfirmationCat className="w-2/3" />
             {/* Possible reasons */}
-            <p className="text-center text-gray-600 mt-4">
+            <CardDescription className="text-center mt-2">
               {t("found.explination", {name:info.user.name})}
-            </p>
+            </CardDescription>
 
             {/* code */}
             <RegisterAsistance/>

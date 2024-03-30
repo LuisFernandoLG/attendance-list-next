@@ -6,6 +6,7 @@ import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useTranslations } from 'next-intl';
 import { Link,  usePathname } from "./navigation";
 import path from "path";
+import { cn } from "@/lib/utils";
 
 export default function GuestNav() {
   const pathName = usePathname()
@@ -15,9 +16,9 @@ export default function GuestNav() {
 
   return (
     <>
-    <header className="flex justify-between p-4">
+    <header className="flex justify-between p-2 px-4 sm:p-4">
     <Link href="/">
-      <Logo className="w-28"/>
+      <Logo className="w-24 sm:w-32"/>
     </Link>
 
       <nav className="flex gap-2">
@@ -32,7 +33,7 @@ export default function GuestNav() {
           }
           {
             pathName !== "/auth/sign-up" && <li>
-            <Link href="/auth/sign-up" className={buttonVariants({variant:"secondary"})}>{t("signUp")}</Link>
+            <Link href="/auth/sign-up" className={cn([buttonVariants({variant:"secondary"}), "text-nowrap"])}>{t("signUp")}</Link>
         </li>
           }
         </ul>

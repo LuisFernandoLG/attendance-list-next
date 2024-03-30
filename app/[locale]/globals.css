@@ -65,9 +65,6 @@ body{
 }
 
 #homepage-title{
-  background: #000000;
-background: linear-gradient(to bottom, #000000 0%, #9747FF 100%);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
-
 }

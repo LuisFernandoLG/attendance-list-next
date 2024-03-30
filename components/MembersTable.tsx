@@ -72,8 +72,8 @@ export const MembersTable = ({
   return (
     <div className="space-y-5">
       <Card className="relative overflow-x-auto  min-h-[60vh] rounded-sm  max-h-[60vh] overflow-y-auto">
-        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 rounded-sm">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <table className="w-full text-sm text-left rtl:text-right">
+          <thead className="text-xs  uppercase ">
             <tr>
               <th scope="col" className="px-6 py-3">
                 {t("tabs.members.table.header.id")}
@@ -103,7 +103,7 @@ export const MembersTable = ({
             {data.map((item, index) => (
               <tr
                 key={index}
-                className="border-b dark:bg-gray-800 dark:border-gray-700"
+                className="border-b "
               >
                 <th
                   scope="row"

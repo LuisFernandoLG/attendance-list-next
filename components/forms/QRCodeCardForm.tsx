@@ -28,6 +28,7 @@ import { useLocale } from "next-intl";
 import { useParams } from "next/navigation";
 import { Badge } from "../ui/badge";
 import Link from "next/link";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 
 export function QRCodeCardForm() {
   const { isOpen, member, closeDrawer } = useContext(QRCodesWizzardContext);
@@ -162,7 +163,16 @@ export function QRCodeCardForm() {
               </article>
 
 <Link href={currentUrl} target="_blank" className="mx-auto">
+  <TooltipProvider>
+    <Tooltip>
+    <TooltipTrigger>
   <Badge className="mt-4 cursor-pointer">Vista previa <GlobeIcon/>  </Badge>
+    </TooltipTrigger>
+    <TooltipContent>
+      <p>Es lo que verán los usuarios</p>
+    </TooltipContent>
+    </Tooltip>
+  </TooltipProvider>
 </Link>
 </div>
             </section>

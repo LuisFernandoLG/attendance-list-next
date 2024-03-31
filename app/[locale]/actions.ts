@@ -1,7 +1,5 @@
 "use server"
 
-import { handleError } from "@/helpers/handleAxiosErrors"
-import { isClientSide } from "@/helpers/isClientSide"
 import { attendanceApi } from "@/services/api/attendanceApi"
 
 type Props = {
@@ -16,20 +14,22 @@ type Data = {
 }
 
 export async function registerAttendance(prevState:Props, data:Data){
+  // Server Side
   try{
+    console.log("Try Server ------------------------")
     const res = await attendanceApi().register(data)
+    console.log("Try #1 Success")
     return {
       success: true,
       message: "register was successful",
       error: "",
     }
   }catch(e){
-    const error = new Error(handleError(e))
-   
+    const error = e instanceof Error ? e.message : "Unknown error"
     return {
       success: false,
-      message: "There was an error registering the attendance",
-      error: error.message
+      message: error,
+      error: error
     }
   }
 }

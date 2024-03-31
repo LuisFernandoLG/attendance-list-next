@@ -17,7 +17,7 @@ export const attendanceApi = () => {
     }
     catch(e){
      const error = new Error(handleError(e))
-     return error
+     throw error
     }
   }
 

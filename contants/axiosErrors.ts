@@ -3,6 +3,7 @@ export const MESSAGE_AXIOS_ERRORS : { [key: string]: string } = {
     "Invalid password": "Invalid password",
     "Validation error": "Validation error",
     "Email has been already taken": "Email has been already taken",
+    "Event not today": "Event not today",
 }
 
 export const CODE_AXIOS_ERRORS: { [key: string]: string } = {

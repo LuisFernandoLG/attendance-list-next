@@ -17,18 +17,20 @@ export const RegisterAsistance = () => {
   const [m, setM] = useState("before")
 
   const handleSubmit = async () => {
+    console.log("Initiating: Server action from CLIENT")
     const { message, error, success } = await registerAttendance({error:"", message:"", success:false}, {
       eventId: params.eventId,
       memberCode: params.memberCode,
     })
     setM(message);
+    // CHECK IS EVENT IS TODAY OR NOT
     
     if(success) {
       toast.success("Asistencia registrada")
       setSuccess(true)
     }else{
       // handle error
-      toast.error("Error al registrar asistencia")
+      toast.error(error)
     }
   }
 

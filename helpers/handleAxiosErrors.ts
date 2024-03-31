@@ -7,7 +7,7 @@ type ResponseDataError = {
   };
 
 export const handleError = (error: any): string => {
-    console.log({resolvingError:error})
+    console.log("Executing -----------", error)
     if (axios.isAxiosError(error)) return handleAxiosError(error);
     return "Unknown Error";
   };

@@ -11,6 +11,7 @@ import { registerAttendance } from "@/app/[locale]/actions";
 
 export const RegisterAsistance = () => {
   const t = useTranslations("Attendance");
+  const httpT = useTranslations("httpErrors");
   const fetchStatus = useFetchStatus(false);
   const params = useParams<{ eventId: string; memberCode: string }>();
   const [success, setSuccess] = useState(false);
@@ -23,14 +24,14 @@ export const RegisterAsistance = () => {
       memberCode: params.memberCode,
     })
     setM(message);
-    // CHECK IS EVENT IS TODAY OR NOT
+    
     
     if(success) {
       toast.success("Asistencia registrada")
       setSuccess(true)
     }else{
-      // handle error
-      toast.error(error)
+      const errorT = httpT(error) || httpT("default");
+      toast.error(errorT)
     }
   }
 

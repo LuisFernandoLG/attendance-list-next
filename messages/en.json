@@ -234,5 +234,17 @@
     "deleteSuccess": "Element deleted successfully",
     "deleteError": "Error deleting element",
     "deleteErrorDescription": "An error occurred while trying to delete the element"
+  },
+
+  
+  "httpErrors": {
+    "Axios: Unknown error.": "An unknown error occurred. Please try again.",
+    "The email does not belong to any user": "The email does not belong to any user",
+    "Invalid password": "Invalid password",
+    "Validation error": "Validation error",
+    "Email has been already taken": "Email has been already taken",
+    "Event not today": "We're sorry, but the event is not today.",
+    "ERR_NETWORK": "Network error. Please check your internet connection and try again.",
+    "ECONNABORTED": "Request timeout. Please try again."
   }
 }

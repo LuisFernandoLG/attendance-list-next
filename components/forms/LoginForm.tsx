@@ -22,6 +22,7 @@ import { debounce } from "@/helpers/debounce";
 import { EnterIcon } from "@radix-ui/react-icons";
 import {useTranslations} from "next-intl"
 import { useRouter } from "../navigation";
+import { successMessages } from "@/contants/successMessages";
 
 const loginFormSchema = z
   .object({
@@ -44,6 +45,8 @@ export default function LoginForm() {
   });
   const dispatch = useDispatch<AppDispatch>()
   const fetchStatus = useFetchStatus()
+  const httpErrorsT = useTranslations("httpErrors")
+  const httpSuccessT = useTranslations("httpSuccess")
   const route = useRouter()
   const t = useTranslations("Login")
 
@@ -52,14 +55,16 @@ export default function LoginForm() {
       fetchStatus.startLoading()
       const res = await authApi().login(values)
       dispatch(login(res))
-      toast.success(`Welcome again ${res.user.name}`)
-
-      debounce(()=>{
-        route.push("/dashboard")
-      }, 3000)
+      
+      const msg = httpSuccessT(successMessages["welcome again x"], {name: res.user.name}) || httpSuccessT("default")
+      toast.success(msg)
+      route.push("/dashboard")
 
     }catch(error){
-      if(error instanceof Error) return toast.error(error.message)
+      if(error instanceof Error){
+        toast.error(httpErrorsT(error.message) || httpErrorsT("default"))
+        return
+      }
       toast.error("Unknown Error")
     }finally{
       fetchStatus.stopLoading()

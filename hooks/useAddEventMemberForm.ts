@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { useFetchStatus } from "./useFetchStatus";
 import { parseSetCookie } from "next/dist/compiled/@edge-runtime/cookies";
+import { useTranslations } from "next-intl";
 
 const formSchema = z.object({
   name: z.string().min(1).max(50),
@@ -34,6 +35,8 @@ export const useAddEventMemberForm = ({addMember}:Props)=>{
   });
   const params = useParams<{id:string}>()
   const fetchStatus = useFetchStatus()
+  const t = useTranslations("Event")
+  const httpErrorsT = useTranslations("httpErrors")
 
   const onSubmit = async (values: FormSchema) => {
     fetchStatus.startLoading()
@@ -60,10 +63,14 @@ export const useAddEventMemberForm = ({addMember}:Props)=>{
         url_attendance: res.url_attendance
       })
       form.reset()
-      const successMsg = `El miembro ${res.member.name} ha sido agregado`
-      toast.success(successMsg)
-    }catch(e){
-      if(e instanceof Error) toast.error(e.message)
+      const msg = t("tabs.members.addMemberForm.success", {name: res.member.name})
+      toast.success(msg)
+    }catch(error){
+      if(error instanceof Error){
+        toast.error(httpErrorsT(error.message) || httpErrorsT("default"))
+        return
+      }
+      toast.error("Unknown Error")
     }
   finally{
     fetchStatus.stopLoading()

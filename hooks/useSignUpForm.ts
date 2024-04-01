@@ -8,6 +8,8 @@ import { AppDispatch } from "@/redux/store";
 import { registerUser } from "@/redux/authSlice";
 import { debounce } from "@/helpers/debounce";
 import { useRouter } from "@/components/navigation";
+import { useTranslations } from "next-intl";
+import { successMessages } from "@/contants/successMessages";
 
 const formSchema = z
   .object({
@@ -27,6 +29,8 @@ const initialForm: FormSchemaType = {
 
 export const useSignUpForm = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const httpSuccessT = useTranslations("httpSuccess");
+  const httpErrorsT = useTranslations("httpErrors");
   const router = useRouter();
   const fetchStatus = useFetchStatus();
   const form = useForm<FormSchemaType>({
@@ -39,16 +43,20 @@ export const useSignUpForm = () => {
     try {
       const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
       const res = await dispatch(registerUser({ ...values, timezone })).unwrap()
-      const msg = `Code verification was sent to ${res?.user?.email}`
+      const msg = httpSuccessT(successMessages["verification code sent to"], { email: res?.user?.email })
       toast.info(msg)
       
       debounce(()=>{
         router.push("/auth/confirm-email");
-      }, 3000)
+      }, 1500)
       
     } catch (error) {
-      if(typeof(error) === "string") toast.error(error)
-      else toast.error("What???")
+      if (error instanceof Error) {
+        const msg = httpErrorsT(error.message) || httpErrorsT("default");
+        toast.error(msg);
+      } else {
+        toast.error(httpErrorsT("default"));
+      }
     }finally{
       fetchStatus.stopLoading()
     }

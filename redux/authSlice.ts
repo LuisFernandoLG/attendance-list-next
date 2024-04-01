@@ -97,7 +97,7 @@ export const registerUser = createAsyncThunk<
   RegisterResponse, 
   RegisterProps,
   {
-    rejectValue: string
+    rejectValue: Error
   }
 >(
   "auth/registerUser",
@@ -107,7 +107,7 @@ export const registerUser = createAsyncThunk<
       return response;
     } catch (error) {
       const msg = error as Error
-      return rejectWithValue(msg.message);
+      return rejectWithValue(msg);
     }
   }
 );

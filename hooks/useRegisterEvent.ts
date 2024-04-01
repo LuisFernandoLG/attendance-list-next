@@ -3,24 +3,33 @@ import { eventApi } from "@/services/api/eventApi";
 import { formatISO9075 } from "date-fns";
 import { toast } from "sonner";
 import { useFetchStatus } from "./useFetchStatus";
-import { debounce } from "@/helpers/debounce";
 import { useRouter } from "@/components/navigation";
+import { useTranslations } from "next-intl";
+import { successMessages } from "@/contants/successMessages";
 
 export const useRegisterEvent = () => {
   const { loading, startLoading, stopLoading } = useFetchStatus();
   const router = useRouter();
+  const httpSuccessT = useTranslations("httpSuccess");
+  const httpErrorsT = useTranslations("httpErrors");
 
   const handleCreateEvent = async (mainForm: MainForm) => {
     try {
       startLoading();
       const data = formatFormToApi(mainForm);
       const event = await eventApi().create(data);
-      toast.success("Evento creado con éxito");
-      debounce(() => {
-        router.push("/dashboard");
-      }, 2000);
+      const msg = httpSuccessT(successMessages["created successfully"]);
+      toast.success(msg);
+      router.push("/dashboard");
+
     } catch (e) {
-      if (e instanceof Error) toast.error(e.message);
+      if ((e instanceof Error)) {
+        const msg = httpErrorsT(e.message) || httpErrorsT("default");
+        toast.error(msg);
+      }else {
+        toast.error(httpErrorsT("default"));
+      }
+      
     } finally {
       stopLoading();
     }

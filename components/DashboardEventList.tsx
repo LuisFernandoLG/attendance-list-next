@@ -12,11 +12,14 @@ import { useTranslations } from "next-intl";
 export const DashboardEventList = ({className}:{className?:string}) => {
   const t = useTranslations("Dashboard")
   const commonT = useTranslations("common")
+  const httpErrorsT = useTranslations("httpErrors")
   const queryClient = useQuery(["events"], eventApi().getAll, {
     onError: (error) => {
-      if (error instanceof Error) {
-        toast.error(error.message)
+      if(error instanceof Error){
+        toast.error(httpErrorsT(error.message) || httpErrorsT("default"))
+        return
       }
+      toast.error("Unknown Error")
     }
   })
   

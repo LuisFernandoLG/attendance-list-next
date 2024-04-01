@@ -103,6 +103,7 @@
         "addMemberForm": {
           "title": "Agrega un nuevo participante",
           "submit": "Agregar",
+          "success": "{name} fue agregado al evento",
           "inputs": {
             "name": {
               "label": "Nombre",
@@ -216,24 +217,34 @@
     "warning": "Advertencia",
     "info": "Información",
     "confirm": "Confirmar",
-    "therWasAnError": "Ocurrió un error",
-    "deleteConfirmation": "¿Estás seguro de que deseas eliminar este elemento?",
-    "deleteConfirmationDescription": "Esta acción no se puede deshacer.",
-    "deleteConfirmationYes": "Sí, eliminar",
-    "deleteConfirmationNo": "No, cancelar",
-    "deleteSuccess": "Elemento eliminado",
-    "deleteError": "No se pudo eliminar el elemento",
-    "deleteErrorDescription": "Ocurrió un error al intentar eliminar el elemento. Por favor, inténtalo de nuevo."
+    "therWasAnError": "Ocurrió un error"
   },
 
   "httpErrors": {
-    "Axios: Unknown error.": "Ocurrió un error en el servidor. Por favor, inténtalo de nuevo más tarde.",
+    "default": "Ocurrió un error en el servidor. Por favor, inténtalo de nuevo más tarde.",
+
     "The email does not belong to any user": "El correo electrónico no pertenece a ningún usuario",
     "Invalid password": "Contraseña incorrecta",
     "Validation error": "Hay errores en los datos ingresados. Por favor, verifica los campos e inténtalo de nuevo.",
     "Email has been already taken": "El correo electrónico ya está en uso",
     "Event not today": "Lo sentimos, pero el evento no es hoy",
     "ERR_NETWORK": "Ocurrió un error de red. Por favor, verifica tu conexión a internet e inténtalo de nuevo.",
-    "ECONNABORTED": "La conexión al servidor ha sido interrumpida. Por favor, inténtalo de nuevo."
-  }
+    "ECONNABORTED": "La conexión al servidor ha sido interrumpida. Por favor, inténtalo de nuevo.",
+    "OTP does not exist": "Código de verificación no válido",
+    "OTP is not valid": "Código de verificación no válido",
+    "OTP Expired": "Código de verificación expirado, por favor solicita uno nuevo"
+  },
+
+  "httpSuccess":{
+    "created successfully": "Creado con éxito",
+    "updated successfully": "Actualizado con éxito",
+    "deleted successfully": "Eliminado con éxito",
+    "default": "Operación exitosa",
+
+    "attendance registered": "Asistencia registrada",
+    "welcome again x": "Bienvenido de nuevo {name}",
+    "email sent": "Correo electrónico enviado",
+    "verification code sent to": "Código de verificación enviado a {email}",
+    "email verified": "Correo electrónico verificado"
+    }
 }

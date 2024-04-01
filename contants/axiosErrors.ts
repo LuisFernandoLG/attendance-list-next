@@ -4,6 +4,9 @@ export const MESSAGE_AXIOS_ERRORS : { [key: string]: string } = {
     "Validation error": "Validation error",
     "Email has been already taken": "Email has been already taken",
     "Event not today": "Event not today",
+    "OTP does not exist": "OTP does not exist",
+    "OTP Expired": "OTP Expired",
+    "OTP is not valid": "OTP is not valid",
 }
 
 export const CODE_AXIOS_ERRORS: { [key: string]: string } = {
@@ -11,4 +14,4 @@ export const CODE_AXIOS_ERRORS: { [key: string]: string } = {
     "ECONNABORTED": "Time out",
 }
 
-export const DEFAULT_AXIOS_ERROR = "Axios: Unknown error."
+export const DEFAULT_AXIOS_ERROR = "default"

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useFetchStatus } from "./useFetchStatus";
 import { toast } from "sonner";
 import { useQuery } from "react-query";
+import { useTranslations } from "next-intl";
 
 const defaultEvent: GetEventItemResponse = {
   id: 0,
@@ -18,13 +19,13 @@ const defaultEvent: GetEventItemResponse = {
 };
 
 export const useEventPage = (eventId:string)=>{
+  const httpErrorsT = useTranslations("httpErrors")
   const query = useQuery({
     queryKey: ["event", eventId],
     queryFn: ()=> eventApi().get(eventId),
-    onError: (error) => {
-      if (error instanceof Error) {
-        toast.error(error.message)
-      }
+    onError: (error:Error) => {
+      const msg = httpErrorsT(error.message) || httpErrorsT("default")
+      toast.error(msg)
     }
   })  
 

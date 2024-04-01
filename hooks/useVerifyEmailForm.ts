@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { confirmEmail } from "@/redux/authSlice";
 import { AppDispatch, RootState } from "@/redux/store";
 import { useRouter } from "@/components/navigation";
+import { useTranslations } from "next-intl";
+import { successMessages } from "@/contants/successMessages";
 
 const OTPForm = z
   .object({
@@ -29,6 +31,8 @@ export default function useVerifyEmailForm() {
   const dispatch = useDispatch<AppDispatch>()
   const {user} = useSelector((state:RootState)=>state.authUser)
   const fetchStatus = useFetchStatus();
+  const httpErrorsT = useTranslations("httpErrors");
+  const httpSuccessT = useTranslations("httpSuccess");
   const [otpValue, setOtpValue] = useState<OTPFormType>();
   const {
     handleSubmit,
@@ -53,13 +57,16 @@ export default function useVerifyEmailForm() {
       .verifyEmail({ code: values.code, email: user.email })
       .then(() => {
         dispatch(confirmEmail());
-        toast.success("Email verified");
+
+        const msg = httpSuccessT(successMessages["email verified"]);
+        toast.success(msg);
         debounce(()=>{
           router.push("/dashboard");
-        }, 3000);
+        }, 1500);
       })
       .catch((error: Error) => {
-        toast.error(error.message);
+        const msg = httpErrorsT(error.message) || httpErrorsT("default");
+        toast.error(msg); 
       })
       .finally(() => {
         fetchStatus.stopLoading();

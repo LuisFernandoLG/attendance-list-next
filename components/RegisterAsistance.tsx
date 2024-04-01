@@ -8,10 +8,12 @@ import { useState } from "react";
 import { CheckCircledIcon } from "@radix-ui/react-icons";
 import { useTranslations } from "next-intl";
 import { registerAttendance } from "@/app/[locale]/actions";
+import { successMessages } from "@/contants/successMessages";
 
 export const RegisterAsistance = () => {
   const t = useTranslations("Attendance");
   const httpT = useTranslations("httpErrors");
+  const httpSuccessT = useTranslations("httpSuccess");
   const fetchStatus = useFetchStatus(false);
   const params = useParams<{ eventId: string; memberCode: string }>();
   const [success, setSuccess] = useState(false);
@@ -27,7 +29,8 @@ export const RegisterAsistance = () => {
     
     
     if(success) {
-      toast.success("Asistencia registrada")
+      const msg = httpSuccessT(successMessages["attendance registered"]) || httpSuccessT("default");
+      toast.success(msg)
       setSuccess(true)
     }else{
       const errorT = httpT(error) || httpT("default");

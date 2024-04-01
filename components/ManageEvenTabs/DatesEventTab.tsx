@@ -19,6 +19,7 @@ import { toast } from "sonner";
 import { useLocale, useTranslations } from "next-intl";
 import { Input } from "../ui/input";
 import { useMutation, useQuery } from "react-query";
+import { successMessages } from "@/contants/successMessages";
 
 type Props = {
   event: GetEventItemResponse;
@@ -40,6 +41,8 @@ export function DatesEventTab({ event }: Props) {
 
   const datesProps = event.dates.map((date) => date.date)
   const t = useTranslations("Event")
+  const httpErrors = useTranslations("httpErrors")
+  const httpSuccess = useTranslations("httpSuccess")
   const locale = useLocale()
   const calendarLocale = locale === "es" ? es : enUS;
   const mutation = useMutation({
@@ -48,10 +51,12 @@ export function DatesEventTab({ event }: Props) {
       return eventApi().update(eventId, props)
     },
     onSuccess: () => {
-      toast.success("Event updated")
+      const msg = httpSuccess(successMessages["updated successfully"] || successMessages["defualt"])  
+      toast.success(msg)
     },
     onError: (error:Error) => {
-      toast.error(error.message)
+      const msg = httpErrors(error.message) || httpErrors("default")
+      toast.error(msg)
     }
   })
 

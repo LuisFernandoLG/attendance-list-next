@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import { useFetchStatus } from "./useFetchStatus";
 import { toast } from "sonner";
 import { useQuery } from "react-query";
+import { useTranslations } from "next-intl";
+import { successMessages } from "@/contants/successMessages";
 
 const initialPaginationResults: Pagination = {
   current_page: 1,
@@ -62,6 +64,8 @@ export const useMemberTab = () => {
   })
 
   const fetchStatusDeleting = useFetchStatus();
+  const httpSuccessT = useTranslations("httpSuccess");
+  const httpErrorsT = useTranslations("httpErrors");
   const [selectedMember, setSelectedMember] =
     useState<MemberItemFromPagination>(memberItemFromPagination);
   const [paginationResults, setPaginationResults] = useState<Pagination>(
@@ -78,10 +82,16 @@ export const useMemberTab = () => {
       setSelectedMember(item);
       fetchStatusDeleting.startLoading();
       await eventMember().deleteFromEvent(params.id, item.id.toString());
-      toast.success("Participante eliminado");
+
+      const msg = httpSuccessT(successMessages["deleted successfully"]);
+      toast.success(msg)
       removeMemberFromMembers(item);
     } catch (e) {
-      if (e instanceof Error) toast.error(e.message);
+      if(error instanceof Error){
+        toast.error(httpErrorsT(error.message) || httpErrorsT("default"))
+        return
+      }
+      toast.error(httpErrorsT("default"));
     } finally {
       fetchStatusDeleting.stopLoading();
     }

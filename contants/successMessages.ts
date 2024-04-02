@@ -1,7 +1,7 @@
 export const successMessages = {
   "updated successfully": "updated successfully",
   "created successfully": "created successfully",
-  "attendance registered": "Asistencia registrada",
+  "attendance registered": "attendance registered",
   "deleted successfully": "deleted successfully",
   "welcome again x": "welcome again x",
 

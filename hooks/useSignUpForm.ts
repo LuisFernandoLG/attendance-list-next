@@ -10,6 +10,7 @@ import { debounce } from "@/helpers/debounce";
 import { useRouter } from "@/components/navigation";
 import { useTranslations } from "next-intl";
 import { successMessages } from "@/contants/successMessages";
+import { useI18nZodErrors } from "./useI18nZodErrors";
 
 const formSchema = z
   .object({
@@ -33,6 +34,7 @@ export const useSignUpForm = () => {
   const httpErrorsT = useTranslations("httpErrors");
   const router = useRouter();
   const fetchStatus = useFetchStatus();
+  useI18nZodErrors()
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
     defaultValues: initialForm,

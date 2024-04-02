@@ -7,6 +7,7 @@ import { z } from "zod";
 import { useFetchStatus } from "./useFetchStatus";
 import { parseSetCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { useTranslations } from "next-intl";
+import { useI18nZodErrors } from "./useI18nZodErrors";
 
 const formSchema = z.object({
   name: z.string().min(1).max(50),
@@ -29,6 +30,7 @@ type Props = {
 }
 
 export const useAddEventMemberForm = ({addMember}:Props)=>{
+  useI18nZodErrors()
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues,

@@ -217,7 +217,8 @@
     "warning": "Advertencia",
     "info": "Información",
     "confirm": "Confirmar",
-    "therWasAnError": "Ocurrió un error"
+    "therWasAnError": "Ocurrió un error",
+    "Select at least a date": "Selecciona al menos una fecha"
   },
 
   "httpErrors": {

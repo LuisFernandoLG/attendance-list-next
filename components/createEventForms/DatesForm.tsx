@@ -30,17 +30,20 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { compareAsc, format } from 'date-fns';
 import { formatDateForHuman } from '@/helpers/formatDateForHuman';
 import { useLocale, useTranslations } from 'next-intl';
+import { useI18nZodErrors } from '@/hooks/useI18nZodErrors';
 
 
 const formSchema = z
   .object({
-    dates: z.array(z.date()).min(1, "Select at least a date")
+    dates: z.array(z.date()).min(1)
   })
   .required();
 
 type Form = z.infer<typeof formSchema>;
 
 export const DatesForm = () => {
+  useI18nZodErrors();
+
   const { changeSection, addDatesFormData, mainForm } = useCreateEventStepForm();
   const t = useTranslations("NewEvent");
   const locale = useLocale()

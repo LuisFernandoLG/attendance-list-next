@@ -23,6 +23,7 @@ import { EnterIcon } from "@radix-ui/react-icons";
 import {useTranslations} from "next-intl"
 import { useRouter } from "../navigation";
 import { successMessages } from "@/contants/successMessages";
+import { useI18nZodErrors } from "@/hooks/useI18nZodErrors";
 
 const loginFormSchema = z
   .object({
@@ -39,6 +40,7 @@ const initialForm: LoginFormType = {
 };
 
 export default function LoginForm() {
+  useI18nZodErrors()
   const form = useForm<LoginFormType>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: initialForm,
@@ -98,7 +100,7 @@ export default function LoginForm() {
               <FormItem>
                 <FormLabel>{t("password")}</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input  {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

@@ -20,6 +20,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { Input } from "../ui/input";
 import { useMutation, useQuery } from "react-query";
 import { successMessages } from "@/contants/successMessages";
+import { useI18nZodErrors } from "@/hooks/useI18nZodErrors";
 
 type Props = {
   event: GetEventItemResponse;
@@ -28,9 +29,9 @@ type Props = {
 
 const formSchema = z
   .object({
-    dates: z.array(z.date()).min(1, "Select at least a date"),
-    name: z.string().min(1, { message: "Name is too short" }).max(255, { message: "Name is too long" }),
-    description: z.string().min(1, { message: "Description is too short" }).max(255, { message: "Description is too long" }),
+    dates: z.array(z.date()).min(1),
+    name: z.string().min(1).max(255),
+    description: z.string().min(1).max(255),
   })
   .required();
 
@@ -38,7 +39,7 @@ type Form = z.infer<typeof formSchema>;
 
 
 export function DatesEventTab({ event }: Props) {
-
+  useI18nZodErrors()
   const datesProps = event.dates.map((date) => date.date)
   const t = useTranslations("Event")
   const httpErrors = useTranslations("httpErrors")

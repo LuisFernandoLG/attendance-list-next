@@ -31,6 +31,7 @@ import {
 import { EventTypeHelpSection } from "../EventTypeHelpSection";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import { useTranslations } from "next-intl";
+import { useI18nZodErrors } from "@/hooks/useI18nZodErrors";
 
 const formSchema = z
   .object({
@@ -41,6 +42,7 @@ const formSchema = z
 type Form = z.infer<typeof formSchema>;
 
 export const EventForm = () => {
+  useI18nZodErrors();
   const { changeSection, addEventFormData, mainForm } = useCreateEventStepForm()
   const t = useTranslations("NewEvent");
   const form = useForm<Form>({

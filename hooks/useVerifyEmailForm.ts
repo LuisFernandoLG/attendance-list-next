@@ -12,10 +12,11 @@ import { AppDispatch, RootState } from "@/redux/store";
 import { useRouter } from "@/components/navigation";
 import { useTranslations } from "next-intl";
 import { successMessages } from "@/contants/successMessages";
+import { useI18nZodErrors } from "./useI18nZodErrors";
 
 const OTPForm = z
   .object({
-    code: z.string().length(6, "Please, enter the full code"),
+    code: z.string().length(6),
   })
   .required();
 
@@ -27,6 +28,7 @@ const initialForm = {
 };
 
 export default function useVerifyEmailForm() {
+  useI18nZodErrors()
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>()
   const {user} = useSelector((state:RootState)=>state.authUser)

@@ -22,6 +22,7 @@ import {
 import { Input } from "../ui/input";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
 import { useTranslations } from "next-intl";
+import { useI18nZodErrors } from "@/hooks/useI18nZodErrors";
 
 const formSchema = z.object({
   name: z.string().min(1).max(255),
@@ -31,6 +32,7 @@ const formSchema = z.object({
 type Form = z.infer<typeof formSchema>;
 
 export const GeneralForm = () => {
+  useI18nZodErrors()
   const { mainForm, changeSection, addGeneralFormData } = useCreateEventStepForm()
   const t = useTranslations("NewEvent")
 

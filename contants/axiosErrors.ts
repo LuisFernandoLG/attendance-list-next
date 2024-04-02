@@ -10,8 +10,9 @@ export const MESSAGE_AXIOS_ERRORS : { [key: string]: string } = {
 }
 
 export const CODE_AXIOS_ERRORS: { [key: string]: string } = {
-    "ERR_NETWORK": "There was an error with the conection",
-    "ECONNABORTED": "Time out",
+    "ERR_NETWORK": "ERR_NETWORK",
+    "ECONNABORTED": "ERR_NETWORK",
 }
 
 export const DEFAULT_AXIOS_ERROR = "default"
+export const DEFAULT_UNKNOWN_ERROR_FROM_SERVER = "Uknown message error from server"

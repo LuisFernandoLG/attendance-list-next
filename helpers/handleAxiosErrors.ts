@@ -1,4 +1,4 @@
-import { CODE_AXIOS_ERRORS, DEFAULT_AXIOS_ERROR, MESSAGE_AXIOS_ERRORS } from "@/contants/axiosErrors";
+import { CODE_AXIOS_ERRORS, DEFAULT_AXIOS_ERROR, DEFAULT_UNKNOWN_ERROR_FROM_SERVER, MESSAGE_AXIOS_ERRORS } from "@/contants/axiosErrors";
 import axios, { AxiosError } from "axios";
 
 type ResponseDataError = {
@@ -15,7 +15,7 @@ export const handleError = (error: any): string => {
   
 const handleAxiosError = (error: AxiosError<ResponseDataError>): string => {
         if (typeof(error.response?.data?.message) === "string"){
-          if(!MESSAGE_AXIOS_ERRORS[error.response?.data?.message]) return "There was an error with the response"
+          if(!MESSAGE_AXIOS_ERRORS[error.response?.data?.message]) return DEFAULT_UNKNOWN_ERROR_FROM_SERVER
           return MESSAGE_AXIOS_ERRORS[error.response?.data.message];
         }
         if (typeof(error.code) === "string") 

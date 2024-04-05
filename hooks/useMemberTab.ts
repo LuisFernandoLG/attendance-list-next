@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { useQuery } from "react-query";
 import { useTranslations } from "next-intl";
 import { successMessages } from "@/contants/successMessages";
+import { useMembersTable } from "./useMembersTable";
 
 const initialPaginationResults: Pagination = {
   current_page: 1,
@@ -44,10 +45,9 @@ type PageParams = {
 }
 
 export const useMemberTab = () => {
+  const {decrementPage, incrementPage, nextPage, numberLinks, openDrawer, page, prevPage, setPageNumber, updatePagination} = useMembersTable()
   const [members, setMembers] = useState<MemberItemFromPagination[]>([]);
   const params = useParams<PageParams>();
-  const query = useSearchParams();
-  const [page, setPage] = useState(1)
 
   const {
     isLoading,
@@ -60,7 +60,10 @@ export const useMemberTab = () => {
   } = useQuery({
     queryKey: ['membersPagination', page],
     queryFn: () => eventMember().getFromEvent(params.id, page),
-    keepPreviousData : true
+    keepPreviousData : true,
+    onSuccess: (data) => {
+      updatePagination({_lastPage: data.last_page})
+    }
   })
 
   const fetchStatusDeleting = useFetchStatus();
@@ -101,10 +104,6 @@ export const useMemberTab = () => {
     setMembers([item, ...members]);
   }
 
-  const incrementPage = () => setPage(old=> old + 1)
-  const decrementPage = () => setPage(old=> old - 1)
-  const assignPage = (page: number) => setPage(page)
-
 
   useEffect(() => {
     if (data) {
@@ -132,7 +131,9 @@ export const useMemberTab = () => {
     incrementPage,
     decrementPage,
     page,
-    assignPage,
-    isPreviousData
+    assignPage: setPageNumber,
+    isPreviousData,
+    nextPage, numberLinks, openDrawer, prevPage, setPageNumber
+
   };
 };

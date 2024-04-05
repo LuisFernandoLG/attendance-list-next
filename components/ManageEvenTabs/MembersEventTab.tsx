@@ -19,7 +19,10 @@ export const MemberEventTab = () => {
     decrementPage,
     page,
     assignPage,
-    isPreviousData
+    isPreviousData,
+    numberLinks, openDrawer, 
+    nextPage, prevPage, setPageNumber
+
   } = useMemberTab();
   const t = useTranslations("Event")
 
@@ -46,6 +49,12 @@ export const MemberEventTab = () => {
         page={page}
         assignPage={assignPage}
         isPreviousData={isPreviousData}
+        numberLinks={numberLinks}
+        openDrawer={openDrawer}
+        nextPage={nextPage}
+        prevPage={prevPage}
+        setPageNumber={setPageNumber}
+        
       />
       <QRCodeCardForm />
     </>

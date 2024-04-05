@@ -141,10 +141,17 @@ export const eventMember = () => {
     }
   }
 
-  const getAttendance = async (eventId: string)  => {
+  const getAttendance = async ({eventId, date, page, perPage}:{eventId:string, date:string, page:number, perPage:number})  => {
     try {
-      const response = await axios.get(`/events/${eventId}/attendance`);
+      console.log({eventId, date})
+      const response = await axios.post(`/events/${eventId}/attendance?perPage=${perPage}&page=${page}`, {
+        date
+      });
       const data = response.data as GetAttendanceResponse;
+      console.log({
+        ...data,
+        pagination:[]
+      })
       return data.pagination
     } catch (e) {
       const error = new Error(handleError(e))
@@ -162,7 +169,9 @@ export const eventMember = () => {
 
 
 export interface GetAttendanceResponse {
-  message:    string;
+  date:         Date;
+  userTimezone: string;
+  message:      string;
   pagination: GetAttendancePagination;
 }
 
@@ -183,10 +192,12 @@ export interface GetAttendancePagination {
 }
 
 export interface MemberWithAttendance {
-  id:         number;
-  member_id:  number;
-  event_id:   number;
-  created_at: string[];
-  updated_at: string[];
-  member:     Item;
+  id:              number;
+  member_id:       number;
+  event_id:        number;
+  created_at:      Date;
+  updated_at:      Date;
+  last_attendance: Date;
+  attendances:     number;
+  member:          Item;
 }

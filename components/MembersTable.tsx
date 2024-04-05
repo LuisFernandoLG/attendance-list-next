@@ -47,6 +47,12 @@ type Props = {
   page: number;
   assignPage: (page: number) => void;
   isPreviousData: boolean;
+  openDrawer: (item: MemberItemFromPagination) => void;
+  numberLinks: number[]
+  nextPage: boolean,
+  prevPage: boolean,
+  setPageNumber: (page: number) => void
+
 }
 
 export const MembersTable = ({
@@ -61,10 +67,14 @@ export const MembersTable = ({
   page,
   assignPage,
   isPreviousData,
+  openDrawer, 
+  numberLinks,
+  nextPage,
+  prevPage,
+  setPageNumber
 
 }: Props) => {
 
-  const { nextPage, numberLinks, openDrawer, prevPage} = useMembersTable({pagination})
   const t = useTranslations("Event")
 
   if (loading || isPreviousData) return <MembersTableSkeleton/>
@@ -164,27 +174,30 @@ export const MembersTable = ({
       </Card>
     <PaginationComponent className=" w-fit p-2 rounded-md">
       <PaginationContent>
-        <Button variant="outline" disabled={!pagination.prev_page_url} onClick={decrementPage}>
+        <Button variant="outline" disabled={prevPage} onClick={decrementPage}>
           <PaginationPrevious>Anterior</PaginationPrevious>
         </Button>
 
         {numberLinks.map((number, index) => (
           <PaginationItem key={index}>
             <PaginationLink
-              onClick={() => assignPage(number)}
-              isActive={number === pagination.current_page}
+              onClick={() => setPageNumber(number)}
+              isActive={number === page}
             >
               {number}
             </PaginationLink>
           </PaginationItem>
         ))}
 
-          <Button variant="outline" disabled={!pagination.next_page_url}  onClick={incrementPage}>
+          <Button variant="outline" disabled={nextPage}  onClick={incrementPage}>
             <PaginationNext>Siguiente</PaginationNext>
           </Button>
          </PaginationContent>
     </PaginationComponent>
-     
+        
+        {
+          page
+        }
       
 </div>
   );

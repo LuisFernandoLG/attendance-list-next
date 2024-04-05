@@ -12,6 +12,7 @@ export const MESSAGE_AXIOS_ERRORS : { [key: string]: string } = {
 export const CODE_AXIOS_ERRORS: { [key: string]: string } = {
     "ERR_NETWORK": "ERR_NETWORK",
     "ECONNABORTED": "ERR_NETWORK",
+    "Network Error": "Network Error",
 }
 
 export const DEFAULT_AXIOS_ERROR = "default"

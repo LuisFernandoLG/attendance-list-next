@@ -229,13 +229,15 @@
     "Validation error": "Hay errores en los datos ingresados. Por favor, verifica los campos e inténtalo de nuevo.",
     "Email has been already taken": "El correo electrónico ya está en uso",
     "Event not today": "Lo sentimos, pero el evento no es hoy",
-    "ERR_NETWORK": "Ocurrió un error de red. Por favor, verifica tu conexión a internet e inténtalo de nuevo.",
-    "ECONNABORTED": "La conexión al servidor ha sido interrumpida. Por favor, inténtalo de nuevo.",
     "Uknown message error from server": "Error desconocido del servidor.",
-
+    
     "OTP does not exist": "Código de verificación no válido",
     "OTP is not valid": "Código de verificación no válido",
-    "OTP Expired": "Código de verificación expirado, por favor solicita uno nuevo"
+    "OTP Expired": "Código de verificación expirado, por favor solicita uno nuevo",
+
+    "ERR_NETWORK": "Ocurrió un error de red. Por favor, verifica tu conexión a internet e inténtalo de nuevo.",
+    "ECONNABORTED": "La conexión al servidor ha sido interrumpida. Por favor, inténtalo de nuevo.",
+    "Network Error": "Ocurrió un error de red. Por favor, verifica tu conexión a internet e inténtalo de nuevo."
   },
 
   "httpSuccess":{

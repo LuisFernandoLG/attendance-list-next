@@ -238,14 +238,15 @@
     "Validation error": "Validation error",
     "Email has been already taken": "Email has been already taken",
     "Event not today": "We're sorry, but the event is not today.",
-    "ERR_NETWORK": "Network error. Please check your internet connection and try again.",
-    "ECONNABORTED": "Request timeout. Please try again.",
     "Uknown message error from server": "Unknown error occurred. Please try again.",
-
+    
     "OTP does not exist": "Verification is not valid",
     "OTP is not valid": "Verification is not valid",
-    "OTP Expired": "Verification code has expired, please request a new one"
-    
+    "OTP Expired": "Verification code has expired, please request a new one",
+
+    "ERR_NETWORK": "Network error. Please check your internet connection and try again.",
+    "ECONNABORTED": "Request timeout. Please try again.",
+    "Network Error": "Network error. Please check your internet connection and try again."
   },
 
   "httpSuccess":{

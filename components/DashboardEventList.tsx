@@ -28,7 +28,7 @@ export const DashboardEventList = ({className}:{className?:string}) => {
   if(queryClient.isError) {
  
   return <div className="flex justify-center items-center gap-2 ">
-    <ExclamationTriangleIcon />  <span>{commonT("thereWasAnError")}</span>
+    <ExclamationTriangleIcon />  <span>{httpErrorsT("Network Error")}</span>
   </div>
   }
 

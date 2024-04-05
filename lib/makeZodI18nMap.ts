@@ -3,6 +3,12 @@
  * Checkout the original at: https://github.com/aiji42/zod-i18n
  */
 
+// disable eslint for this file
+/* eslint-disable no-restricted-syntax */
+// @ts-nocheck
+
+
+
 import {
   ZodIssueCode, ZodParsedType, defaultErrorMap, ZodErrorMap,
 } from 'zod';

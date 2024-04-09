@@ -1,6 +1,10 @@
 {
   "Index": {
-    "title": "Hello world!"
+    "title": "Your tool for attendance!",
+    "description": "take control of people's attendance at your events like: ",
+    "event1": "classes",
+    "event2": "meetings",
+    "event3": "conferences"
   },
   "GuestNav": {
     "login": "Login",

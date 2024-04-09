@@ -1,6 +1,10 @@
 {
   "Index": {
-    "title": "Hola mundo"
+    "title": "¡Tu herramienta de pase de lista!",
+    "description": "Toma el control de las personas que asisten a tus: ",
+    "event1": "clases",
+    "event2": "reuniones",
+    "event3": "conferencias"
   },
   "GuestNav": {
     "login": "Iniciar sesión",

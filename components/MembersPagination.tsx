@@ -16,6 +16,7 @@ import {
   SelectValue,
 } from "./ui/select";
 import { Skeleton } from "./ui/skeleton";
+import { useTranslations } from "next-intl";
 
 type Props = {
   perPage: number;
@@ -46,6 +47,7 @@ export const MembersPagination = ({
   loading,
   isError
 }: Props) => {
+  const tCommon = useTranslations("common");
 
   if(isError) return null;
 
@@ -74,7 +76,7 @@ export const MembersPagination = ({
       <PaginationComponent className="w-fit p-2 rounded-md mx-0">
         <PaginationContent>
           <Button variant="outline" disabled={prevPage} onClick={incrementPage}>
-            <PaginationPrevious>Anterior</PaginationPrevious>
+            <PaginationPrevious text={tCommon("previous")} >Anterior</PaginationPrevious>
           </Button>
 
           {numberLinks.map((number, index) => (
@@ -89,7 +91,7 @@ export const MembersPagination = ({
           ))}
 
           <Button variant="outline" disabled={nextPage} onClick={decrementPage}>
-            <PaginationNext>Siguiente</PaginationNext>
+            <PaginationNext text={tCommon("next")}>Siguiente</PaginationNext>
           </Button>
         </PaginationContent>
       </PaginationComponent>

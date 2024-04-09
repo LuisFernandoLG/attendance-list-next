@@ -76,6 +76,7 @@ export const MembersTable = ({
 }: Props) => {
 
   const t = useTranslations("Event")
+  const tCommon = useTranslations("common")
 
   if (loading || isPreviousData) return <MembersTableSkeleton/>
 
@@ -173,7 +174,7 @@ export const MembersTable = ({
       <PaginationComponent className=" w-fit p-2 rounded-md">
       <PaginationContent>
         <Button variant="outline" disabled={prevPage} onClick={decrementPage}>
-          <PaginationPrevious>Anterior</PaginationPrevious>
+          <PaginationPrevious text={tCommon("previous")}>Anterior</PaginationPrevious>
         </Button>
 
         {numberLinks.map((number, index) => (
@@ -188,7 +189,7 @@ export const MembersTable = ({
         ))}
 
           <Button variant="outline" disabled={nextPage}  onClick={incrementPage}>
-            <PaginationNext>Siguiente</PaginationNext>
+            <PaginationNext text={tCommon("next")}>Siguiente</PaginationNext>
           </Button>
          </PaginationContent>
     </PaginationComponent>

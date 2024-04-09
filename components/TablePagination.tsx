@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { Button } from "./ui/button";
 import {
   PaginationComponent,
@@ -25,12 +26,15 @@ export const TablePagination = ({
   setPageNumber: (pageNumber: number) => void;
   numberLinks: number[];
 }) => {
+
+  const tCommon = useTranslations("common");
+
   return (
     <>
       <PaginationComponent className=" w-fit p-2 rounded-md">
         <PaginationContent>
           <Button variant="outline" disabled={prevPage} onClick={incrementPage}>
-            <PaginationPrevious>Anterior</PaginationPrevious>
+            <PaginationPrevious text={tCommon("back")}></PaginationPrevious>
           </Button>
 
           {numberLinks.map((number, index) => (
@@ -44,8 +48,8 @@ export const TablePagination = ({
             </PaginationItem>
           ))}
 
-          <Button variant="outline" disabled={nextPage} onClick={decrementPage}>
-            <PaginationNext>Siguiente</PaginationNext>
+          <Button variant="destructive" disabled={nextPage} onClick={decrementPage}>
+            <PaginationNext text={tCommon("next")}></PaginationNext>
           </Button>
         </PaginationContent>
       </PaginationComponent>

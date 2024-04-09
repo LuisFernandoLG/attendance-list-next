@@ -103,7 +103,7 @@
         "addMemberForm": {
           "title": "Add member",
           "submit": "Agregar",
-          "member added successfully": "{name} was added to the event",
+          "success": "{name} was added to the event",
           "inputs": {
             "name": {
               "label": "Name",

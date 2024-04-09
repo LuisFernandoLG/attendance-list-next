@@ -239,6 +239,7 @@
     "Email has been already taken": "Email has been already taken",
     "Event not today": "We're sorry, but the event is not today.",
     "Uknown message error from server": "Unknown error occurred. Please try again.",
+    "Unauthenticated": "Unauthenticated. Please login again.",
     
     "OTP does not exist": "Verification is not valid",
     "OTP is not valid": "Verification is not valid",

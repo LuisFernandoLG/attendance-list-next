@@ -7,6 +7,7 @@ export const MESSAGE_AXIOS_ERRORS : { [key: string]: string } = {
     "OTP does not exist": "OTP does not exist",
     "OTP Expired": "OTP Expired",
     "OTP is not valid": "OTP is not valid",
+    "Unauthenticated.": "Unauthenticated",
 }
 
 export const CODE_AXIOS_ERRORS: { [key: string]: string } = {

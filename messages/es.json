@@ -230,6 +230,7 @@
     "Email has been already taken": "El correo electrónico ya está en uso",
     "Event not today": "Lo sentimos, pero el evento no es hoy",
     "Uknown message error from server": "Error desconocido del servidor.",
+    "Unauthenticated": "No autenticado. Por favor, inicia sesión para continuar.",
     
     "OTP does not exist": "Código de verificación no válido",
     "OTP is not valid": "Código de verificación no válido",

@@ -31,9 +31,9 @@ export const EventManagerContainer = ({eventId}:{eventId:string}) => {
 
   return (
     <>
-      <Tabs defaultValue="members" className="w-[100%]">
+      <Tabs defaultValue="members" className="w-[100%] px-2 py-3">
         <TabsList>
-          <div className="border p-1 rounded-sm">
+          <div className="border rounded-sm">
             <TabsTrigger value="members"> <PersonIcon className="mr-1"/>  {t("tabs.members.tabName")}</TabsTrigger>
             <TabsTrigger value="attendance"> <ReaderIcon className="mr-1"/>  {t("tabs.attendance.tabName")}</TabsTrigger>
             <TabsTrigger value="dates"> <GearIcon className="mr-1"/> {t("tabs.settings.tabName")}</TabsTrigger>

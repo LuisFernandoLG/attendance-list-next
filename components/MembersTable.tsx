@@ -194,11 +194,6 @@ export const MembersTable = ({
           </Button>
          </PaginationContent>
     </PaginationComponent>
-        
-        {
-          page
-        }
-      
 </div>
   );
 };

@@ -25,7 +25,7 @@ export default function RootLayout({
 
   return (
     <html lang={locale}>
-      <body className={`${inter.className}  min-h-dvh bg-background`}>
+      <body className={`${inter.className}  min-h-dvh bg-zinc-100 dark:bg-zinc-900`}>
         <NextIntlClientProvider messages={messages}>
           <ReduxProvider>
             <QueryProvider>

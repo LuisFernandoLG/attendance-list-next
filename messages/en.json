@@ -1,10 +1,11 @@
 {
   "Index": {
-    "title": "Your tool for attendance!",
+    "title": "Your tool for taking attendance!",
     "description": "take control of people's attendance at your events like: ",
     "event1": "classes",
     "event2": "meetings",
-    "event3": "conferences"
+    "event3": "conferences",
+    "callToAction": "Scan any of the next QR codes"
   },
   "GuestNav": {
     "login": "Login",

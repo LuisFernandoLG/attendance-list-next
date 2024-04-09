@@ -4,7 +4,8 @@
     "description": "Toma el control de las personas que asisten a tus: ",
     "event1": "clases",
     "event2": "reuniones",
-    "event3": "conferencias"
+    "event3": "conferencias",
+    "callToAction": "Escanea alguno de los siguientes códigos"
   },
   "GuestNav": {
     "login": "Iniciar sesión",

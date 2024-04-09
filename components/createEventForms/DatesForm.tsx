@@ -31,6 +31,7 @@ import { compareAsc, format } from 'date-fns';
 import { formatDateForHuman } from '@/helpers/formatDateForHuman';
 import { useLocale, useTranslations } from 'next-intl';
 import { useI18nZodErrors } from '@/hooks/useI18nZodErrors';
+import { UTCToLocalDate } from '@/helpers/UTCToLocalDate';
 
 
 const formSchema = z
@@ -50,7 +51,11 @@ export const DatesForm = () => {
   const form = useForm<Form>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      dates: mainForm.DATES_FORM.dates.map((dateString) => new Date(dateString)),
+      dates: mainForm.DATES_FORM.dates.map((dateString) => {
+        // values from server are in utc format, so we need to convert them to local time
+        const dateFromServer = new Date(dateString)
+        return UTCToLocalDate(dateFromServer)
+      }),
     },
   });
 
@@ -130,7 +135,8 @@ export const DatesForm = () => {
                 {fields.sort(compareAsc).map((item, i) => 
                     <Badge variant="secondary" key={i} className="text-sm">{
                       formatDateForHuman(item, calendarLocale)
-                    }</Badge>
+                    }
+                    </Badge>
                 )
                 }
             </div>

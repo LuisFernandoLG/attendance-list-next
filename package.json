@@ -33,7 +33,7 @@
     "axios": "^1.6.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
-    "date-fns": "^3.3.1",
+    "date-fns-tz": "^2.0.1",
     "html-to-image": "^1.11.11",
     "input-otp": "^0.3.31-beta",
     "lucide-react": "^0.341.0",

@@ -12,7 +12,7 @@ import { Badge } from "../ui/badge";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { compareAsc, formatISO9075 } from "date-fns";
+import { compareAsc, format, formatISO9075 } from "date-fns";
 import { formatDateForHuman } from "@/helpers/formatDateForHuman";
 import { useEffect } from "react";
 import { toast } from "sonner";
@@ -21,6 +21,10 @@ import { Input } from "../ui/input";
 import { useMutation, useQuery } from "react-query";
 import { successMessages } from "@/contants/successMessages";
 import { useI18nZodErrors } from "@/hooks/useI18nZodErrors";
+import {utcToZonedTime, formatInTimeZone} from 'date-fns-tz'
+import { addMinutes } from "date-fns"
+import { UTCToLocalDate } from "@/helpers/UTCToLocalDate";
+import { dateToUTC } from "@/helpers/dateToUTC";
 
 type Props = {
   event: GetEventItemResponse;
@@ -75,14 +79,21 @@ export function DatesEventTab({ event }: Props) {
   // Rest of the code remains the same
   useEffect(()=>{
     if(event){
-      form.setValue("dates", datesProps.map((dateString) => new Date(dateString)))
+      // becomes to UTC
+      form.setValue("dates", datesProps.map((utcTimeString) => {
+        const time = UTCToLocalDate(new Date(utcTimeString))
+        return time
+      }))
     }
   },[event])
 
   const fields = form.watch("dates")
 
   const onSubmit = (values: Form) => {
-    const formattedDates = values.dates.map((date) => formatISO9075(date))
+    const formattedDates = values.dates.map((date) => {
+      const utcTime = dateToUTC(date)
+      return formatISO9075(utcTime)
+    })
     mutation.mutate({
       ...event,
       ...values,
@@ -186,7 +197,8 @@ export function DatesEventTab({ event }: Props) {
                 {fields.sort(compareAsc).map((item, i) => 
                     <Badge variant="secondary" key={i} className="text-sm">{
                       formatDateForHuman(item, calendarLocale)
-                    }</Badge>
+                    }
+                    </Badge>
                 )
                 }
             </div>

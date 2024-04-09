@@ -82,6 +82,9 @@ export const eventApi = ()=>{
         try{
             const response = await axios.get(`/events/${id}`)
             const data = response.data as GetEventResponse
+            console.log({
+                dates: data.item.dates
+            })
             return data.item
         }catch(e){
             console.log(e)

@@ -6,6 +6,7 @@ import { useFetchStatus } from "./useFetchStatus";
 import { useRouter } from "@/components/navigation";
 import { useTranslations } from "next-intl";
 import { successMessages } from "@/contants/successMessages";
+import { dateToUTC } from "@/helpers/dateToUTC";
 
 export const useRegisterEvent = () => {
   const { loading, startLoading, stopLoading } = useFetchStatus();
@@ -40,7 +41,14 @@ export const useRegisterEvent = () => {
       name: mainForm.GENERAL_FORM.name,
       description: mainForm.GENERAL_FORM.description,
       type: mainForm.EVENT_FORM.type,
-      dates: mainForm.DATES_FORM.dates.map((date) => formatISO9075(date)),
+      dates: mainForm.DATES_FORM.dates.map((date) => {
+        const utcTime = dateToUTC(date)
+        console.log({
+          calendar: date,
+          utcTime
+        })
+        return formatISO9075(utcTime)
+      }),
     };
   };
 

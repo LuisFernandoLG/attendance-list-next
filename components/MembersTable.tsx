@@ -81,8 +81,7 @@ export const MembersTable = ({
 
   return (
     <div className="space-y-5">
-      <Card className="relative overflow-x-auto  min-h-[60vh] rounded-sm  max-h-[60vh] overflow-y-auto">
-        <table className="w-full text-sm text-left rtl:text-right">
+        <table className="w-full text-sm text-left rtl:text-right relative overflow-x-auto  min-h-[60vh] rounded-sm  max-h-[60vh] overflow-y-auto">
           <thead className="text-xs  uppercase ">
             <tr>
               <th scope="col" className="px-6 py-3">
@@ -171,8 +170,7 @@ export const MembersTable = ({
             ))}
           </tbody>
         </table>
-      </Card>
-    <PaginationComponent className=" w-fit p-2 rounded-md">
+      <PaginationComponent className=" w-fit p-2 rounded-md">
       <PaginationContent>
         <Button variant="outline" disabled={prevPage} onClick={decrementPage}>
           <PaginationPrevious>Anterior</PaginationPrevious>

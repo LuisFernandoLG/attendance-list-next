@@ -5,6 +5,7 @@ import { MembersTable } from "../MembersTable";
 import { QRCodeCardForm } from "../forms/QRCodeCardForm";
 import { useMemberTab } from "@/hooks/useMemberTab";
 import { useTranslations } from "next-intl";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 
 export const MemberEventTab = () => {
   const {
@@ -27,15 +28,23 @@ export const MemberEventTab = () => {
   const t = useTranslations("Event")
 
   return (
-    <>
-      <section className="flex mb-5 justify-between">
-        <div>
-      <h2 className="text-xl font-bold">{t("tabs.members.title")}</h2>
-      <h3 className="">{t("tabs.members.description")}</h3>
-        </div>
-
+    <Card>
+        <CardHeader className="flex-row justify-between">
+      <div>
+        <CardTitle>
+          {t("tabs.members.title")}
+        </CardTitle>
+        <CardDescription>
+          {t("tabs.members.description")}
+        </CardDescription>
+      </div>
         <AddNewMember addMember={addMember} />
-      </section>
+        </CardHeader>
+
+      <CardContent>
+
+      </CardContent>
+
 
       <MembersTable
         loading={fetchTableItemsStatus.loading || fetchTableItemsStatus.isFetching && !fetchTableItemsStatus.data}
@@ -57,6 +66,6 @@ export const MemberEventTab = () => {
         
       />
       <QRCodeCardForm />
-    </>
+    </Card>
   );
 };

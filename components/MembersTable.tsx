@@ -82,7 +82,7 @@ export const MembersTable = ({
 
   return (
     <div className="space-y-5">
-        <table className="w-full text-sm text-left rtl:text-right relative overflow-x-auto  min-h-[60vh] rounded-sm  max-h-[60vh] overflow-y-auto">
+        <table className="w-full text-sm text-left rtl:text-right relative overflow-x-auto  rounded-sm  max-h-[60vh] overflow-y-auto">
           <thead className="text-xs  uppercase ">
             <tr>
               <th scope="col" className="px-6 py-3">

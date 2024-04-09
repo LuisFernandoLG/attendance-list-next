@@ -178,9 +178,6 @@ export function DatesEventTab({ event }: Props) {
                         selected={field.value}
                         onSelect={field.onChange}
                         locale={calendarLocale}
-                        disabled={(date) =>
-                          date < new Date(new Date().setHours(0, 0, 0, 0))
-                        }
                         initialFocus
                       />
                     </PopoverContent>

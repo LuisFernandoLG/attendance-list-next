@@ -1,7 +1,9 @@
 "use client";
 import {
   Drawer,
+  DrawerClose,
   DrawerContent,
+  DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Button } from "../ui/button";
 import {  useContext, useEffect, useRef, useState } from "react";
@@ -29,27 +31,16 @@ import { useParams } from "next/navigation";
 import { Badge } from "../ui/badge";
 import Link from "next/link";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
+import { QRIcon } from "../ui/icons/QRIcon";
+import { MemberItemFromPagination } from "@/services/api/eventMember";
 
-export function QRCodeCardForm() {
-  const { isOpen, member, closeDrawer } = useContext(QRCodesWizzardContext);
+export function QRCodeCardForm({member}:{member:MemberItemFromPagination}) {
+  console.log({member})
   const [attributes, setAttributes] = useState<string[]>(["name", "folio"]);
   const ref = useRef<HTMLDivElement>(null)
   const locale = useLocale()
+  const currentUrl = `${window.location.protocol}//${window.location.host}/${locale}/attendance/${member.event_id }/${member.custom_id}`
 
-  const [currentUrl, setCurrentUrl] = useState('');
-
-  useEffect(() => {
-    // Check if the code is running on the client side
-    if (process) {
-      // Access the current page URL using window.location
-      const tempUrl = `${window.location.protocol}//${window.location.host}/${locale}/attendance/${member.event_id}/${member.custom_id}`
-      setCurrentUrl(tempUrl);
-    }
-  }, [member, locale]);
-
-  const hasAttribute = (attribute: string) => {
-    return attributes.includes(attribute);
-  }
 
   const stringToFileName = (str: string) => {
     return str.replace(/[^a-z0-9]/gi, '_').toLowerCase();
@@ -75,7 +66,15 @@ export function QRCodeCardForm() {
 
 
   return (
-    <Drawer open={isOpen} dismissible={false}>
+    <Drawer>
+        <DrawerTrigger asChild>
+        <Button
+                    variant="outline"
+                    size="icon"
+                  >
+                    <QRIcon className="h-4 w-4" />
+                  </Button>
+        </DrawerTrigger>
       <DrawerContent className="p-5">
         <Card  className="m-5 max-w-[1200px] min-w-[800px] mx-auto">
           <CardHeader>
@@ -157,8 +156,8 @@ export function QRCodeCardForm() {
                   viewBox={`0 0 800 800`}
                 />
                 <div>
-              { hasAttribute("name") && <h3 className="text-center text-xl font-bold mt-2 text-black">{member.custom_id}</h3>}
-              { hasAttribute("folio") && <h4 className="text-center text-base text-black">{member.name}</h4> }
+              { attributes.includes("folio") && <h3 className="text-center text-xl font-bold mt-2 text-black">{member.custom_id}</h3>}
+              { attributes.includes("name") && <h4 className="text-center text-base text-black">{member.name}</h4> }
                 </div>
               </article>
 
@@ -179,10 +178,11 @@ export function QRCodeCardForm() {
           </CardContent>
 
           <CardFooter className="mt-5 flex gap-2 justify-end">
-            <Button size="lg" onClick={onButtonClick}>Descargar</Button>
-            <Button size="lg" onClick={closeDrawer} variant="outline">
-              Cancelar
-            </Button>
+            <Button  onClick={onButtonClick}>Descargar</Button>
+            <DrawerClose>
+        <Button variant="outline">Cancel</Button>
+      </DrawerClose>
+       
           </CardFooter>
         </Card>
       </DrawerContent>

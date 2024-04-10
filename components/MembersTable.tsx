@@ -34,6 +34,7 @@ import { useTranslations } from "next-intl";
 import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { EditEventMember } from "./forms/EditEventMember";
+import { QRCodeCardForm } from "./forms/QRCodeCardForm";
 
 
 type Props = {
@@ -127,13 +128,8 @@ export const MembersTable = ({
                 <td className="px-6 py-4">{item.name}</td>
                 <td className="px-6 py-4">{item.email}</td>
                 <td className="px-6 py-4 flex gap-2">
-                  <Button
-                    onClick={() => openDrawer(item)}
-                    variant="outline"
-                    size="icon"
-                  >
-                    <QRIcon className="h-4 w-4" />
-                  </Button>
+                  <QRCodeCardForm member={item}/>
+                  
                   {/* <Button variant="outline" size="icon">
                     
                   </Button> */}

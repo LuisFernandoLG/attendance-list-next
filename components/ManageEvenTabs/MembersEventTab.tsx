@@ -65,7 +65,6 @@ export const MemberEventTab = () => {
         setPageNumber={setPageNumber}
         
       />
-      <QRCodeCardForm />
     </Card>
   );
 };

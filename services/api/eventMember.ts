@@ -159,11 +159,61 @@ export const eventMember = () => {
     }
   }
 
+  // 
+interface UpdateMemberResponse {
+    message: string;
+    item:    Item;
+    event:   Event;
+}
+
+interface Event {
+    id:              number;
+    name:            string;
+    description:     string;
+    image_url:       string;
+    type:            string;
+    attandance_type: null;
+    user_id:         number;
+    created_at:      Date;
+    updated_at:      Date;
+}
+
+interface Item {
+    id:            number;
+    name:          string;
+    custom_id:     string;
+    email:         string;
+    phone:         string;
+    details:       string;
+    image_url:     null;
+    notifyByEmail: number;
+    notifyByPhone: number;
+    event_id:      number;
+    created_at:    Date;
+    updated_at:    Date;
+}
+  // 
+
+  const updateMember = async ({eventId, member}:{eventId:string, member:{id:string, name:string, email:string, details:string}})=>{
+    try{
+      const res = await axios.put(`/events/${eventId}/members/${member.id}`, member)
+      const data = res.data as UpdateMemberResponse
+      return data
+    }
+    catch(e){
+      const error = new Error(handleError(e))
+      throw error
+    }
+  }
+
+  
+
   return {
     create,
     getFromEvent,
     deleteFromEvent,
-    getAttendance
+    getAttendance,
+    updateMember
   };
 };
 

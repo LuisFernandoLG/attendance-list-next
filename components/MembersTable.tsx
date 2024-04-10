@@ -33,6 +33,7 @@ import { EmptyUsersIllustration } from "./illustrations/emptyIllustrations/Empty
 import { useTranslations } from "next-intl";
 import { Card } from "./ui/card";
 import { Badge } from "./ui/badge";
+import { EditEventMember } from "./forms/EditEventMember";
 
 
 type Props = {
@@ -133,9 +134,10 @@ export const MembersTable = ({
                   >
                     <QRIcon className="h-4 w-4" />
                   </Button>
-                  <Button variant="outline" size="icon">
-                    <Pencil1Icon className="h-4 w-4" />
-                  </Button>
+                  {/* <Button variant="outline" size="icon">
+                    
+                  </Button> */}
+                  <EditEventMember id={String(item.id)} name={item.name} email={typeof(item?.email) === "string" ? item.email : "x"} details={typeof(item?.details) === "string" ? item.details : ""} eventId={item.event_id}/>
 
                   <AlertDialog>
                     <AlertDialogTrigger disabled={isDeleting}>

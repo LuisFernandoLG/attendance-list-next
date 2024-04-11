@@ -58,6 +58,10 @@ export const EditEventMember = ({id, name, email, details, eventId}:Props)=>{
         toast.success(`${data.item.name} was updated successfuly`)
         console.log(data)
 
+        queryClient.invalidateQueries({
+          queryKey:["membersPagination"]
+        })
+
 
       
         // queryClient.setQueryData(['membersPagination', 1], (old:MemberItemFromPagination[] | undefined)=> {
@@ -90,11 +94,12 @@ export const EditEventMember = ({id, name, email, details, eventId}:Props)=>{
       }
     },
 
-    onSuccess: ()=>{
+    onSettled: async () => {
       queryClient.invalidateQueries({
-        queryKey:["membersPagination"]
-      })
-    }
+        queryKey: ["membersPagination"],
+      });
+    },
+
   })
 
   const handleSubmit = async (values:FormSchema)=>{

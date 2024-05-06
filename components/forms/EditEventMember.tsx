@@ -18,6 +18,7 @@ import { Textarea } from "../ui/textarea"
 import { MemberItemFromPagination, eventMember } from "@/services/api/eventMember"
 import { toast } from "sonner"
 import { useMutation, useQueryClient } from "react-query"
+import { useEffect } from "react"
 
 type Props = {
   id: string;
@@ -47,6 +48,13 @@ export const EditEventMember = ({id, name, email, details, eventId}:Props)=>{
       details: details
     }
   })
+
+  useEffect(()=>{
+    form.setValue("name", name)
+    form.setValue("email", email)
+    form.setValue("details", details)
+  },[id])
+
   const mutation = useMutation({
     mutationFn: async (values:{eventId: string, id:string, email:string, name:string, details:string})=>{
       try{

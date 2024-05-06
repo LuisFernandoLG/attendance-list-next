@@ -47,7 +47,7 @@ export const useRegisterEvent = () => {
           calendar: date,
           utcTime
         })
-        return formatISO9075(utcTime)
+        return utcTime
       }),
     };
   };

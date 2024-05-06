@@ -7,8 +7,22 @@ import { DatesForm } from "./createEventForms/DatesForm";
 import { sectionNamesObject } from "@/contants/createEventStepForm";
 import { InfoSummary } from "./createEventForms/InfoSummary";
 import CreateEventStepFormProvider from "@/contexts/CreateEventStepFormContext";
+import { formatInTimeZone } from "date-fns-tz";
+import { Separator } from "./ui/separator";
 
 export const CreateEventMultiStepForm = () => {
+
+  const given = "2024-04-25 23:00:00"
+  const now = new Date(given);
+  const convertion1 = formatInTimeZone(now, 'UTC', 'yyyy-MM-dd HH:mm:ss')
+
+  const checkDay = new Date('2024-04-25 23:00:00')
+  const UTCCheckDay = formatInTimeZone(checkDay, 'UTC', 'yyyy-MM-dd HH:mm:ss')
+
+  // const isSameDay = (date1:Date)=>{
+  //   return date1.toDateString() === convertion1.
+  // }
+
   return (
     <CreateEventStepFormProvider>
     <div>

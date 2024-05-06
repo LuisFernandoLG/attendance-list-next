@@ -55,6 +55,7 @@ export const useAddEventMemberForm = ({addMember}:Props)=>{
       addMember({
        id: res.member.id,
        email: res.member.email,
+       details: res.member.details,
         name: res.member.name,
         custom_id: res.member.custom_id,
         notifyByEmail: false,

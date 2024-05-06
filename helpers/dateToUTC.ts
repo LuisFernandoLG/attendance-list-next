@@ -1,7 +1,12 @@
-import {addMinutes} from "date-fns"
+import { formatInTimeZone } from "date-fns-tz";
 
+// LOCAL: 00:00:00, UTC; 07:00:00
 export const dateToUTC = (localGivenDate: Date) => {
-  const utcTimestamp = Date.UTC(localGivenDate.getFullYear(), localGivenDate.getMonth(), localGivenDate.getDate(), localGivenDate.getHours(), localGivenDate.getMinutes(), localGivenDate.getSeconds())
-  const date = addMinutes(new Date(utcTimestamp), new Date().getTimezoneOffset() * 2)
-  return date
-}
+  localGivenDate.setHours(0)
+  localGivenDate.setMinutes(0)
+  localGivenDate.setSeconds(0)
+
+  const utcTime = formatInTimeZone(localGivenDate, 'UTC', 'yyyy-MM-dd HH:mm:ss')
+
+  return utcTime;
+};

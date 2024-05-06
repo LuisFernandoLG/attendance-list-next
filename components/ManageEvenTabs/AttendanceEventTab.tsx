@@ -23,6 +23,7 @@ import { format } from "date-fns";
 import { usePagination } from "@/hooks/usePagination";
 import { MembersPagination } from "../MembersPagination";
 import { MemberAttendanceTable } from "../tables/MemberAttendanceTable";
+import { formatInTimeZone, zonedTimeToUtc } from "date-fns-tz";
 
 export function AttendanceEventTab() {
   const {
@@ -40,18 +41,24 @@ export function AttendanceEventTab() {
   const params = useParams<{ id: string }>();
   const [date, setDate] = useState(new Date());
   const locale = useLocale();
+
+  const dateToUTC = (item: Date) => {
+    const utcTime = formatInTimeZone(item, 'UTC', 'yyyy-MM-dd HH:mm:ss')
+    return utcTime;
+  }
+
   const query = useQuery({
     queryKey: [
       "getAttendance",
       params.id,
-      format(date, "yyyy-MM-dd", { locale: locale === "es" ? es : enUS}),
+      dateToUTC(date),
       page,
       perPage,
     ],
     queryFn: () =>
       eventMember().getAttendance({
         eventId: params.id,
-        date: format(date, "yyyy-MM-dd", { locale: locale === "es" ? es : enUS}),
+        date: dateToUTC(date),
         page,
         perPage,
       }),

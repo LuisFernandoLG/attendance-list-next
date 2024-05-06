@@ -133,7 +133,7 @@ export const MembersTable = ({
                   {/* <Button variant="outline" size="icon">
                     
                   </Button> */}
-                  <EditEventMember id={String(item.id)} name={item.name} email={typeof(item?.email) === "string" ? item.email : "x"} details={typeof(item?.details) === "string" ? item.details : ""} eventId={item.event_id}/>
+                  <EditEventMember id={String(item.id)} name={item.name} email={typeof(item?.email) === "string" ? item.email : "???"} details={typeof(item?.details) === "string" ? item.details : "???"} eventId={item.event_id}/>
 
                   <AlertDialog>
                     <AlertDialogTrigger disabled={isDeleting}>

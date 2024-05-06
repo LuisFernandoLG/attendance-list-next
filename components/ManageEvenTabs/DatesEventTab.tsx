@@ -92,7 +92,7 @@ export function DatesEventTab({ event }: Props) {
   const onSubmit = (values: Form) => {
     const formattedDates = values.dates.map((date) => {
       const utcTime = dateToUTC(date)
-      return formatISO9075(utcTime)
+      return utcTime
     })
     mutation.mutate({
       ...event,

@@ -43,6 +43,8 @@ export function AttendanceEventTab() {
   const locale = useLocale();
 
   const dateToUTC = (item: Date) => {
+    //  set 00:00:00
+    item.setHours(0, 0, 0, 0)
     const utcTime = formatInTimeZone(item, 'UTC', 'yyyy-MM-dd HH:mm:ss')
     return utcTime;
   }

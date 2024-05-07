@@ -1,6 +1,6 @@
 import { ArrowRightIcon } from "@radix-ui/react-icons";
-import rec from "./../../assets/images/rectangleQr.png"
-import square from "./../../assets/images/squareQr.png"
+import rec from "./../../assets/images/rectangleQr.webp"
+import square from "./../../assets/images/squareQr.webp"
 import { useTranslations } from "next-intl";
 
 export  function HeroBanner(){

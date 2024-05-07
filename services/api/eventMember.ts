@@ -22,6 +22,7 @@ export interface MemberFromCreateResponse {
   event_id:   string;
   updated_at: Date;
   created_at: Date;
+  details:    string;
   id:         number;
 }
 
